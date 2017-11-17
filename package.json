@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.4",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "geojson-bounds": "^1.0.1",
+    "node-fetch": "^1.7.3"
   }
 }

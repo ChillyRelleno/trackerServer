@@ -12,6 +12,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "geojson-bounds": "^1.0.1",
-    "node-fetch": "^1.7.3"
+    "node-fetch": "^1.7.3",
+    "node-schedule": "^1.2.5"
   }
 }

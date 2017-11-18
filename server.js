@@ -141,9 +141,9 @@ function filterFireByBounds(west, south, east, north) {
     
   }//for
   //console.log(toSend)
-  var geojson = GeoJSON.parse(toSend, {Point: ['lat', 'lng', 'z'], 'Polygon': 'polygon'})
+  //var geojson = GeoJSON.parse(toSend, {Point: ['lat', 'lng', 'z'], 'Polygon': 'polygon'})
 //  console.log(util.inspect(geojson, false, null))//JSON.stringify(geojson))
-  return geojson;
+  return toSend;
 }
 
 app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
@@ -156,7 +156,7 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
 	 req.params.south, req.params.east, req.params.north)
 //  console.log(matching)
    console.log(util.inspect(matching,false,null))
-   console.log("Matching: " + matching.features.length + ' elements')
+   console.log("Matching: " + matching./*features.*/length + ' elements')
    
 if (typeof res !== "undefined") {
   //res.header('Content-Type', 'application/json');

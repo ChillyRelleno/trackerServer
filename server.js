@@ -25,7 +25,9 @@ var calcBounds = function(json) {
     //console.log(i)
     //var feature = json.features[i]
     var extent = GeoBounds.extent(json.features[i].geometry)
-    json.features[i].properties.extent = extent
+    json.features[i].properties.extent = [
+	Number(extent[0]).toFixed(4), Number(extent[1]).toFixed(4),
+	Number(extent[2]).toFixed(4), Number(extent[3]).toFixed(4)]//extent//Number(extent).toFixed(4)
   }//for
   console.log("Bounding boxes calculated and stored for " + i + " perimeters")
   fireCache = json
@@ -96,11 +98,24 @@ var TOP = 3
 
 
 function intersectRect(r1, r2) {
-  return !(r2[LEFT] > r1[RIGHT] || 
-           r2[RIGHT] < r1[LEFT] || 
-           r2[TOP] > r1[BOTTOM] ||
-           r2[BOTTOM] < r1[TOP]);
+  console.log(r1, r2)
+  console.log("r1L > r2R ? " + (+(r1[LEFT]) > +(r2[RIGHT]))) //they all fail this rule...
+  console.log("r1R < r2L ? " + (+(r1[RIGHT]) < +(r2[LEFT])))
+  console.log("r1T < r2B ? " + (+(r1[TOP]) < +(r2[BOTTOM])))
+  console.log("r1B > r2T ? " +  (+(r1[BOTTOM]) > +(r2[TOP])))
+  var intersect = !((+(r1[LEFT]) > +(r2[RIGHT])) ||
+          (+(r1[RIGHT]) < +(r2[LEFT])) ||
+          (+(r1[TOP]) < +(r2[BOTTOM])) ||
+          (+(r1[BOTTOM]) > +(r2[TOP])))
+  console.log(intersect)
+  console.log('')
+  return intersect
 }
+//  return !(r2[LEFT] > r1[RIGHT] || 
+//           r2[RIGHT] < r1[LEFT] || 
+//           r2[TOP] > r1[BOTTOM] ||
+//           r2[BOTTOM] < r1[TOP]);
+//}
 function filterFireByBounds(west, south, east, north) {
   var i = 0;
   var toSend = [];
@@ -109,16 +124,22 @@ function filterFireByBounds(west, south, east, north) {
   console.log('Filtering ' + len + ' elements')
   //Build geojson header? Use Library?
 
-  var boundingBox = [west, south, east, north];
+  var boundingBox =  [west, south, east, north]
+		    //[Number(west).toFixed(4), Number(south).toFixed(4), 
+		    //	Number(east).toFixed(4), Number(north).toFixed(4)];
   // Push intersecting rectangles onto toSend array
   for (i = 0, len = fireCache.features.length; i < len; i++) {
-    if (intersectRect(fireCache.features[i].properties.extent, 
-	  boundingBox)) {
+    //console.log(fireCache.features[i].properties.extent)
+    //console.log(boundingBox, 
+	//fireCache.features[i].properties.extent)
+    if (intersectRect(boundingBox, 
+			fireCache.features[i].properties.extent)) {
 	console.log(JSON.stringify(fireCache.features[i]))
 	toSend.push(fireCache.features[i])
     }//if intersect 
+    
   }
-  
+  console.log(toSend)
   return toSend; //for now
 }
 

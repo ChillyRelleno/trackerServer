@@ -9,7 +9,7 @@ var xmldom = require('xmldom').DOMParser;
 var toGeoJSON  = require('./lib/togeojson.js')
 var GeoJSON = require('geojson')
 //var stringify = require('json-stringify')
-
+const util = require('util')
 var DOWNLOAD_DIR = './dataCache/'
 var FIREREPLY = 'Updated fire perimeter data'
 
@@ -72,8 +72,8 @@ var updateFireData = function(req, res) {
 
 //    .then(json => calcBounds(json))
 
-  res.send("<h1>" + FIREREPLY + "</h1>")
-}//
+  if (typeof res !== "undefined") res.sendStatus("<h1>" + FIREREPLY + "</h1>")
+}()//
 
 //Problem: Doesn't have res object when run on timer
 //var fireJob = schedule.scheduleJob('* * 3 * * *', updateFireData);
@@ -98,17 +98,17 @@ var TOP = 3
 
 
 function intersectRect(r1, r2) {
-  console.log(r1, r2)
-  console.log("r1L > r2R ? " + (+(r1[LEFT]) > +(r2[RIGHT]))) //they all fail this rule...
-  console.log("r1R < r2L ? " + (+(r1[RIGHT]) < +(r2[LEFT])))
-  console.log("r1T < r2B ? " + (+(r1[TOP]) < +(r2[BOTTOM])))
-  console.log("r1B > r2T ? " +  (+(r1[BOTTOM]) > +(r2[TOP])))
+  //console.log(r1, r2)
+  //console.log("r1L > r2R ? " + (+(r1[LEFT]) > +(r2[RIGHT]))) //they all fail this rule...
+  //console.log("r1R < r2L ? " + (+(r1[RIGHT]) < +(r2[LEFT])))
+  //console.log("r1T < r2B ? " + (+(r1[TOP]) < +(r2[BOTTOM])))
+  //console.log("r1B > r2T ? " +  (+(r1[BOTTOM]) > +(r2[TOP])))
   var intersect = !((+(r1[LEFT]) > +(r2[RIGHT])) ||
           (+(r1[RIGHT]) < +(r2[LEFT])) ||
           (+(r1[TOP]) < +(r2[BOTTOM])) ||
           (+(r1[BOTTOM]) > +(r2[TOP])))
-  console.log(intersect)
-  console.log('')
+  //console.log("Polygon " + intersect)
+  //console.log('')
   return intersect
 }
 //  return !(r2[LEFT] > r1[RIGHT] || 
@@ -134,13 +134,16 @@ function filterFireByBounds(west, south, east, north) {
 	//fireCache.features[i].properties.extent)
     if (intersectRect(boundingBox, 
 			fireCache.features[i].properties.extent)) {
-	console.log(JSON.stringify(fireCache.features[i]))
+	console.log("POLYGON " + i + " - TRUE")
 	toSend.push(fireCache.features[i])
     }//if intersect 
+    else console.log("Polygon " + i + " - false")
     
-  }
-  console.log(toSend)
-  return toSend; //for now
+  }//for
+  //console.log(toSend)
+  var geojson = GeoJSON.parse(toSend, {Point: ['lat', 'lng', 'z'], 'Polygon': 'polygon'})
+//  console.log(util.inspect(geojson, false, null))//JSON.stringify(geojson))
+  return geojson;
 }
 
 app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
@@ -151,8 +154,15 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
   
   var matching = filterFireByBounds(req.params.west,
 	 req.params.south, req.params.east, req.params.north)
-  console.log("Matching: " + matching.length + ' elements')
-  res.send(matching.length)
+//  console.log(matching)
+   console.log(util.inspect(matching,false,null))
+   console.log("Matching: " + matching.features.length + ' elements')
+   
+if (typeof res !== "undefined") {
+  //res.header('Content-Type', 'application/json');
+  //res.sendStatus(JSON.stringify(matching))
+   res.json(matching);
+  }//if reply needed
 })
 
 app.get('filter/aqi/:west/:south/:east/:north', function (req, res) {

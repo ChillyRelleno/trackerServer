@@ -104,7 +104,9 @@ function intersectRect(r1, r2) {
 function filterFireByBounds(west, south, east, north) {
   var i = 0;
   var toSend = [];
+  var len = fireCache.features.length;
 
+  console.log('Filtering ' + len + ' elements')
   //Build geojson header? Use Library?
 
   var boundingBox = [west, south, east, north];
@@ -112,9 +114,12 @@ function filterFireByBounds(west, south, east, north) {
   for (i = 0, len = fireCache.features.length; i < len; i++) {
     if (intersectRect(fireCache.features[i].properties.extent, 
 	  boundingBox)) {
-	toSend.push(fireCache.feastures[i])
+	console.log(JSON.stringify(fireCache.features[i]))
+	toSend.push(fireCache.features[i])
     }//if intersect 
   }
+  
+  return toSend; //for now
 }
 
 app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
@@ -123,7 +128,10 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
   console.log('east : ' + req.params.east)
   console.log('north : ' + req.params.north)
   
-  res.send()
+  var matching = filterFireByBounds(req.params.west,
+	 req.params.south, req.params.east, req.params.north)
+  console.log("Matching: " + matching.length + ' elements')
+  res.send(matching.length)
 })
 
 app.get('filter/aqi/:west/:south/:east/:north', function (req, res) {

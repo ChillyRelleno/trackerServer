@@ -11,27 +11,50 @@ var GeoJSON = require('geojson')
 //var stringify = require('json-stringify')
 const util = require('util')
 var DOWNLOAD_DIR = './dataCache/'
-var FIREREPLY = 'Updated fire perimeter data'
+ var FIREREPLY = 'Updated fire perimeter data'
 
 var fireCache;
 
+var modifyFeatures = function(json) {
+  var i = 0;
+  fireCache = null
+  //console.log(json)
+  for (i = 0, len = json.features.length; i < len; i++) {
+    //set style
+    json.features[i] = setFireStyle(json.features[i])
+    //Calculate and store bounds
+    json.features[i] = calcBounds(json.features[i])
+  }//for each feature
+  fireCache = json
+  console.log("Bounding boxes calculated and stored for " + i + " perimeters")
+  return json
+}//modifyFeatures()
+
+//Set Defaults for fire perimeters
+var setFireStyle = function(feature) {
+  feature.properties.color = "red"
+  feature.properties.opacity = 0.5
+  //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
+  return feature
+}//setStyle()
+
 //Calculate bounding boxes - GeoBounds
-var calcBounds = function(json) {
+var calcBounds = function(feature) { //json) {
   //console.log(JSON.stringify(json))
   //fireCache = null;
   //store boundingBox as property in each feature
-  var i = 0;
-  for (i = 0, len = json.features.length; i < len; i++) {
+  //var i = 0;
+  //for (i = 0, len = json.features.length; i < len; i++) {
+    //json.features[i].properties.color = "red"
     //console.log(i)
     //var feature = json.features[i]
-    var extent = GeoBounds.extent(json.features[i].geometry)
-    json.features[i].properties.extent = [
+    var extent = GeoBounds.extent(feature.geometry)
+    feature.properties.extent = [
 	Number(extent[0]).toFixed(4), Number(extent[1]).toFixed(4),
 	Number(extent[2]).toFixed(4), Number(extent[3]).toFixed(4)]//extent//Number(extent).toFixed(4)
-  }//for
-  console.log("Bounding boxes calculated and stored for " + i + " perimeters")
-  fireCache = json
-  return json
+  //}//for
+  //fireCache = json
+  return feature
 }//calcBounds
 
 //prep fire data for calcBounds - MOVED TO FETCH PROMISE CHAIN
@@ -59,7 +82,7 @@ var updateFireData = function(req, res) {
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
     //.then(function(json) { console.log(JSON.stringify(json)); return json; })
-    .then(function(json) { return calcBounds(json); })
+    .then(function(json) { return modifyFeatures(json); })//calcBounds(json); })
     //.then(function(json) { console.log(JSON.stringify(json)); return json; })
     .then(function(json) { fs.writeFile(moddest, JSON.stringify(fireCache), function (err) {
           if (err) return console.log(err);
@@ -75,8 +98,7 @@ var updateFireData = function(req, res) {
   if (typeof res !== "undefined") res.sendStatus("<h1>" + FIREREPLY + "</h1>")
 }()//
 
-//Problem: Doesn't have res object when run on timer
-//var fireJob = schedule.scheduleJob('* * 3 * * *', updateFireData);
+var fireJob = schedule.scheduleJob('* * /1 * * *', updateFireData);
 app.get('/updateFireData', (req, res) => {updateFireData(req, res)})
 
 //CORS middleware

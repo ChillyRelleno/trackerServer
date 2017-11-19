@@ -11,6 +11,7 @@ var GeoJSON = require('geojson')
 //var stringify = require('json-stringify')
 const util = require('util')
 
+app.use(cors());
 
 //**************Functions shared between Fire / AQI*******************************//
 var DOWNLOAD_DIR = './dataCache/'
@@ -61,9 +62,17 @@ var aqiUrl = "http://phillipdaw.com:3000/testAqicontUS.kml"//testAqi.kml"
 
 //AQI Routes
 app.get('updateAqiData', (req, res) => {updateAqiData(req, res)})
-app.get('filter/aqi/:west/:south/:east/:north', function (req, res) {
+app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
+  var matching = filterAqiByBounds(req.params.west,
+         req.params.south, req.params.east, req.params.north)
+   console.log(util.inspect(matching,false,null))
+   console.log("Matching: " + matching./*features.*/length + ' elements')
 
-})
+  if (typeof res !== "undefined") {
+    res.json(matching);
+  }//if reply needed
+})//filter aqi by bounds route
+
 
 var updateAqiData = function(req, res) {
  console.log('updating air quality data')
@@ -89,7 +98,7 @@ var updateAqiData = function(req, res) {
 
 //This function is identical to the fire one except for the data source
 //delete this and make a filterData(source, west, south, east, north) function in shared funcs
-function filterAQIByBounds(west, south, east, north) {
+function filterAqiByBounds(west, south, east, north) {
   var i = 0;
   var toSend = [];
   var len = aqiCache.features.length;
@@ -116,8 +125,11 @@ var aqiJob = schedule.scheduleJob('* 30 /1 * * *', updateFireData);
 
 var setAqiStyle = function(feature) {
   //feature.properties.color = "yellow"
-//  if (features.properties.fill !== undefined)
-//    feature.properties.color = feature.properties.fill
+  if (typeof(feature.properties.fill) !== undefined) {
+//    if (features.properties.fill !== 1)
+//      console.log(feature
+      feature.properties.color = feature.properties.fill
+  }
   feature.properties.opacity = 0.5
   //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
   return feature
@@ -130,6 +142,7 @@ var setAqiStyle = function(feature) {
 //Fire variables
 var FIREREPLY = 'Updated fire perimeter data'
 var fireCache;
+var fireJob = schedule.scheduleJob('* * /1 * * *', updateFireData);
 var fireUrl = "http://phillipdaw.com:3000/testFirePerimeters.kml"
 //"https://rmgsc.cr.usgs.gov/outgoing/GeoMAC/ActiveFirePerimeters.kml";
 
@@ -159,7 +172,7 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
   if (typeof res !== "undefined") {
     res.json(matching);
   }//if reply needed
-})
+})//.use(allowCrossDomain);
 
 //Update data from server - currently just using my test data
 var updateFireData = function(req, res) {
@@ -214,7 +227,6 @@ function filterFireByBounds(west, south, east, north) {
 
 
 
-var fireJob = schedule.scheduleJob('* * /1 * * *', updateFireData);
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -247,9 +259,6 @@ function intersectRect(r1, r2) {
 }
 
 
-app.get('filter/aqi/:west/:south/:east/:north', function (req, res) {
-
-})
 
 app.listen(3000, function () {
   console.log('CORS-enabled web server listening on port 3000')

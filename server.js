@@ -10,6 +10,7 @@ var toGeoJSON  = require('./lib/togeojson.js')
 var GeoJSON = require('geojson')
 //var stringify = require('json-stringify')
 const util = require('util')
+var ClipPoly = require('geojson-slicer')
 
 app.use(cors());
 
@@ -89,7 +90,9 @@ var updateAqiData = function(req, res) {
     .then(function(res) { return res.text() })
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
+//.then(function(json) {console.log(JSON.stringify(json.features[1][0][0])); return json;})
     .then(function(json) { return aqiCache = modifyFeatures(json, setAqiStyle); })
+//.then(function(json) { console.log(json.features[1].geometry.coordinates[0][0]);return json;})//JSON.stringify(json.features[0])); return json; })
     .then(function(json) { fs.writeFile(aqimoddest, JSON.stringify(aqiCache), function (err) {
           if (err) return console.log(err);
           else return json;
@@ -102,25 +105,40 @@ function filterAqiByBounds(west, south, east, north) {
   var i = 0;
   var toSend = [];
   var len = aqiCache.features.length;
+//  var boundary = [west, south, east, north];
+	//GeoJSON.parse(
+	//{ polygon: [[ [west, north], [west, south], [east, north], [east, south] ]] },
+	//{'Polygon': 'polygon'});
 
   console.log('Filtering ' + len + ' elements')
   //Build geojson header? Use Library?
 
-  var boundingBox =  [west, south, east, north]
+  var boundingBox =  [Number(west), Number(south), Number(east), Number(north)]
   // Push intersecting rectangles onto toSend array
   for (i = 0, len = aqiCache.features.length; i < len; i++) {
     if (intersectRect(boundingBox,
                         aqiCache.features[i].properties.extent)) {
     //    console.log("POLYGON " + i + " - TRUE")
+	//console.log(aqiCache.features[i].geometry.coordinates)
         toSend.push(aqiCache.features[i])
     }//if intersect
     //else console.log("Polygon " + i + " - false")
-
-  }//for
-  return toSend;
+//    if (modified) aqiCache.features[i].geometry.coordinates.push(
+//			aqiCache.features[i].geometry.coordinates[0])
+  }//for aqiCache
+  var clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
+  for (i = 0, len = clippedPolys.features.length; i < len; i++) {
+    for (j = 0; j < clippedPolys.features[i].geometry.coordinates.length; j++)
+      clippedPolys.features[i].geometry.coordinates[j].push(clippedPolys.features[i].geometry.coordinates[j][0]);
+  }//for toSend
+  console.log(util.inspect(clippedPolys.features[1],false,null))
+  //console.log(util.inspect(clippedPolys,false,null))//toSend)
+  //console.log(util.inspect(boundary,false,null))//console.log(util.inspect(matching,false,null))
+  return clippedPolys
+  //return toSend;
 }//filterAqiByBounds
 
-var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { updateAqiData() });
+var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
 
 
 var setAqiStyle = function(feature) {
@@ -139,7 +157,7 @@ var setAqiStyle = function(feature) {
 //Fire variables
 var FIREREPLY = 'Updated fire perimeter data'
 var fireCache;
-var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { updateFireData() });
+var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { this.updateFireData() });
 var fireUrl = "http://phillipdaw.com:3000/testFirePerimeters.kml"
 //"https://rmgsc.cr.usgs.gov/outgoing/GeoMAC/ActiveFirePerimeters.kml";
 

@@ -1,0 +1,25 @@
+
+> server@1.0.0 start /home/phillipdaw/code/gpxAQI/server
+> node server.js
+
+CORS-enabled web server listening on port 3000
+Updated air quality data
+Bounding boxes calculated and stored for 130 perimeters
+Updated fire perimeter data
+Bounding boxes calculated and stored for 322 perimeters
+Filtering 130 elements
+Matching: 2 elements
+Filtering 322 elements
+Matching: 123 elements
+Filtering 322 elements
+Matching: 123 elements
+Filtering 130 elements
+Matching: 2 elements
+Filtering 130 elements
+Matching: 2 elements
+Filtering 322 elements
+Matching: 123 elements
+Filtering 130 elements
+Matching: 2 elements
+Filtering 322 elements
+Matching: 123 elements

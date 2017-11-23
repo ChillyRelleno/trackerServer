@@ -138,7 +138,7 @@ function filterAqiByBounds(west, south, east, north) {
   //return toSend;
 }//filterAqiByBounds
 
-var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
+//var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
 
 
 var setAqiStyle = function(feature) {
@@ -157,7 +157,7 @@ var setAqiStyle = function(feature) {
 //Fire variables
 var FIREREPLY = 'Updated fire perimeter data'
 var fireCache;
-var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { this.updateFireData() });
+//var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { this.updateFireData() });
 var fireUrl = "http://phillipdaw.com:3000/testFirePerimeters.kml"
 //"https://rmgsc.cr.usgs.gov/outgoing/GeoMAC/ActiveFirePerimeters.kml";
 

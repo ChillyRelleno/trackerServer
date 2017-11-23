@@ -16,7 +16,11 @@ var Geobuf = require('geobuf')
 var SimplifyGeoJson = require('simplify-geojson')
 var Pbf = require('pbf');
 
+var config = require('./config.js')
+
 app.use(cors());
+
+var simplifyTolerance = 0.001;
 
 //**************Functions shared between Fire / AQI*******************************//
 var DOWNLOAD_DIR = './dataCache/'
@@ -37,13 +41,6 @@ var modifyFeatures = function(json, setStyleFunc, destCache) {
    return json
 }//modifyFeatures()
 
-//Set Defaults for fire perimeters
-var setFireStyle = function(feature) {
-  feature.properties.color = "red"
-  feature.properties.opacity = 0.5
-  //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
-  return feature
-}//setStyle()
 
 //Calculate bounding boxes - GeoBounds
 var calcBounds = function(feature) { //json) {
@@ -84,8 +81,8 @@ app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
          req.params.south, req.params.east, req.params.north)
    //console.log(util.inspect(matching,false,null))
    console.log("Matching: " + matching.features.length + ' elements')
-
-  var geobuf = geojsonToGeobuf(matching);//Geobuf.encode(matching, new Pbf());
+  var simplified = SimplifyGeoJson(matching, simplifyTolerance);
+  var geobuf = geojsonToGeobuf(simplified);//Geobuf.encode(matching, new Pbf());
   //var buffer = Buffer.from(geobuf);
   if (typeof res !== "undefined") {
     res.type('arraybuffer');
@@ -178,7 +175,7 @@ var fireUrl = "http://phillipdaw.com:3000/testFirePerimeters.kml"
 //Fire Default Style
 //Set Defaults for fire perimeters
 var setFireStyle = function(feature) {
-  feature.properties.color = "red"
+  feature.properties.color = "black"
   feature.properties.opacity = 0.5
   //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
   return feature
@@ -192,10 +189,13 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
   var matching = filterFireByBounds(req.params.west,
          req.params.south, req.params.east, req.params.north)
    //console.log(util.inspect(matching,false,null))
-   console.log("Matching: " + matching./*features.*/length + ' elements')
-
+   var geojson = {type: "FeatureCollection", features: matching}
+   console.log("Matching: " + geojson.features.length + ' elements')
+   var simplified = SimplifyGeoJson(geojson, simplifyTolerance);
+   var geobuf = geojsonToGeobuf(simplified);
   if (typeof res !== "undefined") {
-    res.json(matching);
+    res.type('arraybuffer')
+    res.send(new Buffer(geobuf));
   }//if reply needed
 })//.use(allowCrossDomain);
 
@@ -277,7 +277,7 @@ function intersectRect(r1, r2) {
 
 
 
-app.listen(3000, function () {
+app.listen(config.serverPort/*3000*/, function () {
   console.log('CORS-enabled web server listening on port 3000')
 })
 

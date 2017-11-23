@@ -68,7 +68,8 @@ var geobufToGeojson = function(geobuf) {
 //AQI variables
 var AQIREPLY = 'Updated air quality data'
 var aqiCache;
-var aqiUrl = "http://phillipdaw.com:3000/testAqicontUS.kml"//testAqi.kml"
+var aqiUrl = "http://phillipdaw.com:" + config.serverPort +
+	"/testAqicontUS.kml"
 //contentintal US 
 //http://www.airnowapi.org/aq/kml/Combined/?DATE=2017-09-18T06&BBOX=-124.78,24.74,-66.95,49.35&SRS=EPSG:4326&API_KEY=8B8927D2-B8C3-4371-8E5D-902C4A129469
 
@@ -169,7 +170,7 @@ var setAqiStyle = function(feature) {
 var FIREREPLY = 'Updated fire perimeter data'
 var fireCache;
 //var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { this.updateFireData() });
-var fireUrl = "http://phillipdaw.com:3000/testFirePerimeters.kml"
+var fireUrl = "http://phillipdaw.com:" + config.serverPort + "/testFirePerimeters.kml"
 //"https://rmgsc.cr.usgs.gov/outgoing/GeoMAC/ActiveFirePerimeters.kml";
 
 //Fire Default Style
@@ -277,7 +278,7 @@ function intersectRect(r1, r2) {
 
 
 
-app.listen(config.serverPort/*3000*/, function () {
-  console.log('CORS-enabled web server listening on port 3000')
+app.listen(config.serverPort, function () {
+  console.log('CORS-enabled web server listening on port ' + config.serverPort)
 })
 

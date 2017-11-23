@@ -12,6 +12,10 @@ var GeoJSON = require('geojson')
 const util = require('util')
 var ClipPoly = require('geojson-slicer')
 
+var Geobuf = require('geobuf')
+var SimplifyGeoJson = require('simplify-geojson')
+var Pbf = require('pbf');
+
 app.use(cors());
 
 //**************Functions shared between Fire / AQI*******************************//
@@ -50,6 +54,17 @@ var calcBounds = function(feature) { //json) {
   return feature
 }//calcBounds
 
+//send simplified geojson data as geobuf
+var geojsonToGeobuf = function(geojson) {
+  var buffer = Geobuf.encode(geojson, new Pbf());
+  return buffer;
+}
+
+var geobufToGeojson = function(geobuf) {
+  var geojson = Geobuf.decode( new Pbf(geobuf) );
+  return geojson;
+}
+
 
 //************AQI Functions****************************//
 
@@ -70,8 +85,12 @@ app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
    //console.log(util.inspect(matching,false,null))
    console.log("Matching: " + matching.features.length + ' elements')
 
+  var geobuf = geojsonToGeobuf(matching);//Geobuf.encode(matching, new Pbf());
+  //var buffer = Buffer.from(geobuf);
   if (typeof res !== "undefined") {
-    res.json(matching);
+    res.type('arraybuffer');
+    res.send(new Buffer(geobuf));//arrayBuffer(geobuf);
+    //res.json(matching);
   }//if reply needed
 })//filter aqi by bounds route
 

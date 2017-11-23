@@ -64,10 +64,11 @@ var aqiUrl = "http://phillipdaw.com:3000/testAqicontUS.kml"//testAqi.kml"
 //AQI Routes
 app.get('updateAqiData', (req, res) => {updateAqiData(req, res)})
 app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
-  var matching = filterAqiByBounds(req.params.west,
+  var matching = null;
+  matching = filterAqiByBounds(req.params.west,
          req.params.south, req.params.east, req.params.north)
    //console.log(util.inspect(matching,false,null))
-   console.log("Matching: " + matching./*features.*/length + ' elements')
+   console.log("Matching: " + matching.features.length + ' elements')
 
   if (typeof res !== "undefined") {
     res.json(matching);
@@ -103,37 +104,31 @@ var updateAqiData = function(req, res) {
 //delete this and make a filterData(source, west, south, east, north) function in shared funcs
 function filterAqiByBounds(west, south, east, north) {
   var i = 0;
-  var toSend = [];
+  var toSend = null; toSend = new Array();
   var len = aqiCache.features.length;
 //  var boundary = [west, south, east, north];
-	//GeoJSON.parse(
-	//{ polygon: [[ [west, north], [west, south], [east, north], [east, south] ]] },
-	//{'Polygon': 'polygon'});
-
   console.log('Filtering ' + len + ' elements')
   //Build geojson header? Use Library?
 
   var boundingBox =  [Number(west), Number(south), Number(east), Number(north)]
-  // Push intersecting rectangles onto toSend array
+  console.log(boundingBox);
+// Push intersecting rectangles onto toSend array
   for (i = 0, len = aqiCache.features.length; i < len; i++) {
     if (intersectRect(boundingBox,
                         aqiCache.features[i].properties.extent)) {
-    //    console.log("POLYGON " + i + " - TRUE")
-	//console.log(aqiCache.features[i].geometry.coordinates)
-        toSend.push(aqiCache.features[i])
+        toSend.push(JSON.parse(JSON.stringify(aqiCache.features[i])))
     }//if intersect
-    //else console.log("Polygon " + i + " - false")
-//    if (modified) aqiCache.features[i].geometry.coordinates.push(
-//			aqiCache.features[i].geometry.coordinates[0])
   }//for aqiCache
-  var clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
+  var clippedPolys = null;
+  clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
   for (i = 0, len = clippedPolys.features.length; i < len; i++) {
     for (j = 0; j < clippedPolys.features[i].geometry.coordinates.length; j++)
       clippedPolys.features[i].geometry.coordinates[j].push(clippedPolys.features[i].geometry.coordinates[j][0]);
   }//for toSend
-  console.log(util.inspect(clippedPolys.features[1],false,null))
+  //console.log(util.inspect(clippedPolys.features[1],false,null))
   //console.log(util.inspect(clippedPolys,false,null))//toSend)
   //console.log(util.inspect(boundary,false,null))//console.log(util.inspect(matching,false,null))
+
   return clippedPolys
   //return toSend;
 }//filterAqiByBounds
@@ -227,7 +222,7 @@ function filterFireByBounds(west, south, east, north) {
     if (intersectRect(boundingBox,
                         fireCache.features[i].properties.extent)) {
         //console.log("POLYGON " + i + " - TRUE")
-        toSend.push(fireCache.features[i])
+        toSend.push(JSON.parse(JSON.stringify(fireCache.features[i])))
     }//if intersect
     //else console.log("Polygon " + i + " - false")
 

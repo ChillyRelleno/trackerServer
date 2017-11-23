@@ -13,6 +13,7 @@ const util = require('util')
 var ClipPoly = require('geojson-slicer')
 
 var Geobuf = require('geobuf')
+//var Normalize = require('@mapbox/geojson-normalize')
 var SimplifyGeoJson = require('simplify-geojson')
 var Pbf = require('pbf');
 
@@ -191,6 +192,7 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
          req.params.south, req.params.east, req.params.north)
    //console.log(util.inspect(matching,false,null))
    var geojson = {type: "FeatureCollection", features: matching}
+   //console.log(geojson)
    console.log("Matching: " + geojson.features.length + ' elements')
    var simplified = SimplifyGeoJson(geojson, simplifyTolerance);
    var geobuf = geojsonToGeobuf(simplified);

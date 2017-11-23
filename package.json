@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/geojson-normalize": "0.0.1",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "geobuf": "^3.0.0",

@@ -22,9 +22,25 @@ var config = require('./config.js')
 app.use(cors());
 
 var simplifyTolerance = 0.001;
+var DOWNLOAD_DIR = './dataCache/';
+
+//*****other stuff*********//
+getTestRoute = function(req, res)  {
+  fs.readFile('./test.gpx', (err, data) => {
+     if (err) {throw err};
+     var str = String(data);
+     var xml = new xmldom().parseFromString(str, "text/xml")
+     var json = toGeoJSON.gpx(xml);
+     console.log(json);
+     var geobuf = geojsonToGeobuf(json);
+     //res.send(json);
+     res.send(new Buffer(geobuf));
+  } );//readfile
+};//getTestRoute
+app.get('/getTestRoute', (req, res) => {getTestRoute(req, res);});
+
 
 //**************Functions shared between Fire / AQI*******************************//
-var DOWNLOAD_DIR = './dataCache/'
 
 
 var modifyFeatures = function(json, setStyleFunc, destCache) {
@@ -62,6 +78,7 @@ var geobufToGeojson = function(geobuf) {
   var geojson = Geobuf.decode( new Pbf(geobuf) );
   return geojson;
 }
+
 
 
 //************AQI Functions****************************//

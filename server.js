@@ -192,8 +192,9 @@ var setAqiStyle = function(feature) {
   if (typeof(feature.properties.fill) !== undefined) {
     feature.properties.color = feature.properties.fill;
     feature.properties.opacity = 0.5
-
+    
   }//if there's a color
+  feature.properties.type = "AQI";
   //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
   return feature
 }//setStyle()
@@ -236,6 +237,7 @@ var fireUrl = "http://phillipdaw.com:" + config.serverPort + "/testFirePerimeter
 var setFireStyle = function(feature) {
   feature.properties.color = "black"
   feature.properties.opacity = 0.5
+  feature.properties.type="Fire"
   //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
   return feature
 }//setStyle()

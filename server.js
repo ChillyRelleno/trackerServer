@@ -76,7 +76,9 @@ var aqiUrl = "http://phillipdaw.com:" + config.serverPort +
 
 
 //AQI Routes
-app.get('updateAqiData', (req, res) => {updateAqiData(req, res)})
+//app.get('/updateAqiData', (req, res) => {updateAqiData(req, res)})
+	//function(req, res) { updateAqiData(req, res).bind(this); });
+	//(req, res) => {updateAqiData(req, res)})//.bind(this)})
 app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
   var matching = null;
   matching = filterAqiByBounds(req.params.west,
@@ -95,6 +97,7 @@ app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
 
 
 var updateAqiData = function(req, res) {
+//updateAqiData = (req, res) => {
  //console.log('updating air quality data')
 
  var aqidest = DOWNLOAD_DIR + "AirQuality.json"
@@ -116,7 +119,11 @@ var updateAqiData = function(req, res) {
           if (err) return console.log(err);
           else return json;
         }) })
-}()//updateAqiData
+
+ if (typeof res !== "undefined") res.sendStatus("<h1>" + AQIREPLY + "</h1>")
+
+}//updateAqiData
+updateAqiData();
 
 //This function is identical to the fire one except for the data source
 //delete this and make a filterData(source, west, south, east, north) function in shared funcs
@@ -185,7 +192,7 @@ var setFireStyle = function(feature) {
 
 
 //Fire Routes
-app.get('/updateFireData', (req, res) => {updateFireData(req, res)})
+//app.get('/updateFireData', (req, res) => {updateFireData(req, res)})
 app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
 
   var matching = filterFireByBounds(req.params.west,
@@ -228,11 +235,15 @@ var updateFireData = function(req, res) {
         }) })
 
   if (typeof res !== "undefined") res.sendStatus("<h1>" + FIREREPLY + "</h1>")
-}()//
+}//updateFireData
+//for some reason if you call it in the declaration it doesn't stick around
+updateFireData();
 
 function filterFireByBounds(west, south, east, north) {
   var i = 0;
   var toSend = [];
+  console.log("fireCache " + fireCache.features.length);
+  //console.log("this.fireCache " + this.fireCache.features.length);
   var len = fireCache.features.length;
 
   console.log('Filtering ' + len + ' elements')

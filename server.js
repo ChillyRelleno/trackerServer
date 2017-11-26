@@ -46,10 +46,13 @@ app.get('/getTestRoute', (req, res) => {getTestRoute(req, res);});
 var modifyFeatures = function(json, setStyleFunc, destCache) {
   var i = 0;
   fireCache = null
-  //console.log(json)
+  
+  console.log(json.features.length)
   for (i = 0, len = json.features.length; i < len; i++) {
     //set style
     json.features[i] = setStyleFunc(json.features[i])  // setFireStyle(json.features[i])
+//console.log(json.features[i])
+//console.log('madeit')
     //Calculate and store bounds
     json.features[i] = calcBounds(json.features[i])
   }//for each feature
@@ -131,6 +134,9 @@ var updateAqiData = function(req, res) {
     .then(function(xml) { return toGeoJSON.kml(xml) })
 //.then(function(json) {console.log(JSON.stringify(json.features[1][0][0])); return json;})
     .then(function(json) { return aqiCache = modifyFeatures(json, setAqiStyle); })
+//.then(function(json) {console.log('madiet'); return json;})
+
+    .then(function(json) { return buildLegend(json) })
 //.then(function(json) { console.log(json.features[1].geometry.coordinates[0][0]);return json;})//JSON.stringify(json.features[0])); return json; })
     .then(function(json) { fs.writeFile(aqimoddest, JSON.stringify(aqiCache), function (err) {
           if (err) return console.log(err);
@@ -159,9 +165,11 @@ function filterAqiByBounds(west, south, east, north) {
     if (intersectRect(boundingBox,
                         aqiCache.features[i].properties.extent)) {
         toSend.push(JSON.parse(JSON.stringify(aqiCache.features[i])))
+	checkLegend(aqiCache.features[i]);
     }//if intersect
   }//for aqiCache
   var clippedPolys = null;
+  var i = 0, j = 0, len = 0;
   clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
   for (i = 0, len = clippedPolys.features.length; i < len; i++) {
     for (j = 0; j < clippedPolys.features[i].geometry.coordinates.length; j++)
@@ -170,24 +178,49 @@ function filterAqiByBounds(west, south, east, north) {
   //console.log(util.inspect(clippedPolys.features[1],false,null))
   //console.log(util.inspect(clippedPolys,false,null))//toSend)
   //console.log(util.inspect(boundary,false,null))//console.log(util.inspect(matching,false,null))
-
+  clippedPolys = buildLegend(clippedPolys);
   return clippedPolys
   //return toSend;
 }//filterAqiByBounds
 
 //var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
 
-
-var setAqiStyle = function(feature) {
+//var aqiLegendColors = [];
+var aqiLegend = [];
+var setAqiStyle = function(feature) { 
+//  aqiLegendColors = [];
   if (typeof(feature.properties.fill) !== undefined) {
-      feature.properties.color = feature.properties.fill
-  }
-  feature.properties.opacity = 0.5
+    feature.properties.color = feature.properties.fill;
+    feature.properties.opacity = 0.5
+
+  }//if there's a color
   //feature.properties.setProperty('fill-opacity', 0.5)//fillOpacity = 0.5
   return feature
 }//setStyle()
 
+var checkLegend = function(feature) {
+    var contains = false;
+    var styleUrl = feature.properties.styleUrl.charAt(1);
+//    console.log(aqiLegend.length);
+    var i = 0, len = 0;
+    for (i = 0, len = aqiLegend.length; i < len; i++) {
+        //console.log(aqiLegend[i]);
+      if (aqiLegend[i][0] == styleUrl) { contains = true; }
+    }//for
 
+    if (!contains) {
+        aqiLegend.push([styleUrl, feature.properties.color]);
+    }//if ! contains}
+}//checkLegend
+
+var buildLegend = function(fc) {
+  console.log(aqiLegend);
+  fc.properties = {legend: aqiLegend};
+//  console.log(fc.properties);
+  //clear for next time
+  aqiLegend = [];//new Array();
+  return fc;//aqiLegend;
+}//buildLegend
 
 //************Fire Functions****************************//
 

@@ -18,6 +18,7 @@ var SimplifyGeoJson = require('simplify-geojson')
 var Pbf = require('pbf');
 
 var config = require('./config.js')
+process.env.NODE_ENV = config.node_env;
 
 app.use(cors());
 

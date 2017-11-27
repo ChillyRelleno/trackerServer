@@ -11,7 +11,7 @@ var GeoJSON = require('geojson')
 //var stringify = require('json-stringify')
 const util = require('util')
 var ClipPoly = require('geojson-slicer')
-
+var compression = require('compression')
 var Geobuf = require('geobuf')
 //var Normalize = require('@mapbox/geojson-normalize')
 var SimplifyGeoJson = require('simplify-geojson')
@@ -21,6 +21,8 @@ var config = require('./config.js')
 process.env.NODE_ENV = config.node_env;
 
 app.use(cors());
+app.use(compression());
+app.use(express.static(__dirname));
 
 var simplifyTolerance = 0.001;
 var DOWNLOAD_DIR = './dataCache/';
@@ -32,7 +34,6 @@ getTestRoute = function(req, res)  {
      var str = String(data);
      var xml = new xmldom().parseFromString(str, "text/xml")
      var json = toGeoJSON.gpx(xml);
-     console.log(json);
      var geobuf = geojsonToGeobuf(json);
      //res.send(json);
      res.send(new Buffer(geobuf));
@@ -48,12 +49,9 @@ var modifyFeatures = function(json, setStyleFunc, destCache) {
   var i = 0;
   fireCache = null
   
-  console.log(json.features.length)
   for (i = 0, len = json.features.length; i < len; i++) {
     //set style
     json.features[i] = setStyleFunc(json.features[i])  // setFireStyle(json.features[i])
-//console.log(json.features[i])
-//console.log('madeit')
     //Calculate and store bounds
     json.features[i] = calcBounds(json.features[i])
   }//for each feature
@@ -62,17 +60,55 @@ var modifyFeatures = function(json, setStyleFunc, destCache) {
    return json
 }//modifyFeatures()
 
+function sendFilteredResponse(matching, west, south, east, north, res) {
+   //console.log(util.inspect(matching,false,null))
+   console.log("Matching: " + matching.features.length + ' elements')
+   var simplified = SimplifyGeoJson(matching, simplifyTolerance);
+   var geobuf = geojsonToGeobuf(simplified);
+  if (typeof res !== "undefined") {
+    res.type('arraybuffer')
+    res.send(new Buffer(geobuf));
+  }//if reply needed
+}//sendFilteredResponse
+
+
+function filterFeaturesByBounds(cache, west, south, east, north, 
+		optPerFeatureFunc, optFCFunc) {
+  var i = 0, toSend= [], len = cache.features.length;
+  console.log('Filtering ' + len + ' elements');
+  var boundingBox =  [Number(west), Number(south), Number(east), Number(north)]
+  for (i = 0; i < len; i++) {
+    if (intersectRect(boundingBox, cache.features[i].properties.extent)) {
+	toSend.push(JSON.parse(JSON.stringify(cache.features[i])));
+	//checkLegend for AQI
+	if (optPerFeatureFunc !== undefined) optPerFeatureFunc(cache.features[i]);
+    }//if intersect
+  }//for
+  //clipFeatures,  for AQI
+  if (optFCFunc !== undefined) toSend =optFCFunc(toSend, boundingBox); 
+  return toSend;
+}//filterFeaturesByBounds
+
+function clipPolysByBounds(toSend, boundingBox) {
+   var clippedPolys = null;
+  var i = 0, j = 0, len = 0;
+  clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
+  for (i = 0, len = clippedPolys.features.length; i < len; i++) {
+    for (j = 0; j < clippedPolys.features[i].geometry.coordinates.length; j++)
+      clippedPolys.features[i].geometry.coordinates[j].push(clippedPolys.features[i].geometry.coordinates[j][0]);
+  }//for toSend
+  return clippedPolys;
+}//clipPolysByBounds
 
 //Calculate bounding boxes - GeoBounds
-var calcBounds = function(feature) { //json) {
+var calcBounds = function(feature) { //json) { 
     var extent = GeoBounds.extent(feature.geometry)
     feature.properties.extent = [
 	Number(extent[0]).toFixed(4), Number(extent[1]).toFixed(4),
-	Number(extent[2]).toFixed(4), Number(extent[3]).toFixed(4)]//extent//Number(extent).toFixed(4)
+	Number(extent[2]).toFixed(4), Number(extent[3]).toFixed(4)]
   return feature
 }//calcBounds
 
-//send simplified geojson data as geobuf
 var geojsonToGeobuf = function(geojson) {
   var buffer = Geobuf.encode(geojson, new Pbf());
   return buffer;
@@ -96,24 +132,26 @@ var aqiUrl = "http://phillipdaw.com:" + config.serverPort +
 //http://www.airnowapi.org/aq/kml/Combined/?DATE=2017-09-18T06&BBOX=-124.78,24.74,-66.95,49.35&SRS=EPSG:4326&API_KEY=8B8927D2-B8C3-4371-8E5D-902C4A129469
 
 
+function aqiDataPrep(toSend, boundingBox) {
+        toSend = buildLegend(clipPolysByBounds(toSend, boundingBox));
+	return toSend;
+}//aqiDataPrep
+
+
 //AQI Routes
 //app.get('/updateAqiData', (req, res) => {updateAqiData(req, res)})
 	//function(req, res) { updateAqiData(req, res).bind(this); });
 	//(req, res) => {updateAqiData(req, res)})//.bind(this)})
 app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
   var matching = null;
-  matching = filterAqiByBounds(req.params.west,
-         req.params.south, req.params.east, req.params.north)
-   //console.log(util.inspect(matching,false,null))
-   console.log("Matching: " + matching.features.length + ' elements')
-  var simplified = SimplifyGeoJson(matching, simplifyTolerance);
-  var geobuf = geojsonToGeobuf(simplified);//Geobuf.encode(matching, new Pbf());
-  //var buffer = Buffer.from(geobuf);
-  if (typeof res !== "undefined") {
-    res.type('arraybuffer');
-    res.send(new Buffer(geobuf));//arrayBuffer(geobuf);
-    //res.json(matching);
-  }//if reply needed
+  matching = filterFeaturesByBounds(aqiCache, 
+	req.params.west, req.params.south, 
+	req.params.east, req.params.north,
+                checkLegend, aqiDataPrep);
+  sendFilteredResponse(matching,
+                req.params.west, req.params.south,
+                req.params.east, req.params.north,
+		res);
 })//filter aqi by bounds route
 
 
@@ -127,18 +165,13 @@ var updateAqiData = function(req, res) {
   fetch(aqiUrl)
     .then(function(res) {
       console.log(AQIREPLY)
-        //prepFireDataForBounds(dest)
         return res;
     })
     .then(function(res) { return res.text() })
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
-//.then(function(json) {console.log(JSON.stringify(json.features[1][0][0])); return json;})
     .then(function(json) { return aqiCache = modifyFeatures(json, setAqiStyle); })
-//.then(function(json) {console.log('madiet'); return json;})
-
     .then(function(json) { return buildLegend(json) })
-//.then(function(json) { console.log(json.features[1].geometry.coordinates[0][0]);return json;})//JSON.stringify(json.features[0])); return json; })
     .then(function(json) { fs.writeFile(aqimoddest, JSON.stringify(aqiCache), function (err) {
           if (err) return console.log(err);
           else return json;
@@ -149,47 +182,10 @@ var updateAqiData = function(req, res) {
 }//updateAqiData
 updateAqiData();
 
-//This function is identical to the fire one except for the data source
-//delete this and make a filterData(source, west, south, east, north) function in shared funcs
-function filterAqiByBounds(west, south, east, north) {
-  var i = 0;
-  var toSend = null; toSend = new Array();
-  var len = aqiCache.features.length;
-//  var boundary = [west, south, east, north];
-  console.log('Filtering ' + len + ' elements')
-  //Build geojson header? Use Library?
-
-  var boundingBox =  [Number(west), Number(south), Number(east), Number(north)]
-  console.log(boundingBox);
-// Push intersecting rectangles onto toSend array
-  for (i = 0, len = aqiCache.features.length; i < len; i++) {
-    if (intersectRect(boundingBox,
-                        aqiCache.features[i].properties.extent)) {
-        toSend.push(JSON.parse(JSON.stringify(aqiCache.features[i])))
-	checkLegend(aqiCache.features[i]);
-    }//if intersect
-  }//for aqiCache
-  var clippedPolys = null;
-  var i = 0, j = 0, len = 0;
-  clippedPolys = ClipPoly(toSend, boundingBox, { cutFeatures:true })
-  for (i = 0, len = clippedPolys.features.length; i < len; i++) {
-    for (j = 0; j < clippedPolys.features[i].geometry.coordinates.length; j++)
-      clippedPolys.features[i].geometry.coordinates[j].push(clippedPolys.features[i].geometry.coordinates[j][0]);
-  }//for toSend
-  //console.log(util.inspect(clippedPolys.features[1],false,null))
-  //console.log(util.inspect(clippedPolys,false,null))//toSend)
-  //console.log(util.inspect(boundary,false,null))//console.log(util.inspect(matching,false,null))
-  clippedPolys = buildLegend(clippedPolys);
-  return clippedPolys
-  //return toSend;
-}//filterAqiByBounds
-
 //var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
 
-//var aqiLegendColors = [];
 var aqiLegend = [];
 var setAqiStyle = function(feature) { 
-//  aqiLegendColors = [];
   if (typeof(feature.properties.fill) !== undefined) {
     feature.properties.color = feature.properties.fill;
     feature.properties.opacity = 0.5
@@ -203,10 +199,8 @@ var setAqiStyle = function(feature) {
 var checkLegend = function(feature) {
     var contains = false;
     var styleUrl = feature.properties.styleUrl.charAt(1);
-//    console.log(aqiLegend.length);
     var i = 0, len = 0;
     for (i = 0, len = aqiLegend.length; i < len; i++) {
-        //console.log(aqiLegend[i]);
       if (aqiLegend[i][0] == styleUrl) { contains = true; }
     }//for
 
@@ -216,9 +210,7 @@ var checkLegend = function(feature) {
 }//checkLegend
 
 var buildLegend = function(fc) {
-  console.log(aqiLegend);
   fc.properties = {legend: aqiLegend};
-//  console.log(fc.properties);
   //clear for next time
   aqiLegend = [];//new Array();
   return fc;//aqiLegend;
@@ -247,20 +239,14 @@ var setFireStyle = function(feature) {
 //Fire Routes
 //app.get('/updateFireData', (req, res) => {updateFireData(req, res)})
 app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
-
-  var matching = filterFireByBounds(req.params.west,
-         req.params.south, req.params.east, req.params.north)
-   //console.log(util.inspect(matching,false,null))
-   var geojson = {type: "FeatureCollection", features: matching}
-   //console.log(geojson)
-   console.log("Matching: " + geojson.features.length + ' elements')
-   var simplified = SimplifyGeoJson(geojson, simplifyTolerance);
-   var geobuf = geojsonToGeobuf(simplified);
-  if (typeof res !== "undefined") {
-    res.type('arraybuffer')
-    res.send(new Buffer(geobuf));
-  }//if reply needed
-})//.use(allowCrossDomain);
+  var matching = filterFeaturesByBounds(fireCache,
+                req.params.west, req.params.south,
+                req.params.east, req.params.north)
+  sendFilteredResponse({type: "FeatureCollection", features: matching}, 
+		req.params.west, req.params.south,
+		req.params.east, req.params.north, 
+		res);
+})//filter/fire
 
 //Update data from server - currently just using my test data
 var updateFireData = function(req, res) {
@@ -272,16 +258,12 @@ var updateFireData = function(req, res) {
   fetch(fireUrl)
     .then(function(res) { 
       console.log(FIREREPLY) 
-        //prepFireDataForBounds(dest)
 	return res;
     })
     .then(function(res) { return res.text() })
-    //.then(function(str) { console.log(str); return str; })
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
-    //.then(function(json) { console.log(JSON.stringify(json)); return json; })
     .then(function(json) { return fireCache = modifyFeatures(json, setFireStyle); })//calcBounds(json); })
-    //.then(function(json) { console.log(JSON.stringify(json)); return json; })
     .then(function(json) { fs.writeFile(firemoddest, JSON.stringify(fireCache), function (err) {
           if (err) return console.log(err);
           else return json;
@@ -291,44 +273,6 @@ var updateFireData = function(req, res) {
 }//updateFireData
 //for some reason if you call it in the declaration it doesn't stick around
 updateFireData();
-
-function filterFireByBounds(west, south, east, north) {
-  var i = 0;
-  var toSend = [];
-  console.log("fireCache " + fireCache.features.length);
-  //console.log("this.fireCache " + this.fireCache.features.length);
-  var len = fireCache.features.length;
-
-  console.log('Filtering ' + len + ' elements')
-  //Build geojson header? Use Library?
-
-  var boundingBox =  [west, south, east, north]
-  // Push intersecting rectangles onto toSend array
-  for (i = 0, len = fireCache.features.length; i < len; i++) {
-    if (intersectRect(boundingBox,
-                        fireCache.features[i].properties.extent)) {
-        //console.log("POLYGON " + i + " - TRUE")
-        toSend.push(JSON.parse(JSON.stringify(fireCache.features[i])))
-    }//if intersect
-    //else console.log("Polygon " + i + " - false")
-
-  }//for
-  return toSend;
-}
-
-
-
-
-//CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-}
-
-app.use(allowCrossDomain);
-app.use(express.static(__dirname));
 
 var LEFT = 0;
 var BOTTOM = 1;
@@ -341,8 +285,6 @@ function intersectRect(r1, r2) {
           (+(r1[BOTTOM]) > +(r2[TOP])))
   return intersect
 }
-
-
 
 app.listen(config.serverPort, function () {
   console.log('CORS-enabled web server listening on port ' + config.serverPort)

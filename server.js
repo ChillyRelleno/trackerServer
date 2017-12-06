@@ -16,7 +16,7 @@ var Geobuf = require('geobuf')
 //var Normalize = require('@mapbox/geojson-normalize')
 var SimplifyGeoJson = require('simplify-geojson')
 var Pbf = require('pbf');
-
+var bodyParser = require('body-parser');
 var config = require('./config.js')
 process.env.NODE_ENV = config.node_env;
 
@@ -26,6 +26,30 @@ app.use(express.static(__dirname));
 
 var simplifyTolerance = 0.001;
 var DOWNLOAD_DIR = './dataCache/';
+
+//--------------RIDE TRACKER---------------//
+var testRide = Array();
+app.use(bodyParser.json() );
+app.use(bodyParser.urlencoded({extended:true}));
+
+app.post('/track', (req, res) => {
+  //console.log('post to /track');
+  //console.log(req)//util.inspect(req, false, null));
+  var loc = req.body.location;
+  var now = new Date();
+  loc.time = now;
+  testRide.push(loc);
+  console.log(testRide);
+  res.send('ok');
+  //getTestRoute(req, res);
+});
+
+app.get('/track', (req, res) => {
+  //build FeatureCollection from testRide array
+  res.send(testRide);
+});
+
+//-------------USER LOGIN / CREATION --------------------//
 
 //*****other stuff*********//
 getTestRoute = function(req, res)  {

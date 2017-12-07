@@ -17,8 +17,11 @@ var Geobuf = require('geobuf')
 var SimplifyGeoJson = require('simplify-geojson')
 var Pbf = require('pbf');
 var bodyParser = require('body-parser');
+//require('body-parser-xml')(bodyParser);
 var config = require('./config.js')
 process.env.NODE_ENV = config.node_env;
+//var XmlStream = require('xml-stream');
+var xmlBodyparser = require('express-xml-bodyparser')
 
 app.use(cors());
 app.use(compression());
@@ -29,9 +32,29 @@ var DOWNLOAD_DIR = './dataCache/';
 
 //--------------RIDE TRACKER---------------//
 var testRide = Array();
+
+app.use(function(req, res, next) {
+  //if (req.method !== "post") return next();
+  if (0 !== req.url.indexOf('/track/gpx')) return next();
+  //else {
+    var data = '';
+    //var re = JSON.parse(JSON.stringify(req));
+    req.setEncoding('utf8');
+    req.on('data', function(chunk) { 
+        data += chunk;
+    });
+    req.on('end', function() {
+        req.rawBody = data;
+console.log(req.rawBody);
+        next();
+    });
+  //}
+});
 app.use(bodyParser.json() );
 app.use(bodyParser.urlencoded({extended:true}));
-
+//app.use(xmlBodyparser());
+//app.use(bodyParser.raw());
+//app.use(bodyParser.xml());
 app.post('/track', (req, res) => {
   //console.log('post to /track');
   //console.log(req)//util.inspect(req, false, null));
@@ -43,7 +66,18 @@ app.post('/track', (req, res) => {
   res.send('ok');
   //getTestRoute(req, res);
 });
-
+app.post('/track/gpx', (req, res) => {
+//  var str = String(req.body);
+//  req.setEncoding('utf8');
+//  var xml = new XmlStream(req);
+  //xml.on('updateElement: sometag', function(element){});
+//  console.log(req.rawBody);//str);
+  var xml = new xmldom().parseFromString(req.rawBody, "application/xml")
+  console.log(xml);
+  var json = toGeoJSON.gpx(xml);
+  console.log(util.inspect(json, false, null));
+  res.send('ok');
+});
 app.get('/track', (req, res) => {
   //build FeatureCollection from testRide array
   res.send(testRide);

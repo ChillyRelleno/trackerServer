@@ -22,7 +22,7 @@ var config = require('./config.js')
 process.env.NODE_ENV = config.node_env;
 //var XmlStream = require('xml-stream');
 var xmlBodyparser = require('express-xml-bodyparser')
-
+var dateFormat = require('dateformat');
 app.use(cors());
 app.use(compression());
 app.use(express.static(__dirname));
@@ -35,7 +35,7 @@ var testRide = Array();
 
 app.use(function(req, res, next) {
   //if (req.method !== "post") return next();
-  if (0 !== req.url.indexOf('/track/gpx')) return next();
+  if (0 !== req.url.indexOf('/route/gpx')) return next();
   //else {
     var data = '';
     //var re = JSON.parse(JSON.stringify(req));
@@ -52,36 +52,42 @@ console.log(req.rawBody);
 });
 app.use(bodyParser.json() );
 app.use(bodyParser.urlencoded({extended:true}));
-//app.use(xmlBodyparser());
-//app.use(bodyParser.raw());
-//app.use(bodyParser.xml());
+
+app.get('/track/:user', (req, res) => {
+  var user;
+  if (req.params.user !== undefined) user = req.params.user;
+  var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng']});
+  console.log("GPX uploaded");
+  var geobuf = geojsonToGeobuf(geojson);
+  if (typeof res !== "undefined") {
+    res.type('arraybuffer')
+    res.send(new Buffer(geobuf));
+  }
+});
 app.post('/track', (req, res) => {
-  //console.log('post to /track');
-  //console.log(req)//util.inspect(req, false, null));
   var loc = req.body.location;
-  var now = new Date();
-  loc.time = now;
+  //var now = new Date();
+  //loc.time = dateFormat();//now is default
   testRide.push(loc);
-  console.log(testRide);
+  console.log(loc);
   res.send('ok');
-  //getTestRoute(req, res);
 });
-app.post('/track/gpx', (req, res) => {
-//  var str = String(req.body);
-//  req.setEncoding('utf8');
-//  var xml = new XmlStream(req);
-  //xml.on('updateElement: sometag', function(element){});
-//  console.log(req.rawBody);//str);
+app.post('/route/gpx', (req, res) => {
   var xml = new xmldom().parseFromString(req.rawBody, "application/xml")
-  console.log(xml);
-  var json = toGeoJSON.gpx(xml);
-  console.log(util.inspect(json, false, null));
+  //console.log(xml);
+  this.routeToDisplay = toGeoJSON.gpx(xml);
+  //console.log(util.inspect(json, false, null));
   res.send('ok');
 });
-app.get('/track', (req, res) => {
-  //build FeatureCollection from testRide array
-  res.send(testRide);
+app.get('/route/gpx', (req, res) => {
+  console.log(this.routeToDisplay);
+  var geobuf = geojsonToGeobuf(this.routeToDisplay);
+  res.send(new Buffer(geobuf));
 });
+//app.get('/track', (req, res) => {
+//  //build FeatureCollection from testRide array
+//  res.send(testRide);
+//});
 
 //-------------USER LOGIN / CREATION --------------------//
 
@@ -105,19 +111,12 @@ app.get('/getTestRoute', (req, res) => {getTestRoute(req, res);});
 
 var modifyFeatures = function(json, setStyleFunc) {
   var i = 0;
-  //if (json.features[0].properties.type == "AQI")
-  //console.log(json);
   for (i = 0, len = json.features.length; i < len; i++) {
-    //set style
     json.features[i] = setStyleFunc(json.features[i])  // setFireStyle(json.features[i])
-
-    //Calculate and store bounds
     json.features[i] = calcBounds(json.features[i])
   }//for each feature
-  //destCache = json
   console.log("Bounding boxes calculated and stored for " + i +
 	" " +json.features[0].properties.type + " perimeters")
-  //console.log( destCache)
    return json
 }//modifyFeatures()
 
@@ -181,7 +180,6 @@ var geobufToGeojson = function(geobuf) {
 }
 
 
-
 //************AQI Functions****************************//
 
 //AQI variables
@@ -215,9 +213,6 @@ var buildLegend = function(fc) {
 
 
 //AQI Routes
-//app.get('/updateAqiData', (req, res) => {updateAqiData(req, res)})
-	//function(req, res) { updateAqiData(req, res).bind(this); });
-	//(req, res) => {updateAqiData(req, res)})//.bind(this)})
 app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
   var matching = null;
   matching = filterFeaturesByBounds(aqiCache, 
@@ -229,7 +224,6 @@ app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
                 req.params.east, req.params.north,
 		res);
 })//filter aqi by bounds route
-
 
 app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', function (req, res) {
   var matching = null;
@@ -384,26 +378,8 @@ var updateFireData = function(req, res) {
   var firemoddest = DOWNLOAD_DIR + "ModifiedFirePerimeters.json"
   var firetestdest =  DOWNLOAD_DIR + "TestActiveFirePerimeters.json"
   var firetestmoddest = DOWNLOAD_DIR + "TestModifiedFirePerimeters.json"
-//  fireCache = null;
-  //fireTestCache = null;
- //updateData(aqiUrl, aqiCache, setAqiStyle, aqimoddest);
- //updateData(aqiTestUrl, aqiTestCache, setAqiStyle, aqitestmoddest);
   updateData(fireUrl, fireCallback, setFireStyle, firemoddest);
-//console.log(fireCache);
   updateData(fireTestUrl, fireTestCallback, setFireStyle, firetestmoddest);
-  /*fetch(fireTestUrl)
-    .then(function(res) { 
-      console.log(FIREREPLY) 
-	return res;
-    })
-    .then(function(res) { return res.text() })
-    .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
-    .then(function(xml) { return toGeoJSON.kml(xml) })
-    .then(function(json) { return fireCache = modifyFeatures(json, setFireStyle, fireCache); })//calcBounds(json); })
-    .then(function(json) { fs.writeFile(firemoddest, JSON.stringify(fireCache), function (err) {
-          if (err) return console.log(err);
-          else return json;
-        }) })*/
 
   if (typeof res !== "undefined") res.sendStatus("<h1>" + FIREREPLY + "</h1>")
 }//updateFireData

@@ -5,6 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    ,"both": "concurrently --kill-others \"npm run fireAqi\" \"npm run tracker\""
+    ,"fireAqi" : "node fireAqiServer.js"
+    ,"tracker" : "node trackerServer.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "@mapbox/geojson-normalize": "0.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
+    "concurrently": "^3.5.1",
     "cors": "^2.8.4",
     "dateformat": "^3.0.2",
     "express": "^4.16.2",

@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    ,"both": "concurrently --kill-others \"npm run fireAqi\" \"npm run tracker\""
-    ,"fireAqi" : "node fireAqiServer.js"
-    ,"tracker" : "node trackerServer.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "both": "concurrently --kill-others \"npm run fireAqi\" \"npm run tracker\"",
+    "fireAqi": "node fireAqiServer.js",
+    "tracker": "node trackerServer.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,8 +27,8 @@
     "graceful-fs": "^4.1.11",
     "json-stringify": "^1.0.0",
     "node-fetch": "^1.7.3",
-    "node-schedule": "^1.2.5",
     "pbf": "^3.1.0",
+    "setinterval": "^0.1.0",
     "simplify-geojson": "^1.0.3",
     "xmldom": "^0.1.27"
   }

@@ -15,13 +15,15 @@ var GeoJSON = require('geojson')
 var SimplifyGeoJson = require('simplify-geojson')
 var bodyParser = require('body-parser');
 var config = require('./config.js')
-//var schedule = require('node-schedule')
+const Timer = require('setinterval');
 
+process.env.TZ = "America/Los_Angeles"
 //In dev only
 process.env.NODE_ENV = config.node_env;
 const util = require('util')
 
-
+//I think they are all uninstalled
+//var schedule = require('node-schedule')
 //var stringify = require('json-stringify')
 //var Normalize = require('@mapbox/geojson-normalize')
 //require('body-parser-xml')(bodyParser);
@@ -39,6 +41,14 @@ app.use(express.static(__dirname));
 
 var simplifyTolerance = 0.001;
 var DOWNLOAD_DIR = './dataCache/';
+
+//Scheduling
+const fireTimer = new Timer(function*() { console.log('Fire update scheduled'); updateFireData(); }, 1800000 );
+fireTimer.setInterval();
+const aqiTimer = new Timer(function*() { console.log('Aqi update scheduled'); updateAqiData(); }, 1860000 ); //offset for fewer collisions
+aqiTimer.setInterval();
+//() => {}, 3600000);
+
 
 //*****other stuff*********//
 getTestRoute = function(req, res)  {
@@ -130,7 +140,7 @@ var buildLegend = function(fc) {
 
 
 //AQI Routes
-app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
+app.get('/filter/aqi/:west/:south/:east/:north', (req, res) => {
   var matching = null;
   matching = polygonFun.filterFeaturesByBounds(aqiCache, 
 	req.params.west, req.params.south, 
@@ -142,7 +152,7 @@ app.get('/filter/aqi/:west/:south/:east/:north', function (req, res) {
 		res);
 })//filter aqi by bounds route
 
-app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', function (req, res) {
+app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', (req, res) => {
   var matching = null;
   matching = polygonFun.filterFeaturesByBounds(aqiTestCache,
         req.params.west, req.params.south,
@@ -160,7 +170,7 @@ var updateData = (url, callback, setStyleFunc, modifiedDest) => {
     .then(function(res) { return res.text() })
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
-    .then(function(json) { return callback( modifyFeatures(json, setStyleFunc)); })
+    .then(function(json) { callback( modifyFeatures(json, setStyleFunc)); return json })
     //.then(function(json) { console.log(json);return json;})//"Length: "+ json.features.length);return json; })
     .then(function(json) {
         fs.writeFile(modifiedDest, JSON.stringify(json), function (err) {
@@ -201,7 +211,7 @@ aqiCallback = (json) => {
 }
 
 aqiTestCallback = (json) => {
-  aqiTestCache = json;
+ aqiTestCache = json;
 }
 
 //updateAqiData
@@ -209,9 +219,6 @@ aqiTestCallback = (json) => {
 //Meant to be run hourly
 //Saves to disk. Will make function to read from disk on startup
 var updateAqiData = function(req, res) {
-//updateAqiData = (req, res) => {
- //console.log('updating air quality data')
-
  var aqidest = DOWNLOAD_DIR + "AirQuality.json"
  var aqimoddest = DOWNLOAD_DIR + "ModifiedAirQuality.json" 
  var aqitestdest = DOWNLOAD_DIR + "TestAirQuality.json"
@@ -229,17 +236,33 @@ var updateAqiData = function(req, res) {
  if (typeof res !== "undefined") res.sendStatus("<h1>" + AQIREPLY + "</h1>")
 
 }//updateAqiData
-updateAqiData();
+//updateAqiData();
 
-//var aqiJob = schedule.scheduleJob('* 30 /1 * * *', function() { this.updateAqiData() });
 
+var updateAqiFromDisk = () => {
+ var aqidest = DOWNLOAD_DIR + "AirQuality.json"
+ var aqimoddest = DOWNLOAD_DIR + "ModifiedAirQuality.json"
+ var aqitestdest = DOWNLOAD_DIR + "TestAirQuality.json"
+ var aqitestmoddest = DOWNLOAD_DIR + "TestModifiedAirQuality.json"
+
+ fs.readFile(aqitestmoddest, 'utf8', (err, data) => {
+   var geojson = JSON.parse(data);//(new xmldom()).parseFromString(data, "text/xml");
+   console.log("loaded " + aqitestmoddest);
+   aqiTestCallback(geojson);
+ });
+ fs.readFile(aqimoddest, 'utf8', (err, data) => {
+   var geojson = JSON.parse(data);//(new xmldom()).parseFromString(data, "text/xml");
+   console.log("loaded " + aqimoddest);
+   aqiCallback(geojson);
+ });
+}
+updateAqiFromDisk();//aqiCallback, aqiTestCallback);
 
 //************Fire Functions****************************//
 
 //Fire variables
 var FIREREPLY = 'Updated fire perimeter data'
 var fireCache = null, fireTestCache = null;
-//var fireJob = schedule.scheduleJob('* 15 /1 * * *', function () { this.updateFireData() });
 var fireTestUrl = config.fireAqiServerUrl + ":" + config.fireAqiServerPort + "/testFirePerimeters.kml"
 var fireUrl = "https://rmgsc.cr.usgs.gov/outgoing/GeoMAC/ActiveFirePerimeters.kml";
 
@@ -255,8 +278,7 @@ var setFireStyle = function(feature) {
 
 
 //Fire Routes
-//app.get('/updateFireData', (req, res) => {updateFireData(req, res)})
-app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
+app.get('/filter/fire/:west/:south/:east/:north', (req, res) => {
   console.log(fireCache)
   var matching = polygonFun.filterFeaturesByBounds(fireCache,
                 req.params.west, req.params.south,
@@ -268,7 +290,7 @@ app.get('/filter/fire/:west/:south/:east/:north', function (req, res) {
 })//filter/fire
 
 
-app.get('/filter/fireSeason/fire/:west/:south/:east/:north', function (req, res) {
+app.get('/filter/fireSeason/fire/:west/:south/:east/:north', (req, res) => {
   var matching = polygonFun.filterFeaturesByBounds(fireTestCache,
                 req.params.west, req.params.south,
                 req.params.east, req.params.north)
@@ -284,8 +306,8 @@ fireCallback = (json) => {
 
 fireTestCallback = (json) => {
   fireTestCache = json;
+  //console.log(this.fireTestCache);
 }
-
 
 //Update data from server - currently just using my test data
 var updateFireData = function(req, res) {
@@ -301,7 +323,30 @@ var updateFireData = function(req, res) {
   if (typeof res !== "undefined") res.sendStatus("<h1>" + FIREREPLY + "</h1>")
 }//updateFireData
 //for some reason if you call it in the declaration it doesn't stick around
-updateFireData();
+//updateFireData();
+
+var updateFireFromDisk = () => {
+  var firedest =  DOWNLOAD_DIR + "ActiveFirePerimeters.json"
+  var firemoddest = DOWNLOAD_DIR + "ModifiedFirePerimeters.json"
+  var firetestdest =  DOWNLOAD_DIR + "TestActiveFirePerimeters.json"
+  var firetestmoddest = DOWNLOAD_DIR + "TestModifiedFirePerimeters.json"
+
+ fs.readFile(firetestmoddest, 'utf8', (err, data) => {
+   var str = data;//(new xmldom()).parseFromString(data, "text/xml");
+   var geojson = JSON.parse(str);
+   console.log("loaded " + firetestmoddest);
+   fireTestCallback(geojson);
+ });
+
+ fs.readFile(firemoddest, 'utf8', (err, data) => {
+   var str = data;//(new xmldom()).parseFromString(data, "text/xml");
+   var geojson = JSON.parse(str);
+   console.log("loaded " + firemoddest);
+   fireCallback(geojson);
+ });
+
+}
+updateFireFromDisk();//fireCallback, fireTestCallback);
 
 
 app.listen(config.fireAqiServerPort, function () {

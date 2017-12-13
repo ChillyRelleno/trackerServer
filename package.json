@@ -24,6 +24,7 @@
     "geojson": "^0.5.0",
     "geojson-bounds": "^1.0.1",
     "geojson-slicer": "^0.1.0",
+    "geojson-to-svg": "^1.0.3",
     "graceful-fs": "^4.1.11",
     "json-stringify": "^1.0.0",
     "node-fetch": "^1.7.3",

@@ -43,10 +43,15 @@ var simplifyTolerance = 0.001;
 var DOWNLOAD_DIR = './dataCache/';
 
 //Scheduling
-const fireTimer = new Timer(function*() { console.log('Fire update scheduled'); updateFireData(); }, 1800000 );
+const fireTimer = new Timer( function*() { 
+	console.log('Fire update scheduled'); 
+	updateFireData();
+	console.log('AQI update scheduled');
+        updateAqiData();
+	}, 1800000 );
 fireTimer.setInterval();
-const aqiTimer = new Timer(function*() { console.log('Aqi update scheduled'); updateAqiData(); }, 1860000 ); //offset for fewer collisions
-aqiTimer.setInterval();
+//const aqiTimer = new Timer(function*() { console.log('Aqi update scheduled'); updateAqiData(); }, 1820000 ); //offset for fewer collisions
+//aqiTimer.setInterval();
 //() => {}, 3600000);
 
 
@@ -166,7 +171,7 @@ app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', (req, res) => {
 //Move to general functions
 var updateData = (url, callback, setStyleFunc, modifiedDest) => {
   console.log("----"+url+"----")
-  fetch(url)
+  return fetch(url)
     .then(function(res) { return res.text() })
     .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
     .then(function(xml) { return toGeoJSON.kml(xml) })
@@ -177,6 +182,7 @@ var updateData = (url, callback, setStyleFunc, modifiedDest) => {
           if (err) return console.log(err);
 	  else return json;
         }) })
+    .catch(function(err) { console.log('Error: ${err}') });
 }
 
 //contentintal US 

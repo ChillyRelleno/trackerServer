@@ -13,7 +13,7 @@ var xmldom = require('xmldom').DOMParser;
 var GeoJSON = require('geojson')
 var geojsonToSvg = require('geojson-to-svg')
 var SimplifyGeoJson = require('simplify-geojson')
-
+var polygonFun = require('./lib/polygonFun.js')
 var dateFormat = require('dateformat');
 
 //Will need
@@ -30,6 +30,7 @@ app.use(express.static(__dirname));
 //--------------RIDE TRACKER---------------//
 var testRide = Array();
 
+//Used for caching XML stream. Should be upgraded to work with streams
 app.use(function(req, res, next) {
   //if (req.method !== "post") return next();
   if (0 !== req.url.indexOf('/route/gpx')) return next();
@@ -50,6 +51,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json() );
 app.use(bodyParser.urlencoded({extended:true}));
 
+//Send tracked positions for display
 app.get('/track/:user', (req, res) => {
   var user;
   if (req.params.user !== undefined) user = req.params.user;
@@ -62,24 +64,50 @@ app.get('/track/:user', (req, res) => {
   }
 });
 
+app.delete('/track/:user', (req, res) => {
+  var user;
+  if (req.params.user !== undefined) user = req.params.user;
+  testRide.length = 0;
+  console.log('track deleted for ' + user);
+  res.send('ok');
+});
+
 createIcon = function(geojson) {
-  var simple = SimplifyGeoJson(geojson, 0.05)
+  var extent = geojson.features[0].properties.extent
+  var width = Math.abs(extent[0] - extent[2])
+  var height = Math.abs(extent[1] - extent[3])
+
+  var simplifyBase = 0.1
+  var simplifyDivisor = 3
+  var simplifyWeight = Math.max(width, height)/simplifyDivisor
+  simplifyWeight = simplifyWeight.toFixed(6)
+  console.log('simplifyWeight: ' + simplifyWeight)
+  var simple = SimplifyGeoJson(geojson, simplifyBase*simplifyWeight)
   var svg = geojsonToSvg()
     //.type('type')
     //.styles({'GPX' : {stroke: 'red' } })
     .styles(function(feature, canvasBBox, featureBBox) {
-		return { stroke:"red", weight:0.1, opacity:.5};
+		var extent = feature.properties.extent
+		var width = Math.abs(extent[0] - extent[2])
+		var height = Math.abs(extent[1] - extent[3])
+		var strokeWeight = (Math.max(width, height)/10)
+//		var newWeight = strokeWeight.toFixed(4)
+	  console.log('strokeWeight: ' + strokeWeight)
+
+//		return { stroke:"red", weight:1, opacity:.5};
+		return { stroke:"red", weight:strokeWeight, opacity:.5};
 	})
     .projection(function(coord) {
 	return [coord[0], coord[1]*-1];
     })
-    .extent(0, 0, 300, 300)
     //.data({type: 'Feature', properties: {type: 'GPX'} })
     .render(simple)
-  //console.log(svg)
-  return svg;
+//    .extent(0, 0, 300, 300)
+  var hackSvg = svg.replace(" viewBox=\"NaN NaN NaN NaN\"", " viewBox=\"0 0 300 300\"")
+  console.log(hackSvg)
+  return hackSvg;
 }
-
+//Upload Location - ADD USER FIELD
 app.post('/track', (req, res) => {
   var loc = req.body.location;
   //var now = new Date();
@@ -88,19 +116,28 @@ app.post('/track', (req, res) => {
   console.log(loc);
   res.send('ok');
 });
+//Upload route to display with track
 app.post('/route/gpx', (req, res) => {
-  console.log('receiving gpx file')
+  console.log('Receiving GPX file for display on track')
   var xml = new xmldom().parseFromString(req.rawBody, "application/xml")
   //console.log(xml);
-  this.routeToDisplay = toGeoJSON.gpx(xml);
+  this.routeToDisplay = polygonFun.insertExtents(toGeoJSON.gpx(xml));
   var svg = createIcon(this.routeToDisplay);
+  console.log('SVG is ' + svg.length + 'chars');
   //console.log(util.inspect(json, false, null));
   res.send(svg);
 });
+app.delete('/route/gpx', (req, res) => {
+  this.routeToDisplay = null;
+  console.log('route deleted')
+  res.send('ok');
+});
 app.get('/route/gpx', (req, res) => {
   //console.log(this.routeToDisplay);
-  var geobuf = geobufFun.geojsonToGeobuf(this.routeToDisplay);
-  res.send(new Buffer(geobuf));
+  if (this.routeToDisplay !== null) {
+	  var geobuf = geobufFun.geojsonToGeobuf(this.routeToDisplay);
+	  res.send(new Buffer(geobuf));
+  }
 });
 
 app.get('/test', (req, res) => {

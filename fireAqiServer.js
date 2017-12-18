@@ -88,8 +88,9 @@ var modifyFeatures = function(json, setStyleFunc) {
    return json
 }//modifyFeatures()
 
-function sendFilteredResponse(matching, west, south, east, north, res) {
+function sendResponse(matching, res) {//west, south, east, north, res) {
    //console.log(util.inspect(matching,false,null))
+
    console.log("Matching: " + matching.features.length + ' elements')
    var simplified = SimplifyGeoJson(matching, simplifyTolerance);
    var geobuf = geobufFun.geojsonToGeobuf(simplified);
@@ -119,7 +120,10 @@ var AQIREPLY = 'Updated air quality data'
 var aqiLegend = [];
 
 function aqiDataPrep(toSend, boundingBox) {
-        toSend = buildLegend(polygonFun.clipPolysByBounds(toSend, boundingBox));
+	if (boundingBox == false)
+		toSend = buildLegend(toSend);
+	else
+        	toSend = buildLegend(polygonFun.clipPolysByBounds(toSend, boundingBox));
 	return toSend;
 }//aqiDataPrep
 
@@ -138,12 +142,18 @@ var checkLegend = function(feature) {
 
 var buildLegend = function(fc) {
   fc.properties = {legend: aqiLegend};
+  console.log('buildLegend')
+console.log(util.inspect(fc.properties,false,null));
+
   //clear for next time
   aqiLegend = [];//new Array();
   return fc;//aqiLegend;
 }//buildLegend
 
-
+app.get('/aqi/all', (req, res) => {
+  var processed = polygonFun.processFeatures(aqiCache, checkLegend, aqiDataPrep);
+  sendResponse({type: "FeatureCollection", features: processed, properties: processed.properties},res);
+})
 //AQI Routes
 app.get('/filter/aqi/:west/:south/:east/:north', (req, res) => {
   var matching = null;
@@ -151,10 +161,7 @@ app.get('/filter/aqi/:west/:south/:east/:north', (req, res) => {
 	req.params.west, req.params.south, 
 	req.params.east, req.params.north,
                 checkLegend, aqiDataPrep);
-  sendFilteredResponse(matching,
-                req.params.west, req.params.south,
-                req.params.east, req.params.north,
-		res);
+  sendResponse(matching, res);
 })//filter aqi by bounds route
 
 app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', (req, res) => {
@@ -163,10 +170,7 @@ app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', (req, res) => {
         req.params.west, req.params.south,
         req.params.east, req.params.north,
                 checkLegend, aqiDataPrep);
-  sendFilteredResponse(matching,
-                req.params.west, req.params.south,
-                req.params.east, req.params.north,
-                res);
+  sendResponse(matching, res);
 })//filter aqi by bounds route
 //Move to general functions
 var updateData = (url, callback, setStyleFunc, modifiedDest) => {
@@ -282,17 +286,16 @@ var setFireStyle = function(feature) {
   return feature
 }//setStyle()
 
-
+app.get('/fire/all', (req, res) => {
+  sendResponse(fireCache, res);
+})
 //Fire Routes
 app.get('/filter/fire/:west/:south/:east/:north', (req, res) => {
   console.log(fireCache)
   var matching = polygonFun.filterFeaturesByBounds(fireCache,
                 req.params.west, req.params.south,
                 req.params.east, req.params.north)
-  sendFilteredResponse({type: "FeatureCollection", features: matching}, 
-		req.params.west, req.params.south,
-		req.params.east, req.params.north, 
-		res);
+  sendResponse({type: "FeatureCollection", features: matching}, res);
 })//filter/fire
 
 
@@ -300,10 +303,7 @@ app.get('/filter/fireSeason/fire/:west/:south/:east/:north', (req, res) => {
   var matching = polygonFun.filterFeaturesByBounds(fireTestCache,
                 req.params.west, req.params.south,
                 req.params.east, req.params.north)
-  sendFilteredResponse({type: "FeatureCollection", features: matching},
-                req.params.west, req.params.south,
-                req.params.east, req.params.north,
-                res);
+  sendResponse({type: "FeatureCollection", features: matching}, res);
 })//filter/fireSeason/fire
 
 fireCallback = (json) => {

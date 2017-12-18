@@ -142,8 +142,8 @@ var checkLegend = function(feature) {
 
 var buildLegend = function(fc) {
   fc.properties = {legend: aqiLegend};
-  console.log('buildLegend')
-console.log(util.inspect(fc.properties,false,null));
+  //console.log('buildLegend')
+//console.log(util.inspect(fc.properties,false,null));
 
   //clear for next time
   aqiLegend = [];//new Array();

@@ -291,7 +291,7 @@ app.get('/fire/all', (req, res) => {
 })
 //Fire Routes
 app.get('/filter/fire/:west/:south/:east/:north', (req, res) => {
-  console.log(fireCache)
+  //console.log(fireCache)
   var matching = polygonFun.filterFeaturesByBounds(fireCache,
                 req.params.west, req.params.south,
                 req.params.east, req.params.north)

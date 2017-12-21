@@ -1,0 +1,1516 @@
+Statistical profiling result from isolate-0x24ccd10-v8.log, (11708 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+    978    8.4%    0.0%  /usr/bin/nodejs
+    220    1.9%    0.0%  /lib/x86_64-linux-gnu/libc-2.23.so
+     28    0.2%    0.0%  /lib/x86_64-linux-gnu/libcrypto.so.1.0.0
+     21    0.2%    0.0%  /lib/x86_64-linux-gnu/libm-2.23.so
+      5    0.0%    0.0%  [vdso]
+      4    0.0%    0.0%  /usr/lib/x86_64-linux-gnu/libuv.so.1.0.0
+      4    0.0%    0.0%  /lib/x86_64-linux-gnu/libpthread-2.23.so
+      3    0.0%    0.0%  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+   1913   16.3%   18.3%  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    228    1.9%    2.2%  LazyCompile: *isFinite native v8natives.js:33:24
+    153    1.3%    1.5%  LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+    141    1.2%    1.3%  LazyCompile: *writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:469:28
+    134    1.1%    1.3%  LazyCompile: *populateLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:201:22
+     51    0.4%    0.5%  LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     45    0.4%    0.4%  Stub: CEntryStub
+     45    0.4%    0.4%  LazyCompile: *writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+     44    0.4%    0.4%  LazyCompile: *writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+     31    0.3%    0.3%  LazyCompile: *Pbf.writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:329:34
+     30    0.3%    0.3%  Stub: GrowArrayElementsStub
+     25    0.2%    0.2%  LazyCompile: *writeProps /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:128:20
+     21    0.2%    0.2%  LazyCompile: *writeUtf8 /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:567:19
+     19    0.2%    0.2%  LazyCompile: *fromObject buffer.js:121:20
+     16    0.1%    0.2%  LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     14    0.1%    0.1%  LazyCompile: *writePackedVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:468:27
+     13    0.1%    0.1%  LazyCompile: *Pbf.writeString /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:269:26
+     13    0.1%    0.1%  KeyedLoadIC: A keyed load IC from the snapshot {1}
+     10    0.1%    0.1%  Stub: CompareICStub
+      9    0.1%    0.1%  LazyCompile: *exports.write /home/phillipdaw/code/gpxAQI/server/node_modules/ieee754/index.js:34:26
+      6    0.1%    0.1%  LazyCompile: *Pbf.writePackedVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:328:34
+      4    0.0%    0.0%  Stub: RecordWriteStub {1}
+      4    0.0%    0.0%  RegExp: ^(\\/?|)([\\s\\S]*?)((?:\\.{1\,2}|[^\\/]+?|)(\\.[^.\\/]*|))(?:[\\/]*)$
+      4    0.0%    0.0%  LazyCompile: *writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+      4    0.0%    0.0%  LazyCompile: *Pbf.writeVarintField /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:358:31
+      4    0.0%    0.0%  KeyedLoadIC: A keyed load IC from the snapshot
+      4    0.0%    0.0%  Builtin: ArraySlice
+      3    0.0%    0.0%  Stub: BinaryOpWithAllocationSiteStub
+      3    0.0%    0.0%  Stub: ArraySingleArgumentConstructorStub
+      3    0.0%    0.0%  LazyCompile: ~resOnFinish _http_server.js:490:25
+      3    0.0%    0.0%  LazyCompile: Join native array.js:102:14
+      3    0.0%    0.0%  LazyCompile: *writeValue /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:143:20
+      3    0.0%    0.0%  LazyCompile: *analyzePoints /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:74:23
+      3    0.0%    0.0%  LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      3    0.0%    0.0%  Builtin: ArrayConcat
+      3    0.0%    0.0%  Builtin: ArgumentsAdaptorTrampoline
+      2    0.0%    0.0%  Stub: TypeofStub
+      2    0.0%    0.0%  Stub: LoadFieldStub {1}
+      2    0.0%    0.0%  Stub: GrowArrayElementsStub {1}
+      2    0.0%    0.0%  Stub: FastCloneShallowArrayStub
+      2    0.0%    0.0%  Stub: CEntryStub {1}
+      2    0.0%    0.0%  LazyCompile: ~setPrototypeOf native v8natives.js:653:30
+      2    0.0%    0.0%  LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+      2    0.0%    0.0%  LazyCompile: ~remove _linklist.js:28:16
+      2    0.0%    0.0%  LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+      2    0.0%    0.0%  LazyCompile: ~exports.write /home/phillipdaw/code/gpxAQI/server/node_modules/ieee754/index.js:34:26
+      2    0.0%    0.0%  LazyCompile: ~exec native regexp.js:85:22
+      2    0.0%    0.0%  LazyCompile: ~contentType /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/response.js:590:32
+      2    0.0%    0.0%  LazyCompile: ~clearBuffer _stream_writable.js:362:21
+      2    0.0%    0.0%  LazyCompile: ~app.get.checkLegend /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:130:27
+      2    0.0%    0.0%  LazyCompile: ~Readable.read _stream_readable.js:250:35
+      2    0.0%    0.0%  LazyCompile: ~OutgoingMessage.end _http_outgoing.js:514:41
+      2    0.0%    0.0%  LazyCompile: ~OutgoingMessage._storeHeader _http_outgoing.js:188:50
+      2    0.0%    0.0%  LazyCompile: ~InnerArrayJoin native array.js:317:24
+      2    0.0%    0.0%  LazyCompile: *test native regexp.js:132:20
+      2    0.0%    0.0%  LazyCompile: *module.exports.processFeatures /home/phillipdaw/code/gpxAQI/server/lib/polygonFun.js:27:18
+      2    0.0%    0.0%  LazyCompile: *join native array.js:333:19
+      2    0.0%    0.0%  KeyedStoreIC: A keyed store IC from the snapshot {1}
+      2    0.0%    0.0%  Handler: oncomplete {1}
+      2    0.0%    0.0%  Handler: An IC handler from the snapshot
+      1    0.0%    0.0%  Stub: ToBooleanStub(Undefined,SpecObject)
+      1    0.0%    0.0%  Stub: ToBooleanStub(String)
+      1    0.0%    0.0%  Stub: ToBooleanStub(Bool,Null)
+      1    0.0%    0.0%  Stub: ToBooleanStub
+      1    0.0%    0.0%  Stub: SubStringStub
+      1    0.0%    0.0%  Stub: StringAddStub_CheckNone_NotTenured
+      1    0.0%    0.0%  Stub: StoreTransitionStub {3}
+      1    0.0%    0.0%  Stub: StoreTransitionStub {2}
+      1    0.0%    0.0%  Stub: StoreTransitionStub {1}
+      1    0.0%    0.0%  Stub: StoreTransitionStub
+      1    0.0%    0.0%  Stub: StoreFastElementStub
+      1    0.0%    0.0%  Stub: StoreBufferOverflowStub
+      1    0.0%    0.0%  Stub: RecordWriteStub {3}
+      1    0.0%    0.0%  Stub: RecordWriteStub {2}
+      1    0.0%    0.0%  Stub: RecordWriteStub
+      1    0.0%    0.0%  Stub: LoadICStub
+      1    0.0%    0.0%  Stub: LoadFieldStub {2}
+      1    0.0%    0.0%  Stub: LoadFieldStub
+      1    0.0%    0.0%  Stub: LoadFastElementStub {1}
+      1    0.0%    0.0%  Stub: LoadFastElementStub
+      1    0.0%    0.0%  Stub: LoadConstantStub {1}
+      1    0.0%    0.0%  Stub: LoadConstantStub
+      1    0.0%    0.0%  Stub: InstanceofStub
+      1    0.0%    0.0%  Stub: GrowArrayElementsStub {2}
+      1    0.0%    0.0%  Stub: FastNewContextStub
+      1    0.0%    0.0%  Stub: CompareICStub {1}
+      1    0.0%    0.0%  Stub: CallICStub(args(7), FUNCTION, 
+      1    0.0%    0.0%  Stub: CallFunctionStub
+      1    0.0%    0.0%  Stub: BinaryOpICWithAllocationSiteStub(ADD_CreateAllocationMementos:String*String->String)
+      1    0.0%    0.0%  Stub: BinaryOpICStub {1}
+      1    0.0%    0.0%  LazyCompile: ~writeUtf8 /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:567:19
+      1    0.0%    0.0%  LazyCompile: ~toLowerCase native string.js:533:29
+      1    0.0%    0.0%  LazyCompile: ~subarray native typedarray.js:165:28
+      1    0.0%    0.0%  LazyCompile: ~storeHeader _http_outgoing.js:301:21
+      1    0.0%    0.0%  LazyCompile: ~spliceOne events.js:423:19
+      1    0.0%    0.0%  LazyCompile: ~setWriteHeadHeaders /home/phillipdaw/code/gpxAQI/server/node_modules/on-headers/index.js:59:29
+      1    0.0%    0.0%  LazyCompile: ~serverSocketCloseListener _http_server.js:286:37
+      1    0.0%    0.0%  LazyCompile: ~serveStatic /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:72:31
+      1    0.0%    0.0%  LazyCompile: ~send /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/response.js:107:25
+      1    0.0%    0.0%  LazyCompile: ~resume_ _stream_readable.js:715:17
+      1    0.0%    0.0%  LazyCompile: ~replace native string.js:146:23
+      1    0.0%    0.0%  LazyCompile: ~parserOnHeadersComplete _http_common.js:42:33
+      1    0.0%    0.0%  LazyCompile: ~onstat /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:722:33
+      1    0.0%    0.0%  LazyCompile: ~onResponseHeaders /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:140:47
+      1    0.0%    0.0%  LazyCompile: ~module.exports.processFeatures /home/phillipdaw/code/gpxAQI/server/lib/polygonFun.js:27:18
+      1    0.0%    0.0%  LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      1    0.0%    0.0%  LazyCompile: ~fastparse /home/phillipdaw/code/gpxAQI/server/node_modules/parseurl/index.js:95:20
+      1    0.0%    0.0%  LazyCompile: ~exports.inherits util.js:745:28
+      1    0.0%    0.0%  LazyCompile: ~exports.enroll timers.js:150:26
+      1    0.0%    0.0%  LazyCompile: ~exports._unrefActive timers.js:599:32
+      1    0.0%    0.0%  LazyCompile: ~error /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:115:39
+      1    0.0%    0.0%  LazyCompile: ~encode /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:18:16
+      1    0.0%    0.0%  LazyCompile: ~emit events.js:117:44
+      1    0.0%    0.0%  LazyCompile: ~createError /home/phillipdaw/code/gpxAQI/server/node_modules/http-errors/index.js:47:22
+      1    0.0%    0.0%  LazyCompile: ~compression /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:59:31
+      1    0.0%    0.0%  LazyCompile: ~StringSplitOnRegExp native string.js:437:29
+      1    0.0%    0.0%  LazyCompile: ~Socket._writeGeneric net.js:622:42
+      1    0.0%    0.0%  LazyCompile: ~ServerResponse.writeHead _http_server.js:160:46
+      1    0.0%    0.0%  LazyCompile: ~RegExpExecNoTests native regexp.js:59:27
+      1    0.0%    0.0%  LazyCompile: ~Readable _stream_readable.js:80:18
+      1    0.0%    0.0%  LazyCompile: ~OutgoingMessage._send _http_outgoing.js:120:43
+      1    0.0%    0.0%  LazyCompile: ~OutgoingMessage._renderHeaders _http_outgoing.js:384:52
+      1    0.0%    0.0%  LazyCompile: ~NativeModule.require node.js:883:34
+      1    0.0%    0.0%  LazyCompile: ~Module._nodeModulePaths module.js:189:35
+      1    0.0%    0.0%  LazyCompile: ~Module module.js:26:16
+      1    0.0%    0.0%  LazyCompile: ~IncomingMessage.read _http_incoming.js:73:42
+      1    0.0%    0.0%  LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+      1    0.0%    0.0%  LazyCompile: fs.readFileSync fs.js:384:27
+      1    0.0%    0.0%  LazyCompile: IN native runtime.js:352:15
+      1    0.0%    0.0%  LazyCompile: Error native messages.js:640:21
+      1    0.0%    0.0%  LazyCompile: APPLY_PREPARE native runtime.js:412:37
+      1    0.0%    0.0%  LazyCompile: *writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+      1    0.0%    0.0%  LazyCompile: *split native string.js:420:23
+      1    0.0%    0.0%  LazyCompile: *needFinish _stream_writable.js:447:20
+      1    0.0%    0.0%  LazyCompile: *analyzePoint /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:78:22
+      1    0.0%    0.0%  LazyCompile: *ToUint32 native runtime.js:601:18
+      1    0.0%    0.0%  LazyCompile: *String native string.js:24:27
+      1    0.0%    0.0%  LazyCompile: *PropertyDescriptor_SetGetter native v8natives.js:353:47
+      1    0.0%    0.0%  LazyCompile: *Pbf.writeStringField /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:366:31
+      1    0.0%    0.0%  LazyCompile: *Line.perpendicularDistance /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/line.js:64:48
+      1    0.0%    0.0%  LazyCompile: *DefineOwnProperty native v8natives.js:630:27
+      1    0.0%    0.0%  LazyCompile: *Buffer buffer.js:47:16
+      1    0.0%    0.0%  LazyCompile: *ArrayBuffer native arraybuffer.js:13:32
+      1    0.0%    0.0%  KeyedStoreIC: A keyed store IC from the snapshot
+      1    0.0%    0.0%  KeyedStoreIC:  {597}
+      1    0.0%    0.0%  KeyedLoadIC: A keyed load IC from the snapshot {2}
+      1    0.0%    0.0%  Handler: toLowerCase
+      1    0.0%    0.0%  Handler: statusCode
+      1    0.0%    0.0%  Handler: res
+      1    0.0%    0.0%  Handler: originalUrl
+      1    0.0%    0.0%  Handler: oncomplete
+      1    0.0%    0.0%  Handler: listenerCount
+      1    0.0%    0.0%  Handler: fresh
+      1    0.0%    0.0%  Handler: _flushOutput
+      1    0.0%    0.0%  Handler: _eventsCount
+      1    0.0%    0.0%  Handler: Object
+      1    0.0%    0.0%  Handler: Math
+      1    0.0%    0.0%  Handler: JSON
+      1    0.0%    0.0%  Handler: ETag
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {7}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {6}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {5}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {4}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {3}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {2}
+      1    0.0%    0.0%  Handler: An IC handler from the snapshot {1}
+      1    0.0%    0.0%  Handler: $toPositiveInteger
+      1    0.0%    0.0%  Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/body-parser/lib/types/json.js:1:11
+      1    0.0%    0.0%  Builtin: JSConstructStubGeneric
+
+ [C++]:
+   ticks  total  nonlib   name
+    840    7.2%    8.0%  v8::internal::FastDtoa(double, v8::internal::FastDtoaMode, int, v8::internal::Vector<char>, int*, int*)
+    349    3.0%    3.3%  v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+    339    2.9%    3.2%  v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+    329    2.8%    3.1%  v8::internal::Strtod(v8::internal::Vector<char const>, int)
+    318    2.7%    3.0%  v8::internal::JsonParser<true>::ParseJsonNumber()
+    297    2.5%    2.8%  v8::internal::BasicJsonStringifier::SerializeDouble(double)
+    288    2.5%    2.8%  double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+    260    2.2%    2.5%  v8::internal::Heap::AllocateRaw(int, v8::internal::AllocationSpace, v8::internal::AllocationSpace, v8::internal::AllocationAlignment)
+    223    1.9%    2.1%  v8::internal::LookupIterator::Next()
+    189    1.6%    1.8%  v8::internal::JsonParser<true>::ParseJsonArray()
+    177    1.5%    1.7%  v8::internal::Heap::AllocateFixedArrayWithFiller(int, v8::internal::PretenureFlag, v8::internal::Object*)
+    147    1.3%    1.4%  v8::internal::DiyFp::Multiply(v8::internal::DiyFp const&)
+    125    1.1%    1.2%  v8::internal::IncrementalMarking::Step(long, v8::internal::IncrementalMarking::CompletionAction, v8::internal::IncrementalMarking::ForceMarkingAction, v8::internal::IncrementalMarking::ForceCompletionAction)
+    107    0.9%    1.0%  node::ContextifyScript::New(v8::FunctionCallbackInfo<v8::Value> const&)
+    106    0.9%    1.0%  v8::internal::Heap::AllocateJSObjectFromMap(v8::internal::Map*, v8::internal::PretenureFlag, bool, v8::internal::AllocationSite*)
+    103    0.9%    1.0%  v8::internal::DoubleToCString(double, v8::internal::Vector<char>)
+    102    0.9%    1.0%  v8::internal::Heap::AllocateHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     96    0.8%    0.9%  v8::internal::Factory::NewJSArrayStorage(v8::internal::Handle<v8::internal::JSArray>, int, int, v8::internal::ArrayStorageAllocationMode)
+     92    0.8%    0.9%  v8::internal::PowersOfTenCache::GetCachedPowerForBinaryExponentRange(int, int, v8::internal::DiyFp*, int*)
+     90    0.8%    0.9%  v8::internal::BasicJsonStringifier::StackPush(v8::internal::Handle<v8::internal::Object>)
+     88    0.8%    0.8%  v8::internal::Context::native_context()
+     84    0.7%    0.8%  v8::internal::PagedSpace::AllocateRawUnaligned(int)
+     81    0.7%    0.8%  v8::internal::JsonParser<true>::ParseJsonValue()
+     78    0.7%    0.7%  v8::internal::Isolate::get_initial_js_array_map(v8::internal::ElementsKind, v8::internal::Strength)
+     78    0.7%    0.7%  v8::internal::BasicJsonStringifier::ApplyToJsonFunction(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+     75    0.6%    0.7%  __lll_unlock_wake
+     74    0.6%    0.7%  v8::internal::Factory::NewJSObjectFromMap(v8::internal::Handle<v8::internal::Map>, v8::internal::PretenureFlag, bool, v8::internal::Handle<v8::internal::AllocationSite>)
+     73    0.6%    0.7%  v8::internal::Heap::Allocate(v8::internal::Map*, v8::internal::AllocationSpace, v8::internal::AllocationSite*)
+     70    0.6%    0.7%  v8::internal::List<v8::internal::Handle<v8::internal::Object>, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::Handle<v8::internal::Object> const&, v8::internal::ZoneAllocationPolicy)
+     69    0.6%    0.7%  v8::internal::Factory::NewJSArray(v8::internal::ElementsKind, v8::internal::Strength, v8::internal::PretenureFlag)
+     61    0.5%    0.6%  v8::internal::JSMessageObject** v8::internal::HandleScope::CreateHandle<v8::internal::JSMessageObject>(v8::internal::Isolate*, v8::internal::JSMessageObject*)
+     57    0.5%    0.5%  v8::internal::DoubleToAscii(double, v8::internal::DtoaMode, int, v8::internal::Vector<char>, int*, int*, int*)
+     56    0.5%    0.5%  v8::internal::Factory::NewNumber(double, v8::internal::PretenureFlag)
+     52    0.4%    0.5%  v8::internal::IncrementalMarkingMarkingVisitor::VisitFixedArrayIncremental(v8::internal::Map*, v8::internal::HeapObject*)
+     52    0.4%    0.5%  v8::internal::FixedArray::set(int, v8::internal::Object*)
+     51    0.4%    0.5%  void node::StreamBase::JSMethod<node::StreamWrap, &node::StreamBase::Writev>(v8::FunctionCallbackInfo<v8::Value> const&)
+     51    0.4%    0.5%  v8::internal::Factory::NewHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     47    0.4%    0.4%  v8::internal::Heap::AllocateRawFixedArray(int, v8::internal::PretenureFlag)
+     43    0.4%    0.4%  v8::internal::Factory::NewUninitializedFixedArray(int)
+     41    0.4%    0.4%  v8::internal::JSArray::SetLength(v8::internal::Handle<v8::internal::JSArray>, unsigned int)
+     37    0.3%    0.4%  v8::internal::Factory::NewJSArray(v8::internal::ElementsKind, int, int, v8::internal::Strength, v8::internal::ArrayStorageAllocationMode, v8::internal::PretenureFlag)
+     36    0.3%    0.3%  v8::internal::JSObject::GetElementsAccessor()
+     34    0.3%    0.3%  node::crypto::Hash::HashUpdate(v8::FunctionCallbackInfo<v8::Value> const&)
+     32    0.3%    0.3%  v8::internal::Factory::NewFixedArray(int, v8::internal::PretenureFlag)
+     32    0.3%    0.3%  strlen
+     31    0.3%    0.3%  v8::internal::Heap::AllocateUninitializedFixedArray(int)
+     31    0.3%    0.3%  v8::internal::BasicJsonStringifier::SerializeString(v8::internal::Handle<v8::internal::String>)
+     30    0.3%    0.3%  v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+     26    0.2%    0.2%  v8::internal::Handle<v8::internal::Object> v8::internal::HandleScope::CloseAndEscape<v8::internal::Object>(v8::internal::Handle<v8::internal::Object>)
+     24    0.2%    0.2%  v8::internal::Zone::New(unsigned long)
+     24    0.2%    0.2%  v8::internal::StoreBuffer::ProcessOldToNewSlot(unsigned char*, void (*)(v8::internal::HeapObject**, v8::internal::HeapObject*))
+     24    0.2%    0.2%  v8::internal::LookupIterator::IsIntegerIndexedExotic(v8::internal::JSReceiver*)
+     23    0.2%    0.2%  void node::StreamBase::JSMethod<node::StreamWrap, &(int node::StreamBase::WriteString<(node::encoding)1>(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+     23    0.2%    0.2%  v8::internal::JsonParser<true>::AdvanceSkipWhitespace()
+     22    0.2%    0.2%  v8::internal::Object::GetRootMap(v8::internal::Isolate*)
+     21    0.2%    0.2%  v8::internal::SimpleStringBuilder::AddSubstring(char const*, int)
+     21    0.2%    0.2%  node::Buffer::Utf8Slice(v8::FunctionCallbackInfo<v8::Value> const&)
+     21    0.2%    0.2%  munmap
+     20    0.2%    0.2%  v8::internal::StoreBuffer::PrepareForIteration()
+     20    0.2%    0.2%  v8::internal::Isolate::native_context()
+     20    0.2%    0.2%  v8::internal::IncrementalMarking::RecordWriteSlow(v8::internal::HeapObject*, v8::internal::Object**, v8::internal::Object*)
+     19    0.2%    0.2%  v8::internal::SimpleStringBuilder::AddString(char const*)
+     19    0.2%    0.2%  v8::internal::Object::GetProperty(v8::internal::LookupIterator*, v8::internal::LanguageMode)
+     19    0.2%    0.2%  v8::internal::JSObject::EnsureWritableFastElements(v8::internal::Handle<v8::internal::JSObject>)
+     18    0.2%    0.2%  v8::internal::Factory::NewJSArrayWithElements(v8::internal::Handle<v8::internal::FixedArrayBase>, v8::internal::ElementsKind, int, v8::internal::Strength, v8::internal::PretenureFlag)
+     18    0.2%    0.2%  int v8::internal::BinarySearch<(v8::internal::SearchMode)0, v8::internal::TransitionArray>(v8::internal::TransitionArray*, v8::internal::Name*, int, int, int, int*)
+     17    0.1%    0.2%  v8::internal::MemoryChunk::Initialize(v8::internal::Heap*, unsigned char*, unsigned long, unsigned char*, unsigned char*, v8::internal::Executability, v8::internal::Space*)
+     17    0.1%    0.2%  v8::internal::JSObject::MigrateFastToFast(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Handle<v8::internal::Map>)
+     15    0.1%    0.1%  write
+     15    0.1%    0.1%  void v8::internal::FlexibleBodyVisitor<v8::internal::IncrementalMarkingMarkingVisitor, v8::internal::JSObject::BodyDescriptor, void>::VisitSpecialized<32>(v8::internal::Map*, v8::internal::HeapObject*)
+     15    0.1%    0.1%  v8::internal::LookupIterator::GetRoot(v8::internal::Handle<v8::internal::Object>, v8::internal::Isolate*)
+     15    0.1%    0.1%  v8::internal::JsonParser<true>::ParseJsonObject()
+     15    0.1%    0.1%  v8::internal::Heap::ScavengeObject(v8::internal::HeapObject**, v8::internal::HeapObject*)
+     14    0.1%    0.1%  v8::internal::SimpleStringBuilder::Finalize()
+     12    0.1%    0.1%  void v8::internal::String::WriteToFlat<unsigned char>(v8::internal::String*, unsigned char*, int, int)
+     12    0.1%    0.1%  void v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::EvacuateObject<(v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::ObjectContents)1, (v8::internal::AllocationAlignment)0>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+     12    0.1%    0.1%  v8::internal::TransitionArray::ExpectedTransitionKey(v8::internal::Handle<v8::internal::Map>)
+     12    0.1%    0.1%  __libc_malloc
+     11    0.1%    0.1%  v8::internal::StringToDouble(v8::internal::UnicodeCache*, v8::internal::Vector<unsigned char const>, int, double)
+     11    0.1%    0.1%  v8::internal::MarkCompactCollector::SweepInParallel(v8::internal::PagedSpace*, int)
+     11    0.1%    0.1%  v8::internal::Heap::AllocateRawOneByteString(int, v8::internal::PretenureFlag)
+     11    0.1%    0.1%  bool v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::SemiSpaceCopyObject<(v8::internal::AllocationAlignment)1>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+     10    0.1%    0.1%  v8::internal::StoreBuffer::Compact()
+     10    0.1%    0.1%  v8::internal::IsMoreGeneralElementsKindTransition(v8::internal::ElementsKind, v8::internal::ElementsKind)
+     10    0.1%    0.1%  v8::internal::Handle<v8::internal::String> v8::internal::JsonParser<true>::ScanJsonString<true>()
+      9    0.1%    0.1%  v8::internal::SerializerDeserializer::Iterate(v8::internal::Isolate*, v8::internal::ObjectVisitor*)
+      9    0.1%    0.1%  v8::internal::PowersOfTenCache::GetCachedPowerForDecimalExponent(int, v8::internal::DiyFp*, int*)
+      9    0.1%    0.1%  v8::internal::IncrementalMarking::RecordWrites(v8::internal::HeapObject*)
+      9    0.1%    0.1%  v8::internal::FlexibleBodyVisitor<v8::internal::NewSpaceScavenger, v8::internal::FixedArray::BodyDescriptor, int>::Visit(v8::internal::Map*, v8::internal::HeapObject*)
+      8    0.1%    0.1%  void v8::internal::Code::CodeIterateBody<v8::internal::IncrementalMarkingMarkingVisitor>(v8::internal::Heap*)
+      7    0.1%    0.1%  void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::String*, unsigned short*, int, int)
+      7    0.1%    0.1%  mmap
+      7    0.1%    0.1%  int v8::internal::FlexibleBodyVisitor<v8::internal::NewSpaceScavenger, v8::internal::JSObject::BodyDescriptor, int>::VisitSpecialized<32>(v8::internal::Map*, v8::internal::HeapObject*)
+      6    0.1%    0.1%  v8::internal::String::GetFlatContent()
+      6    0.1%    0.1%  v8::internal::Object* v8::internal::VisitWeakList<v8::internal::JSFunction>(v8::internal::Heap*, v8::internal::Object*, v8::internal::WeakObjectRetainer*)
+      6    0.1%    0.1%  v8::internal::NewSpace::ResetAllocationInfo()
+      6    0.1%    0.1%  v8::internal::JSObject::MigrateToMap(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Handle<v8::internal::Map>, int)
+      6    0.1%    0.1%  v8::internal::InnerPointerToCodeCache::GetCacheEntry(unsigned char*)
+      6    0.1%    0.1%  v8::internal::Heap::IterateAndMarkPointersToFromSpace(bool, unsigned char*, unsigned char*, void (*)(v8::internal::HeapObject**, v8::internal::HeapObject*))
+      6    0.1%    0.1%  _IO_vfprintf
+      5    0.0%    0.0%  void v8::internal::Heap::RightTrimFixedArray<(v8::internal::Heap::InvocationMode)1>(v8::internal::FixedArrayBase*, int)
+      5    0.0%    0.0%  v8::internal::TransitionArray::SearchTransition(v8::internal::Map*, v8::internal::PropertyKind, v8::internal::Name*, PropertyAttributes)
+      5    0.0%    0.0%  v8::internal::TransitionArray::SearchDetails(int, v8::internal::PropertyKind, PropertyAttributes, int*)
+      5    0.0%    0.0%  v8::internal::Isolate::IsFastArrayConstructorPrototypeChainIntact()
+      5    0.0%    0.0%  v8::internal::Heap::AllocateFixedArray(int, v8::internal::PretenureFlag)
+      5    0.0%    0.0%  epoll_pwait
+      4    0.0%    0.0%  v8::internal::String::IsOneByteEqualTo(v8::internal::Vector<unsigned char const>)
+      4    0.0%    0.0%  v8::internal::MarkCompactCollector::EmptyMarkingDeque()
+      4    0.0%    0.0%  v8::internal::Map::IsUnboxedDoubleField(v8::internal::FieldIndex)
+      4    0.0%    0.0%  v8::internal::LookupIterator::WriteDataValue(v8::internal::Handle<v8::internal::Object>)
+      4    0.0%    0.0%  v8::internal::JSObject::FastPropertyAt(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Representation, v8::internal::FieldIndex)
+      4    0.0%    0.0%  v8::internal::HBasicBlock::CreateSimulate(v8::internal::BailoutId, v8::internal::RemovableSimulate)
+      4    0.0%    0.0%  v8::internal::Factory::NewRawOneByteString(int, v8::internal::PretenureFlag)
+      4    0.0%    0.0%  v8::internal::BasicJsonStringifier::SerializeDeferredKey(bool, v8::internal::Handle<v8::internal::Object>)
+      4    0.0%    0.0%  cfree
+      4    0.0%    0.0%  _init
+      3    0.0%    0.0%  v8::internal::TemplateHashMapImpl<v8::internal::FreeStoreAllocationPolicy>::Probe(void*, unsigned int) const
+      3    0.0%    0.0%  v8::internal::String::SlowFlatten(v8::internal::Handle<v8::internal::ConsString>, v8::internal::PretenureFlag)
+      3    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParseMemberExpressionContinuation(v8::internal::Expression*, v8::internal::ExpressionClassifier*, bool*)
+      3    0.0%    0.0%  v8::internal::MarkCompactCollector::ProcessAndClearWeakCells()
+      3    0.0%    0.0%  v8::internal::Map::InstancesNeedRewriting(v8::internal::Map*, int, int, int, int*)
+      3    0.0%    0.0%  v8::internal::JSObject::SetMapAndElements(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::FixedArrayBase>)
+      3    0.0%    0.0%  v8::internal::JSObject::GetElementsTransitionMap(v8::internal::Handle<v8::internal::JSObject>, v8::internal::ElementsKind)
+      3    0.0%    0.0%  v8::internal::Heap::IteratePointersToFromSpace(v8::internal::HeapObject*, int, void (*)(v8::internal::HeapObject**, v8::internal::HeapObject*))
+      3    0.0%    0.0%  v8::internal::HashTable<v8::internal::StringTable, v8::internal::StringTableShape, v8::internal::HashTableKey*>::FindEntry(v8::internal::Isolate*, v8::internal::HashTableKey*)
+      3    0.0%    0.0%  v8::internal::HBasicBlock::HBasicBlock(v8::internal::HGraph*)
+      3    0.0%    0.0%  v8::internal::AstValueFactory::GetOneByteStringInternal(v8::internal::Vector<unsigned char const>)
+      3    0.0%    0.0%  node::HandleWrap::Close(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.0%    0.0%  __pthread_cond_signal
+      3    0.0%    0.0%  _IO_default_xsputn
+      2    0.0%    0.0%  void v8::internal::StringHasher::AddCharacters<unsigned short>(unsigned short const*, int)
+      2    0.0%    0.0%  void v8::internal::StaticMarkingVisitor<v8::internal::IncrementalMarkingMarkingVisitor>::DataObjectVisitor::VisitSpecialized<16>(v8::internal::Map*, v8::internal::HeapObject*)
+      2    0.0%    0.0%  v8::internal::TransitionArray::Search(v8::internal::PropertyKind, v8::internal::Name*, PropertyAttributes, int*)
+      2    0.0%    0.0%  v8::internal::StringHasher::GetHashField()
+      2    0.0%    0.0%  v8::internal::StaticMarkingVisitor<v8::internal::IncrementalMarkingMarkingVisitor>::VisitJSFunctionStrongCode(v8::internal::Heap*, v8::internal::HeapObject*)
+      2    0.0%    0.0%  v8::internal::StaticMarkingVisitor<v8::internal::IncrementalMarkingMarkingVisitor>::MarkMapContents(v8::internal::Heap*, v8::internal::Map*)
+      2    0.0%    0.0%  v8::internal::Runtime_LoadMutableDouble(int, v8::internal::Object**, v8::internal::Isolate*)
+      2    0.0%    0.0%  v8::internal::Runtime::SetupArrayBuffer(v8::internal::Isolate*, v8::internal::Handle<v8::internal::JSArrayBuffer>, bool, void*, unsigned long, v8::internal::SharedFlag)
+      2    0.0%    0.0%  v8::internal::Runtime::SetObjectProperty(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::LanguageMode)
+      2    0.0%    0.0%  v8::internal::Runtime::KeyedGetObjectProperty(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::LanguageMode)
+      2    0.0%    0.0%  v8::internal::RelocInfoWriter::Write(v8::internal::RelocInfo const*)
+      2    0.0%    0.0%  v8::internal::PrototypeIterator::Advance()
+      2    0.0%    0.0%  v8::internal::PropertyHandlerCompiler::CheckPrototypes(v8::internal::Register, v8::internal::Register, v8::internal::Register, v8::internal::Register, v8::internal::Handle<v8::internal::Name>, v8::internal::Label*, v8::internal::PrototypeCheckType, v8::internal::ReturnHolder)
+      2    0.0%    0.0%  v8::internal::PointersUpdatingVisitor::VisitPointers(v8::internal::Object**, v8::internal::Object**)
+      2    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParseAssignmentExpression(bool, v8::internal::ExpressionClassifier*, bool*)
+      2    0.0%    0.0%  v8::internal::Parser::ParseStatement(v8::internal::ZoneList<v8::internal::AstRawString const*>*, bool*)
+      2    0.0%    0.0%  v8::internal::Parser::ParseFunctionLiteral(v8::internal::AstRawString const*, v8::internal::Scanner::Location, bool, v8::internal::FunctionKind, int, v8::internal::FunctionLiteral::FunctionType, v8::internal::FunctionLiteral::ArityRestriction, v8::internal::LanguageMode, bool*)
+      2    0.0%    0.0%  v8::internal::MarkCompactCollector::ClearNonLiveMapTransitions(v8::internal::Map*, v8::internal::MarkBit)
+      2    0.0%    0.0%  v8::internal::JSObject::ValidateElements(v8::internal::Handle<v8::internal::JSObject>)
+      2    0.0%    0.0%  v8::internal::JSObject::RawFastPropertyAtPut(v8::internal::FieldIndex, v8::internal::Object*)
+      2    0.0%    0.0%  v8::internal::JSObject::HasFastProperties()
+      2    0.0%    0.0%  v8::internal::JSFunction::EnsureHasInitialMap(v8::internal::Handle<v8::internal::JSFunction>)
+      2    0.0%    0.0%  v8::internal::IntToCString(int, v8::internal::Vector<char>)
+      2    0.0%    0.0%  v8::internal::InnerPointerToCodeCache::GcSafeFindCodeForInnerPointer(unsigned char*)
+      2    0.0%    0.0%  v8::internal::IncrementalMarking::UpdateMarkingDequeAfterScavenge()
+      2    0.0%    0.0%  v8::internal::IC::ConfigureVectorState(v8::internal::InlineCacheState)
+      2    0.0%    0.0%  v8::internal::HeapObject::synchronized_set_map(v8::internal::Map*)
+      2    0.0%    0.0%  v8::internal::HeapObject::SizeFromMap(v8::internal::Map*)
+      2    0.0%    0.0%  v8::internal::HEnvironmentLivenessAnalysisPhase::Run()
+      2    0.0%    0.0%  v8::internal::FreeListCategory::PickNodeFromList(int*)
+      2    0.0%    0.0%  v8::internal::DescriptorArray::CopyFrom(int, v8::internal::DescriptorArray*, v8::internal::DescriptorArray::WhitenessWitness const&)
+      2    0.0%    0.0%  v8::internal::Compiler::GetOptimizedCode(v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Handle<v8::internal::Code>, v8::internal::Compiler::ConcurrencyMode, v8::internal::BailoutId, v8::internal::JavaScriptFrame*)
+      2    0.0%    0.0%  v8::internal::Code::CopyFrom(v8::internal::CodeDesc const&)
+      2    0.0%    0.0%  v8::internal::Assembler::emit_operand(int, v8::internal::Operand const&)
+      2    0.0%    0.0%  v8::internal::ApiNatives::ConfigureInstance(v8::internal::Isolate*, v8::internal::Handle<v8::internal::FunctionTemplateInfo>, v8::internal::Handle<v8::internal::JSObject>)
+      2    0.0%    0.0%  v8::internal::Accessors::ArrayLengthSetter(v8::Local<v8::Name>, v8::Local<v8::Value>, v8::PropertyCallbackInfo<void> const&)
+      2    0.0%    0.0%  node::crypto::Hash::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.0%    0.0%  c32rtomb
+      2    0.0%    0.0%  brk
+      2    0.0%    0.0%  __xstat
+      2    0.0%    0.0%  _IO_do_write
+      1    0.0%    0.0%  void v8::internal::TypeFeedbackOracle::CollectReceiverTypes<v8::internal::LoadICNexus>(v8::internal::LoadICNexus*, v8::internal::SmallMapList*)
+      1    0.0%    0.0%  void v8::internal::StringHasher::AddCharacters<unsigned char>(unsigned char const*, int)
+      1    0.0%    0.0%  void v8::internal::StaticMarkingVisitor<v8::internal::MarkCompactMarkingVisitor>::DataObjectVisitor::VisitSpecialized<16>(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  void v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::EvacuateObject<(v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::ObjectContents)0, (v8::internal::AllocationAlignment)1>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+      1    0.0%    0.0%  void v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)0, (v8::internal::LoggingAndProfiling)0>::EvacuateObject<(v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)0, (v8::internal::LoggingAndProfiling)0>::ObjectContents)1, (v8::internal::AllocationAlignment)0>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+      1    0.0%    0.0%  void v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)0, (v8::internal::LoggingAndProfiling)0>::EvacuateObject<(v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)0, (v8::internal::LoggingAndProfiling)0>::ObjectContents)0, (v8::internal::AllocationAlignment)1>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+      1    0.0%    0.0%  void v8::internal::FlexibleBodyVisitor<v8::internal::MarkCompactMarkingVisitor, v8::internal::JSObject::BodyDescriptor, void>::VisitSpecialized<56>(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  void v8::internal::FlexibleBodyVisitor<v8::internal::IncrementalMarkingMarkingVisitor, v8::internal::JSObject::BodyDescriptor, void>::VisitSpecialized<56>(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  void std::__insertion_sort<v8::internal::VarAndOrder*, __gnu_cxx::__ops::_Iter_comp_iter<v8::internal::Vector<v8::internal::VarAndOrder>::RawComparer<int (*)(v8::internal::VarAndOrder const*, v8::internal::VarAndOrder const*)> > >(v8::internal::VarAndOrder*, v8::internal::VarAndOrder*, __gnu_cxx::__ops::_Iter_comp_iter<v8::internal::Vector<v8::internal::VarAndOrder>::RawComparer<int (*)(v8::internal::VarAndOrder const*, v8::internal::VarAndOrder const*)> >)
+      1    0.0%    0.0%  v8::internal::modulo(double, double)
+      1    0.0%    0.0%  v8::internal::VariableMap::Lookup(v8::internal::AstRawString const*)
+      1    0.0%    0.0%  v8::internal::VariableDeclaration::node_type() const
+      1    0.0%    0.0%  v8::internal::ValueContext::ReturnInstruction(v8::internal::HInstruction*, v8::internal::BailoutId)
+      1    0.0%    0.0%  v8::internal::UsePosition::UsePosition(v8::internal::LifetimePosition, v8::internal::LOperand*, v8::internal::LOperand*)
+      1    0.0%    0.0%  v8::internal::UnaryOperation::Accept(v8::internal::AstVisitor*)
+      1    0.0%    0.0%  v8::internal::TypeImpl<v8::internal::ZoneTypeConfig>::BitsetType::Lub(v8::internal::Map*)
+      1    0.0%    0.0%  v8::internal::TypeFeedbackVector::ClearSlotsImpl(v8::internal::SharedFunctionInfo*, bool)
+      1    0.0%    0.0%  v8::internal::TypeFeedbackOracle::GetInfo(v8::internal::TypeFeedbackId)
+      1    0.0%    0.0%  v8::internal::TranslatedValue::GetValue()
+      1    0.0%    0.0%  v8::internal::TemplateHashMapImpl<v8::internal::ZoneAllocationPolicy>::Probe(void*, unsigned int) const
+      1    0.0%    0.0%  v8::internal::TemplateHashMapImpl<v8::internal::ZoneAllocationPolicy>::LookupOrInsert(void*, unsigned int, v8::internal::ZoneAllocationPolicy)
+      1    0.0%    0.0%  v8::internal::TemplateHashMapImpl<v8::internal::ZoneAllocationPolicy>::Initialize(unsigned int, v8::internal::ZoneAllocationPolicy)
+      1    0.0%    0.0%  v8::internal::StubCache::CollectMatchingMaps(v8::internal::SmallMapList*, v8::internal::Handle<v8::internal::Name>, unsigned int, v8::internal::Handle<v8::internal::Context>, v8::internal::Zone*)
+      1    0.0%    0.0%  v8::internal::StringHasher::ComputeUtf8Hash(v8::internal::Vector<char const>, unsigned int, int*)
+      1    0.0%    0.0%  v8::internal::String::SlowEquals(v8::internal::String*)
+      1    0.0%    0.0%  v8::internal::String::SlowEquals(v8::internal::Handle<v8::internal::String>, v8::internal::Handle<v8::internal::String>)
+      1    0.0%    0.0%  v8::internal::StoreIC_Slow(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::StoreIC_Miss(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::StoreIC::Store(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::Object>, v8::internal::Object::StoreFromKeyed)
+      1    0.0%    0.0%  v8::internal::StaticMarkingVisitor<v8::internal::IncrementalMarkingMarkingVisitor>::VisitSharedFunctionInfoStrongCode(v8::internal::Heap*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  v8::internal::StackSlotOffset(int)
+      1    0.0%    0.0%  v8::internal::StackGuard::CheckAndHandleGCInterrupt()
+      1    0.0%    0.0%  v8::internal::StackFrameIteratorBase::SingletonFor(v8::internal::StackFrame::Type)
+      1    0.0%    0.0%  v8::internal::SharedFunctionInfo::ClearTypeFeedbackInfoAtGCTime()
+      1    0.0%    0.0%  v8::internal::SemiSpace::FlipPages(long, long)
+      1    0.0%    0.0%  v8::internal::Script::GetLineNumberWithArray(int)
+      1    0.0%    0.0%  v8::internal::Scope::MustAllocate(v8::internal::Variable*)
+      1    0.0%    0.0%  v8::internal::Scope::Initialize()
+      1    0.0%    0.0%  v8::internal::Scope::DeserializeScopeChain(v8::internal::Isolate*, v8::internal::Zone*, v8::internal::Context*, v8::internal::Scope*)
+      1    0.0%    0.0%  v8::internal::Scanner::SkipWhiteSpace()
+      1    0.0%    0.0%  v8::internal::Scanner::ScanIdentifierOrKeyword()
+      1    0.0%    0.0%  v8::internal::Scanner::Scan()
+      1    0.0%    0.0%  v8::internal::Scanner::Next()
+      1    0.0%    0.0%  v8::internal::Runtime_StringToLowerCase(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_RegExpExec(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_NumberToStringSkipCache(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_NumberToRadixString(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_MathFloor(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_MaterializeRegExpLiteral(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_KeyedGetProperty(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Runtime_ArrayConcat(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::RuntimeProfiler::OptimizeNow()
+      1    0.0%    0.0%  v8::internal::Runtime::ToName(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>)
+      1    0.0%    0.0%  v8::internal::Runtime::GetObjectProperty(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, v8::internal::LanguageMode)
+      1    0.0%    0.0%  v8::internal::Runtime::FunctionForName(v8::internal::Handle<v8::internal::String>)
+      1    0.0%    0.0%  v8::internal::RelocIterator::next()
+      1    0.0%    0.0%  v8::internal::RegExpConstructResultStub::GenerateCode()
+      1    0.0%    0.0%  v8::internal::PropertyICCompiler::CompilePolymorphic(v8::internal::List<v8::internal::Handle<v8::internal::Map>, v8::internal::FreeStoreAllocationPolicy>*, v8::internal::List<v8::internal::Handle<v8::internal::Code>, v8::internal::FreeStoreAllocationPolicy>*, v8::internal::Handle<v8::internal::Name>, v8::internal::Code::StubType, v8::internal::IcCheckType)
+      1    0.0%    0.0%  v8::internal::PropertyCallbackArguments::Call(void (*)(v8::Local<v8::Name>, v8::Local<v8::Value>, v8::PropertyCallbackInfo<void> const&), v8::Local<v8::Name>, v8::Local<v8::Value>)
+      1    0.0%    0.0%  v8::internal::Property::node_type() const
+      1    0.0%    0.0%  v8::internal::PlatformCodeStub::GenerateCode()
+      1    0.0%    0.0%  v8::internal::ParserTraits::ExpressionFromIdentifier(v8::internal::AstRawString const*, int, int, v8::internal::Scope*, v8::internal::AstNodeFactory*)
+      1    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParsePropertyName(v8::internal::AstRawString const**, bool*, bool*, bool*, bool*, v8::internal::ExpressionClassifier*, bool*)
+      1    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParseMemberExpression(v8::internal::ExpressionClassifier*, bool*)
+      1    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParseBinaryExpression(int, bool, v8::internal::ExpressionClassifier*, bool*)
+      1    0.0%    0.0%  v8::internal::ParserBase<v8::internal::ParserTraits>::ParseArguments(v8::internal::Scanner::Location*, v8::internal::ExpressionClassifier*, bool*)
+      1    0.0%    0.0%  v8::internal::Parser::ParseV8Intrinsic(bool*)
+      1    0.0%    0.0%  v8::internal::Parser::ParseStatementAsUnlabelled(v8::internal::ZoneList<v8::internal::AstRawString const*>*, bool*)
+      1    0.0%    0.0%  v8::internal::Parser::ParseBlock(v8::internal::ZoneList<v8::internal::AstRawString const*>*, bool*)
+      1    0.0%    0.0%  v8::internal::ParseInfo::ParseInfo(v8::internal::Zone*, v8::internal::Handle<v8::internal::SharedFunctionInfo>)
+      1    0.0%    0.0%  v8::internal::PagedSpace::CountTotalPages()
+      1    0.0%    0.0%  v8::internal::Object::OptimalRepresentation()
+      1    0.0%    0.0%  v8::internal::Object::AddDataProperty(v8::internal::LookupIterator*, v8::internal::Handle<v8::internal::Object>, PropertyAttributes, v8::internal::LanguageMode, v8::internal::Object::StoreFromKeyed)
+      1    0.0%    0.0%  v8::internal::NamedLoadHandlerCompiler::GenerateDirectLoadGlobalFunctionPrototype(v8::internal::MacroAssembler*, int, v8::internal::Register, v8::internal::Label*)
+      1    0.0%    0.0%  v8::internal::NameDictionaryBase<v8::internal::NameDictionary, v8::internal::NameDictionaryShape>::FindEntry(v8::internal::Handle<v8::internal::Name>)
+      1    0.0%    0.0%  v8::internal::MemoryReducer::TimerTask::Run()
+      1    0.0%    0.0%  v8::internal::MemoryAllocator::Free(v8::internal::MemoryChunk*)
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::SweepInParallel(v8::internal::Page*, v8::internal::PagedSpace*)
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::RetainMaps()
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::RecordRelocSlot(v8::internal::RelocInfo*, v8::internal::Object*)
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::DiscoverAndEvacuateBlackObjectsOnPage(v8::internal::NewSpace*, v8::internal::NewSpacePage*)
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::CollectGarbage()
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::CollectEvacuationCandidates(v8::internal::PagedSpace*)
+      1    0.0%    0.0%  v8::internal::MarkCompactCollector::ClearInvalidStoreAndSlotsBufferEntries()
+      1    0.0%    0.0%  v8::internal::Map::TransitionToDataProperty(v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::Object>, PropertyAttributes, v8::internal::Object::StoreFromKeyed)
+      1    0.0%    0.0%  v8::internal::Map::ReconfigureProperty(v8::internal::Handle<v8::internal::Map>, int, v8::internal::PropertyKind, PropertyAttributes, v8::internal::Representation, v8::internal::Handle<v8::internal::TypeImpl<v8::internal::HeapTypeConfig> >, v8::internal::StoreMode)
+      1    0.0%    0.0%  v8::internal::Map::RawCopy(v8::internal::Handle<v8::internal::Map>, int)
+      1    0.0%    0.0%  v8::internal::Map::NextFreePropertyIndex()
+      1    0.0%    0.0%  v8::internal::Map::GeneralizeFieldType(v8::internal::Handle<v8::internal::TypeImpl<v8::internal::HeapTypeConfig> >, v8::internal::Handle<v8::internal::TypeImpl<v8::internal::HeapTypeConfig> >, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::MacroAssembler::SmiCompare(v8::internal::Operand const&, v8::internal::Smi*)
+      1    0.0%    0.0%  v8::internal::MacroAssembler::LoadRoot(v8::internal::Register, v8::internal::Heap::RootListIndex)
+      1    0.0%    0.0%  v8::internal::MacroAssembler::GetWeakValue(v8::internal::Register, v8::internal::Handle<v8::internal::WeakCell>)
+      1    0.0%    0.0%  v8::internal::LookupIterator::InternalizeName()
+      1    0.0%    0.0%  v8::internal::LookupIterator::FetchValue() const
+      1    0.0%    0.0%  v8::internal::Logger::CodeCreateEvent(v8::internal::Logger::LogEventsAndTags, v8::internal::Code*, char const*)
+      1    0.0%    0.0%  v8::internal::Log::MessageBuilder::Append(char const*, ...)
+      1    0.0%    0.0%  v8::internal::LoadICNexus::StateFromFeedback() const
+      1    0.0%    0.0%  v8::internal::LoadIC::megamorphic_stub()
+      1    0.0%    0.0%  v8::internal::LoadIC::CompileHandler(v8::internal::LookupIterator*, v8::internal::Handle<v8::internal::Object>, v8::internal::CacheHolderFlag)
+      1    0.0%    0.0%  v8::internal::LiveEditFunctionTracker::LiveEditFunctionTracker(v8::internal::Isolate*, v8::internal::FunctionLiteral*)
+      1    0.0%    0.0%  v8::internal::List<v8::internal::ParserFormalParameterParsingState::Parameter, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::ParserFormalParameterParsingState::Parameter const&, v8::internal::ZoneAllocationPolicy)
+      1    0.0%    0.0%  v8::internal::List<v8::internal::Expression*, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::Expression* const&, v8::internal::ZoneAllocationPolicy)
+      1    0.0%    0.0%  v8::internal::List<v8::internal::Context*, v8::internal::FreeStoreAllocationPolicy>::Remove(int)
+      1    0.0%    0.0%  v8::internal::LayoutDescriptor::IsTagged(int, int, int*)
+      1    0.0%    0.0%  v8::internal::LCodeGenBase::GenerateBody()
+      1    0.0%    0.0%  v8::internal::LCodeGenBase::AddStabilityDependency(v8::internal::Handle<v8::internal::Map>)
+      1    0.0%    0.0%  v8::internal::LCodeGen::RecordSafepointWithLazyDeopt(v8::internal::LInstruction*, v8::internal::LCodeGen::SafepointMode, int)
+      1    0.0%    0.0%  v8::internal::LChunkBuilder::DoMul(v8::internal::HMul*)
+      1    0.0%    0.0%  v8::internal::LChunk::RegisterWeakObjectsInOptimizedCode(v8::internal::Handle<v8::internal::Code>) const
+      1    0.0%    0.0%  v8::internal::LAllocator::ResolvePhis()
+      1    0.0%    0.0%  v8::internal::LAllocator::ProcessInstructions(v8::internal::HBasicBlock*, v8::internal::BitVector*)
+      1    0.0%    0.0%  v8::internal::LAllocator::LiveRangeFor(v8::internal::LOperand*)
+      1    0.0%    0.0%  v8::internal::LAllocator::ComputeLiveOut(v8::internal::HBasicBlock*)
+      1    0.0%    0.0%  v8::internal::JSObject::LazyRegisterPrototypeUser(v8::internal::Handle<v8::internal::Map>, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::JSObject::AddSlowProperty(v8::internal::Handle<v8::internal::JSObject>, v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::Object>, PropertyAttributes)
+      1    0.0%    0.0%  v8::internal::JSObject::AddDataElement(v8::internal::Handle<v8::internal::JSObject>, unsigned int, v8::internal::Handle<v8::internal::Object>, PropertyAttributes)
+      1    0.0%    0.0%  v8::internal::JSDate::SetValue(v8::internal::Object*, bool)
+      1    0.0%    0.0%  v8::internal::IncrementalStringBuilder::Accumulate(v8::internal::Handle<v8::internal::String>)
+      1    0.0%    0.0%  v8::internal::IncrementalMarking::RecordWriteOfCodeEntrySlow(v8::internal::JSFunction*, v8::internal::Object**, v8::internal::Code*)
+      1    0.0%    0.0%  v8::internal::IC::UpdateState(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+      1    0.0%    0.0%  v8::internal::IC::PostPatching(unsigned char*, v8::internal::Code*, v8::internal::Code*)
+      1    0.0%    0.0%  v8::internal::IC::ConfigureVectorState(v8::internal::Handle<v8::internal::Name>, v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Code>)
+      1    0.0%    0.0%  v8::internal::IC::AddressFromUtilityId(v8::internal::IC::UtilityId)
+      1    0.0%    0.0%  v8::internal::Heap::SelectGarbageCollector(v8::internal::AllocationSpace, char const**)
+      1    0.0%    0.0%  v8::internal::Heap::RegisterNewArrayBuffer(bool, void*, unsigned long)
+      1    0.0%    0.0%  v8::internal::Heap::PromotedExternalMemorySize()
+      1    0.0%    0.0%  v8::internal::Heap::PromoteArrayBuffer(v8::internal::Object*)
+      1    0.0%    0.0%  v8::internal::Heap::MonotonicallyIncreasingTimeInMs()
+      1    0.0%    0.0%  v8::internal::Heap::DoScavenge(v8::internal::ObjectVisitor*, unsigned char*)
+      1    0.0%    0.0%  v8::internal::HashTable<v8::internal::SeededNumberDictionary, v8::internal::SeededNumberDictionaryShape, unsigned int>::FindInsertionEntry(unsigned int)
+      1    0.0%    0.0%  v8::internal::HashTable<v8::internal::NameDictionary, v8::internal::NameDictionaryShape, v8::internal::Handle<v8::internal::Name> >::FindEntry(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Name>)
+      1    0.0%    0.0%  v8::internal::HandleScope::~HandleScope()
+      1    0.0%    0.0%  v8::internal::HandleScope::DeleteExtensions(v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::Handle<v8::internal::JSObject> v8::internal::HandleScope::CloseAndEscape<v8::internal::JSObject>(v8::internal::Handle<v8::internal::JSObject>)
+      1    0.0%    0.0%  v8::internal::Handle<v8::internal::ConsString> v8::internal::Factory::New<v8::internal::ConsString>(v8::internal::Handle<v8::internal::Map>, v8::internal::AllocationSpace)
+      1    0.0%    0.0%  v8::internal::HValue::RepresentationFromUses()
+      1    0.0%    0.0%  v8::internal::HType::FromValue(v8::internal::Handle<v8::internal::Object>)
+      1    0.0%    0.0%  v8::internal::HTemplateInstruction<3>::InternalSetOperandAt(int, v8::internal::HValue*)
+      1    0.0%    0.0%  v8::internal::HTemplateInstruction<2>::OperandCount() const
+      1    0.0%    0.0%  v8::internal::HSimulate::ReplayEnvironment(v8::internal::HEnvironment*)
+      1    0.0%    0.0%  v8::internal::HOptimizedGraphBuilder::TryInline(v8::internal::Handle<v8::internal::JSFunction>, int, v8::internal::HValue*, v8::internal::BailoutId, v8::internal::BailoutId, v8::internal::InliningKind)
+      1    0.0%    0.0%  v8::internal::HOptimizedGraphBuilder::PushLoad(v8::internal::Property*, v8::internal::HValue*, v8::internal::HValue*)
+      1    0.0%    0.0%  v8::internal::HOptimizedGraphBuilder::HandlePolymorphicNamedFieldAccess(v8::internal::PropertyAccessType, v8::internal::Expression*, v8::internal::BailoutId, v8::internal::BailoutId, v8::internal::HValue*, v8::internal::HValue*, v8::internal::SmallMapList*, v8::internal::Handle<v8::internal::String>)
+      1    0.0%    0.0%  v8::internal::HOptimizedGraphBuilder::BuildFastLiteral(v8::internal::Handle<v8::internal::JSObject>, v8::internal::AllocationSiteUsageContext*)
+      1    0.0%    0.0%  v8::internal::HInstruction::position() const
+      1    0.0%    0.0%  v8::internal::HInstruction::InsertAfter(v8::internal::HInstruction*)
+      1    0.0%    0.0%  v8::internal::HInferTypesPhase::InferTypes(int, int)
+      1    0.0%    0.0%  v8::internal::HGraphBuilder::BuildStringAdd(v8::internal::HValue*, v8::internal::HValue*, v8::internal::HAllocationMode)
+      1    0.0%    0.0%  v8::internal::HContext::opcode() const
+      1    0.0%    0.0%  v8::internal::HConstant::InferRange(v8::internal::Zone*)
+      1    0.0%    0.0%  v8::internal::HChange::CalculateInferredType()
+      1    0.0%    0.0%  v8::internal::HBlockEntry::opcode() const
+      1    0.0%    0.0%  v8::internal::HBasicBlock::AddInstruction(v8::internal::HInstruction*, v8::internal::SourcePosition)
+      1    0.0%    0.0%  v8::internal::GetBailoutReason(v8::internal::BailoutReason)
+      1    0.0%    0.0%  v8::internal::GCTracer::ScavengeSpeedInBytesPerMillisecond(v8::internal::ScavengeSpeedMode) const
+      1    0.0%    0.0%  v8::internal::FunctionTemplateInfo::GetCompatibleReceiver(v8::internal::Isolate*, v8::internal::Object*)
+      1    0.0%    0.0%  v8::internal::FuncNameInferrer::PushLiteralName(v8::internal::AstRawString const*)
+      1    0.0%    0.0%  v8::internal::FullCodeGenerator::VisitCallNew(v8::internal::CallNew*)
+      1    0.0%    0.0%  v8::internal::FullCodeGenerator::VisitAssignment(v8::internal::Assignment*)
+      1    0.0%    0.0%  v8::internal::FullCodeGenerator::GetVar(v8::internal::Register, v8::internal::Variable*)
+      1    0.0%    0.0%  v8::internal::FullCodeGenerator::EmitReturnSequence()
+      1    0.0%    0.0%  v8::internal::FlexibleBodyVisitor<v8::internal::NewSpaceScavenger, v8::internal::JSObject::BodyDescriptor, int>::Visit(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  v8::internal::FlexibleBodyVisitor<v8::internal::MarkCompactMarkingVisitor, v8::internal::FixedArray::BodyDescriptor, void>::Visit(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  v8::internal::FixedBodyVisitor<v8::internal::IncrementalMarkingMarkingVisitor, v8::internal::FixedBodyDescriptor<24, 40, 40>, void>::Visit(v8::internal::Map*, v8::internal::HeapObject*)
+      1    0.0%    0.0%  v8::internal::FixedArray::UnionOfKeys(v8::internal::Handle<v8::internal::FixedArray>, v8::internal::Handle<v8::internal::FixedArray>)
+      1    0.0%    0.0%  v8::internal::FixedArray::SetValue(unsigned int, v8::internal::Object*)
+      1    0.0%    0.0%  v8::internal::Factory::NewFixedArrayWithHoles(int, v8::internal::PretenureFlag)
+      1    0.0%    0.0%  v8::internal::ExternalReferenceTable::ExternalReferenceTable(v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::ExitFrame::ComputeCallerState(v8::internal::StackFrame::State*) const
+      1    0.0%    0.0%  v8::internal::EscapeRegExpSource(v8::internal::Isolate*, v8::internal::Handle<v8::internal::String>)
+      1    0.0%    0.0%  v8::internal::Dictionary<v8::internal::UnseededNumberDictionary, v8::internal::UnseededNumberDictionaryShape, unsigned int>::AtPut(v8::internal::Handle<v8::internal::UnseededNumberDictionary>, unsigned int, v8::internal::Handle<v8::internal::Object>)
+      1    0.0%    0.0%  v8::internal::Dictionary<v8::internal::NameDictionary, v8::internal::NameDictionaryShape, v8::internal::Handle<v8::internal::Name> >::EnsureCapacity(v8::internal::Handle<v8::internal::NameDictionary>, int, v8::internal::Handle<v8::internal::Name>)
+      1    0.0%    0.0%  v8::internal::Deserializer::ReadData(v8::internal::Object**, v8::internal::Object**, int, unsigned char*)
+      1    0.0%    0.0%  v8::internal::DescriptorArray::CopyUpToAddAttributes(v8::internal::Handle<v8::internal::DescriptorArray>, int, PropertyAttributes, int)
+      1    0.0%    0.0%  v8::internal::Deoptimizer::DeoptimizeMarkedCodeForContext(v8::internal::Context*)
+      1    0.0%    0.0%  v8::internal::DateCache::YearMonthDayFromDays(int, int*, int*, int*)
+      1    0.0%    0.0%  v8::internal::ConsString* v8::internal::String::VisitFlat<v8::internal::IteratingStringHasher>(v8::internal::IteratingStringHasher*, v8::internal::String*, int)
+      1    0.0%    0.0%  v8::internal::Compiler::GetSharedFunctionInfo(v8::internal::FunctionLiteral*, v8::internal::Handle<v8::internal::Script>, v8::internal::CompilationInfo*)
+      1    0.0%    0.0%  v8::internal::CompilationInfo::~CompilationInfo()
+      1    0.0%    0.0%  v8::internal::CompareIC_Miss(int, v8::internal::Object**, v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::CodeStub::UseSpecialCache()
+      1    0.0%    0.0%  v8::internal::CodeStub::GetCodeCopy(v8::internal::Code::FindAndReplacePattern const&)
+      1    0.0%    0.0%  v8::internal::CodeStub::FindCodeInCache(v8::internal::Code**)
+      1    0.0%    0.0%  v8::internal::CodeFactory::BinaryOpIC(v8::internal::Isolate*, v8::internal::Token::Value, v8::internal::Strength)
+      1    0.0%    0.0%  v8::internal::Builtins::KeyedLoadIC_Megamorphic()
+      1    0.0%    0.0%  v8::internal::BoyerMooreLookahead::GetSkipTable(int, int, v8::internal::Handle<v8::internal::ByteArray>)
+      1    0.0%    0.0%  v8::internal::BodyVisitorBase<v8::internal::NewSpaceScavenger>::IterateBodyUsingLayoutDescriptor(v8::internal::Heap*, v8::internal::HeapObject*, int, int)
+      1    0.0%    0.0%  v8::internal::Block::node_type() const
+      1    0.0%    0.0%  v8::internal::BitVector::Iterator::Advance()
+      1    0.0%    0.0%  v8::internal::BasicJsonStringifier::Stringify(v8::internal::Handle<v8::internal::Object>)
+      1    0.0%    0.0%  v8::internal::BasicJsonStringifier::BasicJsonStringifier(v8::internal::Isolate*)
+      1    0.0%    0.0%  v8::internal::AstValueFactory::GetString(unsigned int, bool, v8::internal::Vector<unsigned char const>)
+      1    0.0%    0.0%  v8::internal::AstNumberingVisitor::VisitVariableProxy(v8::internal::VariableProxy*)
+      1    0.0%    0.0%  v8::internal::AstNumberingVisitor::VisitAssignment(v8::internal::Assignment*)
+      1    0.0%    0.0%  v8::internal::Assembler::emit_test(v8::internal::Operand const&, v8::internal::Immediate, int)
+      1    0.0%    0.0%  v8::internal::Assembler::emit_mov(v8::internal::Operand const&, v8::internal::Register, int)
+      1    0.0%    0.0%  v8::internal::AllocationSiteUsageContext::ShouldCreateMemento(v8::internal::Handle<v8::internal::JSObject>)
+      1    0.0%    0.0%  v8::internal::AllocationSiteCreationContext::EnterNewScope()
+      1    0.0%    0.0%  v8::internal::Accessors::IsJSArrayBufferViewFieldAccessor(v8::internal::Handle<v8::internal::Map>, v8::internal::Handle<v8::internal::Name>, int*)
+      1    0.0%    0.0%  v8::internal::Accessors::FunctionPrototypeSetter(v8::Local<v8::Name>, v8::Local<v8::Value>, v8::PropertyCallbackInfo<void> const&)
+      1    0.0%    0.0%  v8::internal::Accessors::FunctionNameSetter(v8::Local<v8::Name>, v8::Local<v8::Value>, v8::PropertyCallbackInfo<void> const&)
+      1    0.0%    0.0%  v8::internal::Accessors::ArrayLengthGetter(v8::Local<v8::Name>, v8::PropertyCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  v8::String::NewFromOneByte(v8::Isolate*, unsigned char const*, v8::String::NewStringType, int)
+      1    0.0%    0.0%  v8::Isolate::GetCurrentContext()
+      1    0.0%    0.0%  v8::Function::Call(v8::Local<v8::Value>, int, v8::Local<v8::Value>*)
+      1    0.0%    0.0%  std::locale::~locale()
+      1    0.0%    0.0%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+      1    0.0%    0.0%  std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::overflow(int)
+      1    0.0%    0.0%  std::__cxx11::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::_M_pbump(char*, char*, long)
+      1    0.0%    0.0%  std::_Rb_tree_node<std::pair<void* const, unsigned long> >* std::_Rb_tree<void*, std::pair<void* const, unsigned long>, std::_Select1st<std::pair<void* const, unsigned long> >, std::less<void*>, std::allocator<std::pair<void* const, unsigned long> > >::_M_copy<std::_Rb_tree<void*, std::pair<void* const, unsigned long>, std::_Select1st<std::pair<void* const, unsigned long> >, std::less<void*>, std::allocator<std::pair<void* const, unsigned long> > >::_Reuse_or_alloc_node>(std::_Rb_tree_node<std::pair<void* const, unsigned long> > const*, std::_Rb_tree_node<std::pair<void* const, unsigned long> >*, std::_Rb_tree<void*, std::pair<void* const, unsigned long>, std::_Select1st<std::pair<void* const, unsigned long> >, std::less<void*>, std::allocator<std::pair<void* const, unsigned long> > >::_Reuse_or_alloc_node&)
+      1    0.0%    0.0%  std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+      1    0.0%    0.0%  operator delete[](void*)
+      1    0.0%    0.0%  operator delete(void*)
+      1    0.0%    0.0%  node::crypto::Hash::HashDigest(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  node::TimerWrap::Now(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  node::Parser::on_message_complete(http_parser*)
+      1    0.0%    0.0%  node::ArrayBufferAllocator::Allocate(unsigned long)
+      1    0.0%    0.0%  log
+      1    0.0%    0.0%  int v8::internal::LinearSearch<(v8::internal::SearchMode)0, v8::internal::TransitionArray>(v8::internal::TransitionArray*, v8::internal::Name*, int, int, int*)
+      1    0.0%    0.0%  fmod
+      1    0.0%    0.0%  bool v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)0, (v8::internal::LoggingAndProfiling)0>::SemiSpaceCopyObject<(v8::internal::AllocationAlignment)1>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+      1    0.0%    0.0%  __clock_gettime
+      1    0.0%    0.0%  __GI___pthread_mutex_unlock
+      1    0.0%    0.0%  __GI___pthread_mutex_lock
+      1    0.0%    0.0%  _IO_file_sync
+      1    0.0%    0.0%  _IO_file_open
+
+ [GC]:
+   ticks  total  nonlib   name
+    248    2.1%
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 2.0% are not shown.
+
+   ticks parent  name
+   1913   16.3%  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1766   92.3%    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1585   89.8%      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1374   86.7%        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1190   86.6%          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1014   85.2%            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    171   14.4%            LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+    174   12.7%          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     86   49.4%            LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     84   48.3%            LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      4    2.3%            LazyCompile: ~simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+    203   12.8%        LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+    100   49.3%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    100  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     98   48.3%          LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+     98  100.0%            LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      5    2.5%          LazyCompile: ~simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      5  100.0%            LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    176   10.0%      LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     89   50.6%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     89  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     89  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     78   44.3%        LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+     78  100.0%          LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     78  100.0%            LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+      9    5.1%        LazyCompile: ~simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      9  100.0%          LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      9  100.0%            LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    142    7.4%    LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     79   55.6%      LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+     79  100.0%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     79  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+     79  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     59   41.5%      LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     59  100.0%        LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     59  100.0%          LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     59  100.0%            LazyCompile: ~dispatch /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:98:45
+      4    2.8%      LazyCompile: ~simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      4  100.0%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      4  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+      4  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+
+    978    8.4%  /usr/bin/nodejs
+    787   80.5%    /usr/bin/nodejs
+    595   75.6%      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    580   97.5%        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    553   95.3%          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    528   95.5%            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     22    4.0%            LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     25    4.3%          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     14   56.0%            LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     11   44.0%            LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+     15    2.5%        LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     12   80.0%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     12  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+      3   20.0%          LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      3  100.0%            LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     71    9.0%      LazyCompile: readPackage module.js:68:21
+     57   80.3%        LazyCompile: ~tryPackage module.js:90:20
+     57  100.0%          LazyCompile: ~Module._findPath module.js:128:28
+     57  100.0%            LazyCompile: ~Module._resolveFilename module.js:312:35
+     14   19.7%        LazyCompile: *tryPackage module.js:90:20
+     14  100.0%          LazyCompile: ~Module._findPath module.js:128:28
+     14  100.0%            LazyCompile: ~Module._resolveFilename module.js:312:35
+     63    8.0%      LazyCompile: ~fs.readSync fs.js:585:23
+     63  100.0%        LazyCompile: fs.readFileSync fs.js:384:27
+     52   82.5%          LazyCompile: ~Module._extensions..js module.js:415:37
+     52  100.0%            LazyCompile: ~Module.load module.js:335:33
+      9   14.3%          LazyCompile: *Module._extensions..js module.js:415:37
+      9  100.0%            LazyCompile: ~Module.load module.js:335:33
+      2    3.2%          LazyCompile: Module._extensions..json module.js:422:39
+      2  100.0%            LazyCompile: ~Module.load module.js:335:33
+     19    2.4%      LazyCompile: ~Module._findPath module.js:128:28
+     19  100.0%        LazyCompile: ~Module._resolveFilename module.js:312:35
+     19  100.0%          LazyCompile: Module._load module.js:272:24
+     10   52.6%            LazyCompile: *require internal/module.js:11:19
+      7   36.8%            LazyCompile: ~Module.require module.js:351:36
+      2   10.5%            LazyCompile: *Module.require module.js:351:36
+    133   13.6%    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    133  100.0%      LazyCompile: ~stringify native json.js:155:23
+     72   54.1%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     72  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+     72  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     60   45.1%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     60  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     60  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     26    2.7%    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     26  100.0%      /usr/bin/nodejs
+     26  100.0%        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     26  100.0%          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     26  100.0%            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+
+    840    7.2%  v8::internal::FastDtoa(double, v8::internal::FastDtoaMode, int, v8::internal::Vector<char>, int*, int*)
+    840  100.0%    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    840  100.0%      LazyCompile: ~stringify native json.js:155:23
+    466   55.5%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    466  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    466  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    374   44.5%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    374  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    374  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+
+    349    3.0%  v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+    181   51.9%    /usr/bin/nodejs
+    181  100.0%      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    173   95.6%        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    160   92.5%          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    155   96.9%            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+      4    2.5%            LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     12    6.9%          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+      8   66.7%            LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      4   33.3%            LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      8    4.4%        LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+      4   50.0%          LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      4  100.0%            LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      4   50.0%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      4  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    164   47.0%    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    164  100.0%      LazyCompile: ~parse native json.js:40:19
+     85   51.8%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     85  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+     85  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     61   37.2%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     61  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     61  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     16    9.8%        LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+     16  100.0%          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+     16  100.0%            LazyCompile: ~readFileAfterClose fs.js:362:28
+
+    339    2.9%  v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+    339  100.0%    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    339  100.0%      LazyCompile: ~stringify native json.js:155:23
+    182   53.7%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    182  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    182  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    151   44.5%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    151  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    151  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+
+    329    2.8%  v8::internal::Strtod(v8::internal::Vector<char const>, int)
+    274   83.3%    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    274  100.0%      LazyCompile: ~parse native json.js:40:19
+    135   49.3%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    135  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    135  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    111   40.5%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    111  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    111  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     26    9.5%        LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+     26  100.0%          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+     26  100.0%            LazyCompile: ~readFileAfterClose fs.js:362:28
+     19    5.8%    LazyCompile: ~onstat /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:722:33
+     19  100.0%      v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+     19  100.0%        LazyCompile: ~parse native json.js:40:19
+     12   63.2%          LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     12  100.0%            LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+      7   36.8%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      7  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     15    4.6%    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     15  100.0%      v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+     15  100.0%        LazyCompile: ~parse native json.js:40:19
+     15  100.0%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     15  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+
+    318    2.7%  v8::internal::JsonParser<true>::ParseJsonNumber()
+    318  100.0%    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    318  100.0%      LazyCompile: ~parse native json.js:40:19
+    160   50.3%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    160  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    160  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    129   40.6%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    129  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    129  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     28    8.8%        LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+     28  100.0%          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+     28  100.0%            LazyCompile: ~readFileAfterClose fs.js:362:28
+
+    297    2.5%  v8::internal::BasicJsonStringifier::SerializeDouble(double)
+    297  100.0%    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    297  100.0%      LazyCompile: ~stringify native json.js:155:23
+    150   50.5%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    150  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    150  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    147   49.5%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    147  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    147  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+
+    288    2.5%  double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+    288  100.0%    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    288  100.0%      LazyCompile: ~parse native json.js:40:19
+    135   46.9%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    135  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    135  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    129   44.8%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+    129  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+    129  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     23    8.0%        LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+     23  100.0%          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+     23  100.0%            LazyCompile: ~readFileAfterClose fs.js:362:28
+
+    260    2.2%  v8::internal::Heap::AllocateRaw(int, v8::internal::AllocationSpace, v8::internal::AllocationSpace, v8::internal::AllocationAlignment)
+    163   62.7%    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    163  100.0%      LazyCompile: ~parse native json.js:40:19
+     75   46.0%        LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+     75  100.0%          LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+     75  100.0%            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     66   40.5%        LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+     66  100.0%          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     66  100.0%            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+     18   11.0%        LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+     18  100.0%          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+     18  100.0%            LazyCompile: ~readFileAfterClose fs.js:362:28
+     93   35.8%    /usr/bin/nodejs
+     93  100.0%      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     90   96.8%        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     88   97.8%          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     82   93.2%            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+      5    5.7%            LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+      2    2.2%          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+      1   50.0%            LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      1   50.0%            LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      2    2.2%        LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+      1   50.0%          LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+      1  100.0%            LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+      1   50.0%          LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+      1  100.0%            LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+
+
+ [Top down (heavy) profile]:
+  Note: callees occupying less than 0.1% are not shown.
+
+  inclusive      self           name
+  ticks   total  ticks   total
+  10408   88.9%      0    0.0%  LazyCompile: ~<anonymous> fs.js:81:18
+  10407   88.9%      1    0.0%    LazyCompile: ~onstat /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:722:33
+  10403   88.9%      0    0.0%      LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:733:17
+   5718   48.8%      0    0.0%        LazyCompile: ~onStatError /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:416:57
+   5718   48.8%      0    0.0%          LazyCompile: ~error /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:267:45
+   5715   48.8%      0    0.0%            LazyCompile: ~emit events.js:117:44
+   5715   48.8%      0    0.0%              LazyCompile: ~emitOne events.js:75:17
+   5715   48.8%      0    0.0%                LazyCompile: ~error /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:115:39
+   5715   48.8%      1    0.0%                  LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+   4678   40.0%      0    0.0%                    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+   4678   40.0%      1    0.0%                      LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   4677   39.9%      0    0.0%                        LazyCompile: ~<anonymous> native v8natives.js:1199:16
+   4677   39.9%      0    0.0%                          LazyCompile: ~dispatch /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:98:45
+   4676   39.9%      0    0.0%                            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+   4676   39.9%      0    0.0%                              LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   4676   39.9%      0    0.0%                                LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+   4673   39.9%      2    0.0%                                  LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+   4139   35.4%      1    0.0%                                    LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+   1793   15.3%      0    0.0%                                      LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+   1792   15.3%      7    0.1%                                        LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+   1785   15.2%     75    0.6%                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1669   14.3%     76    0.6%                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1529   13.1%     92    0.8%                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1396   11.9%     80    0.7%                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1261   10.8%     70    0.6%                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1127    9.6%     89    0.8%                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    971    8.3%     63    0.5%                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    815    7.0%     63    0.5%                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    677    5.8%     63    0.5%                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    521    4.4%     42    0.4%                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    422    3.6%     41    0.4%                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    321    2.7%     35    0.3%                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    227    1.9%     16    0.1%                                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    165    1.4%     13    0.1%                                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    111    0.9%      6    0.1%                                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     78    0.7%     10    0.1%                                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     47    0.4%      6    0.1%                                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     31    0.3%      4    0.0%                                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     23    0.2%      3    0.0%                                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     14    0.1%      3    0.0%                                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     19    0.2%      0    0.0%                                                                          /usr/bin/nodejs
+     24    0.2%      0    0.0%                                                                        /usr/bin/nodejs
+     16    0.1%     16    0.1%                                                                          /usr/bin/nodejs
+     37    0.3%      0    0.0%                                                                      /usr/bin/nodejs
+     42    0.4%      0    0.0%                                                                    /usr/bin/nodejs
+     12    0.1%     12    0.1%                                                                      /usr/bin/nodejs
+     55    0.5%      0    0.0%                                                                  /usr/bin/nodejs
+     18    0.2%     18    0.2%                                                                    /usr/bin/nodejs
+     53    0.5%      0    0.0%                                                                /usr/bin/nodejs
+     22    0.2%     22    0.2%                                                                  /usr/bin/nodejs
+     52    0.4%      0    0.0%                                                              /usr/bin/nodejs
+     21    0.2%     21    0.2%                                                                /usr/bin/nodejs
+     80    0.7%      0    0.0%                                                            /usr/bin/nodejs
+     31    0.3%     31    0.3%                                                              /usr/bin/nodejs
+     66    0.6%      0    0.0%                                                          /usr/bin/nodejs
+     22    0.2%     22    0.2%                                                            /usr/bin/nodejs
+     85    0.7%      0    0.0%                                                        /usr/bin/nodejs
+     29    0.2%     29    0.2%                                                          /usr/bin/nodejs
+     13    0.1%     13    0.1%                                                          v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+     56    0.5%      0    0.0%                                                      /usr/bin/nodejs
+     20    0.2%     20    0.2%                                                        /usr/bin/nodejs
+     51    0.4%      0    0.0%                                                    /usr/bin/nodejs
+     13    0.1%     13    0.1%                                                      /usr/bin/nodejs
+     37    0.3%      0    0.0%                                                  /usr/bin/nodejs
+     13    0.1%     13    0.1%                                                    /usr/bin/nodejs
+     16    0.1%     16    0.1%                                                  LazyCompile: *isFinite native v8natives.js:33:24
+     32    0.3%      0    0.0%                                                /usr/bin/nodejs
+     46    0.4%      0    0.0%                                              /usr/bin/nodejs
+     13    0.1%     11    0.1%                                              LazyCompile: *isFinite native v8natives.js:33:24
+     32    0.3%      0    0.0%                                            /usr/bin/nodejs
+   1208   10.3%      0    0.0%                                      LazyCompile: ~stringify native json.js:155:23
+   1208   10.3%      0    0.0%                                        v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    392    3.3%    392    3.3%                                          v8::internal::FastDtoa(double, v8::internal::FastDtoaMode, int, v8::internal::Vector<char>, int*, int*)
+    153    1.3%    153    1.3%                                          v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+    121    1.0%    121    1.0%                                          v8::internal::BasicJsonStringifier::SerializeDouble(double)
+    102    0.9%    102    0.9%                                          v8::internal::LookupIterator::Next()
+     56    0.5%     56    0.5%                                          /usr/bin/nodejs
+     52    0.4%     52    0.4%                                          v8::internal::DiyFp::Multiply(v8::internal::DiyFp const&)
+     44    0.4%     44    0.4%                                          v8::internal::DoubleToCString(double, v8::internal::Vector<char>)
+     41    0.4%     41    0.4%                                          v8::internal::PowersOfTenCache::GetCachedPowerForBinaryExponentRange(int, int, v8::internal::DiyFp*, int*)
+     36    0.3%     36    0.3%                                          v8::internal::BasicJsonStringifier::StackPush(v8::internal::Handle<v8::internal::Object>)
+     29    0.2%     29    0.2%                                          v8::internal::BasicJsonStringifier::ApplyToJsonFunction(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+     27    0.2%     27    0.2%                                          v8::internal::DoubleToAscii(double, v8::internal::DtoaMode, int, v8::internal::Vector<char>, int*, int*, int*)
+     21    0.2%     21    0.2%                                          v8::internal::JSArray::SetLength(v8::internal::Handle<v8::internal::JSArray>, unsigned int)
+     20    0.2%     20    0.2%                                          /lib/x86_64-linux-gnu/libc-2.23.so
+     15    0.1%     15    0.1%                                          strlen
+     14    0.1%     14    0.1%                                          v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+   1137    9.7%      0    0.0%                                      LazyCompile: ~parse native json.js:40:19
+   1137    9.7%      0    0.0%                                        v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    131    1.1%    131    1.1%                                          v8::internal::JsonParser<true>::ParseJsonNumber()
+    119    1.0%    119    1.0%                                          v8::internal::Strtod(v8::internal::Vector<char const>, int)
+    113    1.0%    113    1.0%                                          double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+     74    0.6%     74    0.6%                                          v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+     73    0.6%     73    0.6%                                          v8::internal::JsonParser<true>::ParseJsonArray()
+     65    0.6%     65    0.6%                                          v8::internal::Heap::AllocateRaw(int, v8::internal::AllocationSpace, v8::internal::AllocationSpace, v8::internal::AllocationAlignment)
+     65    0.6%     65    0.6%                                          v8::internal::Heap::AllocateFixedArrayWithFiller(int, v8::internal::PretenureFlag, v8::internal::Object*)
+     59    0.5%     59    0.5%                                          v8::internal::Heap::AllocateHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     29    0.2%     29    0.2%                                          v8::internal::JsonParser<true>::ParseJsonValue()
+     27    0.2%     27    0.2%                                          v8::internal::PagedSpace::AllocateRawUnaligned(int)
+     26    0.2%     26    0.2%                                          v8::internal::Heap::Allocate(v8::internal::Map*, v8::internal::AllocationSpace, v8::internal::AllocationSite*)
+     26    0.2%     26    0.2%                                          v8::internal::FixedArray::set(int, v8::internal::Object*)
+     24    0.2%     24    0.2%                                          v8::internal::List<v8::internal::Handle<v8::internal::Object>, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::Handle<v8::internal::Object> const&, v8::internal::ZoneAllocationPolicy)
+     22    0.2%     22    0.2%                                          v8::internal::Factory::NewNumber(double, v8::internal::PretenureFlag)
+     19    0.2%     19    0.2%                                          v8::internal::JSMessageObject** v8::internal::HandleScope::CreateHandle<v8::internal::JSMessageObject>(v8::internal::Isolate*, v8::internal::JSMessageObject*)
+     19    0.2%     19    0.2%                                          v8::internal::Factory::NewHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     18    0.2%     18    0.2%                                          /lib/x86_64-linux-gnu/libc-2.23.so
+     16    0.1%     16    0.1%                                          v8::internal::Heap::AllocateJSObjectFromMap(v8::internal::Map*, v8::internal::PretenureFlag, bool, v8::internal::AllocationSite*)
+     15    0.1%     15    0.1%                                          v8::internal::Isolate::get_initial_js_array_map(v8::internal::ElementsKind, v8::internal::Strength)
+     14    0.1%     14    0.1%                                          v8::internal::Factory::NewJSArray(v8::internal::ElementsKind, v8::internal::Strength, v8::internal::PretenureFlag)
+     12    0.1%     12    0.1%                                          v8::internal::Factory::NewFixedArray(int, v8::internal::PretenureFlag)
+    403    3.4%      0    0.0%                                    LazyCompile: ~module.exports.geojsonToGeobuf /home/phillipdaw/code/gpxAQI/server/lib/geobufFun.js:8:27
+    401    3.4%      0    0.0%                                      LazyCompile: ~encode /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:18:16
+    316    2.7%     21    0.2%                                        LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+    257    2.2%     23    0.2%                                          LazyCompile: *writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+    234    2.0%     20    0.2%                                            LazyCompile: *writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+    148    1.3%      0    0.0%                                              LazyCompile: *writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+    138    1.2%      0    0.0%                                                LazyCompile: *writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+     71    0.6%     12    0.1%                                                  LazyCompile: *Pbf.writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:329:34
+     59    0.5%     54    0.5%                                                    LazyCompile: *writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:469:28
+     66    0.6%     46    0.4%                                                  LazyCompile: *populateLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:201:22
+     12    0.1%     12    0.1%                                                    Stub: GrowArrayElementsStub
+     66    0.6%     12    0.1%                                              LazyCompile: *writeProps /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:128:20
+     39    0.3%      1    0.0%                                                LazyCompile: *writeValue /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:143:20
+     15    0.1%      3    0.0%                                                  LazyCompile: *Pbf.writeString /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:269:26
+     13    0.1%      0    0.0%                                                  LazyCompile: ~stringify native json.js:155:23
+     13    0.1%      0    0.0%                                                    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+     36    0.3%      0    0.0%                                          LazyCompile: ~writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+     36    0.3%      4    0.0%                                            LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     32    0.3%      5    0.0%                                              LazyCompile: *writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+     18    0.2%      0    0.0%                                                LazyCompile: *writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+     17    0.1%      1    0.0%                                                  LazyCompile: *writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+     78    0.7%      0    0.0%                                        LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     78    0.7%      1    0.0%                                          LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     74    0.6%     68    0.6%                                            LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     93    0.8%      0    0.0%                                    LazyCompile: ~send /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/response.js:107:25
+     57    0.5%      0    0.0%                                      LazyCompile: ~end /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:92:28
+     41    0.4%      0    0.0%                                        LazyCompile: ~OutgoingMessage.end _http_outgoing.js:514:41
+     19    0.2%      0    0.0%                                          LazyCompile: *Writable.uncork _stream_writable.js:219:37
+     19    0.2%      1    0.0%                                            LazyCompile: ~clearBuffer _stream_writable.js:362:21
+     18    0.2%      0    0.0%                                              LazyCompile: *doWrite _stream_writable.js:284:17
+     18    0.2%      0    0.0%                                                LazyCompile: ~Socket._writeGeneric net.js:622:42
+     15    0.1%      0    0.0%                                                  /usr/bin/nodejs
+     15    0.1%     15    0.1%                                                    void node::StreamBase::JSMethod<node::StreamWrap, &node::StreamBase::Writev>(v8::FunctionCallbackInfo<v8::Value> const&)
+     15    0.1%      0    0.0%                                          LazyCompile: ~Writable.uncork _stream_writable.js:219:37
+     15    0.1%      0    0.0%                                            LazyCompile: ~clearBuffer _stream_writable.js:362:21
+     14    0.1%      0    0.0%                                              LazyCompile: ~doWrite _stream_writable.js:284:17
+     14    0.1%      0    0.0%                                                LazyCompile: ~Socket._writev net.js:688:36
+     14    0.1%      0    0.0%                                                  LazyCompile: ~Socket._writeGeneric net.js:622:42
+     12    0.1%      0    0.0%                                                    /usr/bin/nodejs
+     12    0.1%     12    0.1%                                                      void node::StreamBase::JSMethod<node::StreamWrap, &node::StreamBase::Writev>(v8::FunctionCallbackInfo<v8::Value> const&)
+     16    0.1%      0    0.0%                                        LazyCompile: ~ServerResponse._implicitHeader _http_server.js:156:52
+     16    0.1%      0    0.0%                                          LazyCompile: ~writeHead /home/phillipdaw/code/gpxAQI/server/node_modules/on-headers/index.js:39:28
+     12    0.1%      0    0.0%                                            LazyCompile: ~ServerResponse.writeHead _http_server.js:160:46
+     34    0.3%      0    0.0%                                      LazyCompile: ~generateETag /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/utils.js:275:32
+     34    0.3%      0    0.0%                                        LazyCompile: ~etag /home/phillipdaw/code/gpxAQI/server/node_modules/etag/index.js:70:15
+     34    0.3%      0    0.0%                                          LazyCompile: ~entitytag /home/phillipdaw/code/gpxAQI/server/node_modules/etag/index.js:39:20
+     28    0.2%      0    0.0%                                            LazyCompile: ~Hash.update crypto.js:66:33
+     28    0.2%      0    0.0%                                              /usr/bin/nodejs
+     28    0.2%     28    0.2%                                                node::crypto::Hash::HashUpdate(v8::FunctionCallbackInfo<v8::Value> const&)
+     17    0.1%      0    0.0%                                    LazyCompile: ~<anonymous> native v8natives.js:1199:16
+     13    0.1%      0    0.0%                                      LazyCompile: ~Console.log console.js:35:33
+     13    0.1%      0    0.0%                                        LazyCompile: *Socket.write net.js:615:34
+     12    0.1%      0    0.0%                                          LazyCompile: *Writable.write _stream_writable.js:186:36
+     12    0.1%      0    0.0%                                            LazyCompile: ~writeOrBuffer _stream_writable.js:255:23
+     12    0.1%      1    0.0%                                    LazyCompile: *Buffer buffer.js:47:16
+   1034    8.8%      0    0.0%                    LazyCompile: ~process_params /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:327:47
+   1034    8.8%      0    0.0%                      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+   1034    8.8%      0    0.0%                        LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   1034    8.8%      0    0.0%                          LazyCompile: ~<anonymous> native v8natives.js:1199:16
+   1034    8.8%      0    0.0%                            LazyCompile: ~dispatch /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:98:45
+   1034    8.8%      0    0.0%                              LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+   1034    8.8%      0    0.0%                                LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   1034    8.8%      0    0.0%                                  LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+   1030    8.8%      0    0.0%                                    LazyCompile: ~sendResponse /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:91:22
+    859    7.3%      0    0.0%                                      LazyCompile: ~module.exports /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:3:27
+    330    2.8%      0    0.0%                                        LazyCompile: ~simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+    165    1.4%      0    0.0%                                          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+    165    1.4%      4    0.0%                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    150    1.3%      9    0.1%                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    133    1.1%      5    0.0%                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    120    1.0%      4    0.0%                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    112    1.0%      5    0.0%                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    103    0.9%      2    0.0%                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     92    0.8%      7    0.1%                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     76    0.6%      6    0.1%                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     62    0.5%      1    0.0%                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     48    0.4%      4    0.0%                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     38    0.3%      2    0.0%                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     26    0.2%      0    0.0%                                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     21    0.2%      1    0.0%                                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     16    0.1%      3    0.0%                                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    164    1.4%      0    0.0%                                          LazyCompile: ~simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+    144    1.2%      0    0.0%                                            LazyCompile: *module.exports.simplify /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:10:36
+    144    1.2%      4    0.0%                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    136    1.2%      5    0.0%                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    125    1.1%      8    0.1%                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    111    0.9%      9    0.1%                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     96    0.8%      5    0.0%                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     88    0.8%      9    0.1%                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     74    0.6%      4    0.0%                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     61    0.5%      6    0.1%                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     54    0.5%      7    0.1%                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     39    0.3%      6    0.1%                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     24    0.2%      1    0.0%                                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     18    0.2%      2    0.0%                                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     20    0.2%      0    0.0%                                            LazyCompile: ~module.exports.simplify /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:10:36
+    239    2.0%      0    0.0%                                        LazyCompile: ~stringify native json.js:155:23
+    239    2.0%      0    0.0%                                          v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+     74    0.6%     74    0.6%                                            v8::internal::FastDtoa(double, v8::internal::FastDtoaMode, int, v8::internal::Vector<char>, int*, int*)
+     29    0.2%     29    0.2%                                            v8::internal::BasicJsonStringifier::SerializeDouble(double)
+     29    0.2%     29    0.2%                                            v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+     16    0.1%     16    0.1%                                            v8::internal::LookupIterator::Next()
+     16    0.1%     16    0.1%                                            /usr/bin/nodejs
+     13    0.1%     13    0.1%                                            v8::internal::DiyFp::Multiply(v8::internal::DiyFp const&)
+    215    1.8%      0    0.0%                                        LazyCompile: ~parse native json.js:40:19
+    215    1.8%      0    0.0%                                          v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+     29    0.2%     29    0.2%                                            v8::internal::JsonParser<true>::ParseJsonNumber()
+     22    0.2%     22    0.2%                                            double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+     16    0.1%     16    0.1%                                            v8::internal::Strtod(v8::internal::Vector<char const>, int)
+     16    0.1%     16    0.1%                                            v8::internal::JsonParser<true>::ParseJsonArray()
+     73    0.6%      0    0.0%                                        LazyCompile: *simplifyFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:35:36
+     73    0.6%      0    0.0%                                          LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+     73    0.6%      4    0.0%                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     68    0.6%      2    0.0%                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     66    0.6%      6    0.1%                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     60    0.5%      4    0.0%                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     56    0.5%      2    0.0%                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     52    0.4%      3    0.0%                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     40    0.3%      3    0.0%                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     34    0.3%      4    0.0%                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     29    0.2%      4    0.0%                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     20    0.2%      1    0.0%                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     16    0.1%      3    0.0%                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    136    1.2%      0    0.0%                                      LazyCompile: ~module.exports.geojsonToGeobuf /home/phillipdaw/code/gpxAQI/server/lib/geobufFun.js:8:27
+    135    1.2%      0    0.0%                                        LazyCompile: ~encode /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:18:16
+     77    0.7%      3    0.0%                                          LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     74    0.6%      0    0.0%                                            LazyCompile: ~writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+     74    0.6%      4    0.0%                                              LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     61    0.5%      5    0.0%                                                LazyCompile: *writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+     21    0.2%      0    0.0%                                                  LazyCompile: ~writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+     14    0.1%      0    0.0%                                                    LazyCompile: ~writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+     15    0.1%      1    0.0%                                                  LazyCompile: *writeProps /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:128:20
+     12    0.1%      0    0.0%                                                    LazyCompile: *writeValue /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:143:20
+     15    0.1%      0    0.0%                                                  LazyCompile: *writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+     15    0.1%      0    0.0%                                                    LazyCompile: *writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+     29    0.2%      0    0.0%                                          LazyCompile: ~Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     29    0.2%      0    0.0%                                            LazyCompile: ~Pbf.writeRawMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:307:30
+     28    0.2%      0    0.0%                                              LazyCompile: ~writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+     15    0.1%      0    0.0%                                                LazyCompile: ~Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     13    0.1%      0    0.0%                                                  LazyCompile: ~Pbf.writeRawMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:307:30
+     13    0.1%      0    0.0%                                                    LazyCompile: ~writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+     13    0.1%      0    0.0%                                                LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+     13    0.1%      0    0.0%                                                  LazyCompile: ~writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+     17    0.1%      0    0.0%                                          LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     17    0.1%      0    0.0%                                            LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     14    0.1%     11    0.1%                                              LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     24    0.2%      0    0.0%                                      LazyCompile: ~send /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/response.js:107:25
+     16    0.1%      0    0.0%                                        LazyCompile: ~end /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:92:28
+   4685   40.0%      0    0.0%        LazyCompile: *onStatError /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:416:57
+   4685   40.0%      0    0.0%          LazyCompile: ~error /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:267:45
+   4685   40.0%      0    0.0%            LazyCompile: ~emit events.js:117:44
+   4685   40.0%      0    0.0%              LazyCompile: ~emitOne events.js:75:17
+   4685   40.0%      1    0.0%                LazyCompile: ~error /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:115:39
+   4684   40.0%      1    0.0%                  LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+   4681   40.0%      0    0.0%                    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+   4681   40.0%      0    0.0%                      LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   4680   40.0%      0    0.0%                        LazyCompile: ~<anonymous> native v8natives.js:1199:16
+   4680   40.0%      0    0.0%                          LazyCompile: ~dispatch /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:98:45
+   4680   40.0%      0    0.0%                            LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:114:16
+   4680   40.0%      0    0.0%                              LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+   4678   40.0%      3    0.0%                                LazyCompile: *<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:153:21
+   1808   15.4%      9    0.1%                                  LazyCompile: *simplifyFeature /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geojson/index.js:15:26
+   1798   15.4%     59    0.5%                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1691   14.4%     89    0.8%                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1538   13.1%    100    0.9%                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1378   11.8%     86    0.7%                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1248   10.7%     94    0.8%                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+   1101    9.4%     82    0.7%                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    957    8.2%     67    0.6%                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    817    7.0%     73    0.6%                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    672    5.7%     70    0.6%                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    514    4.4%     42    0.4%                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    393    3.4%     32    0.3%                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    306    2.6%     28    0.2%                                                          LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    221    1.9%     25    0.2%                                                            LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+    143    1.2%     14    0.1%                                                              LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     88    0.8%      7    0.1%                                                                LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     62    0.5%      9    0.1%                                                                  LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     40    0.3%      3    0.0%                                                                    LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     22    0.2%      1    0.0%                                                                      LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     16    0.1%      1    0.0%                                                                        LazyCompile: *simplifyGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/simplify-geometry/lib/index.js:3:32
+     14    0.1%      0    0.0%                                                                      /usr/bin/nodejs
+     12    0.1%      0    0.0%                                                                    /usr/bin/nodejs
+     17    0.1%      0    0.0%                                                                  /usr/bin/nodejs
+     38    0.3%      0    0.0%                                                                /usr/bin/nodejs
+     23    0.2%     23    0.2%                                                                  /usr/bin/nodejs
+     50    0.4%      0    0.0%                                                              /usr/bin/nodejs
+     16    0.1%     16    0.1%                                                                /usr/bin/nodejs
+     52    0.4%      0    0.0%                                                            /usr/bin/nodejs
+     25    0.2%     25    0.2%                                                              /usr/bin/nodejs
+     46    0.4%      0    0.0%                                                          /usr/bin/nodejs
+     19    0.2%     19    0.2%                                                            /usr/bin/nodejs
+     72    0.6%      0    0.0%                                                        /usr/bin/nodejs
+     34    0.3%     34    0.3%                                                          /usr/bin/nodejs
+     72    0.6%      0    0.0%                                                      /usr/bin/nodejs
+     21    0.2%     21    0.2%                                                        /usr/bin/nodejs
+     67    0.6%      0    0.0%                                                    /usr/bin/nodejs
+     23    0.2%     23    0.2%                                                      /usr/bin/nodejs
+     65    0.6%      0    0.0%                                                  /usr/bin/nodejs
+     17    0.1%     17    0.1%                                                    /usr/bin/nodejs
+     52    0.4%      0    0.0%                                                /usr/bin/nodejs
+     18    0.2%     18    0.2%                                                  /usr/bin/nodejs
+     35    0.3%      0    0.0%                                              /usr/bin/nodejs
+     17    0.1%     17    0.1%                                              LazyCompile: *isFinite native v8natives.js:33:24
+     37    0.3%      0    0.0%                                            /usr/bin/nodejs
+     14    0.1%     14    0.1%                                              /usr/bin/nodejs
+     39    0.3%      0    0.0%                                          /usr/bin/nodejs
+     20    0.2%     17    0.1%                                          LazyCompile: *isFinite native v8natives.js:33:24
+     43    0.4%      0    0.0%                                        /usr/bin/nodejs
+     14    0.1%     14    0.1%                                          /usr/bin/nodejs
+     19    0.2%     18    0.2%                                        LazyCompile: *isFinite native v8natives.js:33:24
+     30    0.3%      0    0.0%                                      /usr/bin/nodejs
+     12    0.1%     12    0.1%                                        /usr/bin/nodejs
+     15    0.1%     12    0.1%                                      LazyCompile: *isFinite native v8natives.js:33:24
+   1260   10.8%      0    0.0%                                  LazyCompile: ~stringify native json.js:155:23
+   1260   10.8%      0    0.0%                                    v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+    374    3.2%    374    3.2%                                      v8::internal::FastDtoa(double, v8::internal::FastDtoaMode, int, v8::internal::Vector<char>, int*, int*)
+    151    1.3%    151    1.3%                                      v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+    147    1.3%    147    1.3%                                      v8::internal::BasicJsonStringifier::SerializeDouble(double)
+     81    0.7%     81    0.7%                                      v8::internal::LookupIterator::Next()
+     62    0.5%     62    0.5%                                      v8::internal::DiyFp::Multiply(v8::internal::DiyFp const&)
+     60    0.5%     60    0.5%                                      /usr/bin/nodejs
+     51    0.4%     51    0.4%                                      v8::internal::DoubleToCString(double, v8::internal::Vector<char>)
+     46    0.4%     46    0.4%                                      v8::internal::PowersOfTenCache::GetCachedPowerForBinaryExponentRange(int, int, v8::internal::DiyFp*, int*)
+     44    0.4%     44    0.4%                                      v8::internal::BasicJsonStringifier::StackPush(v8::internal::Handle<v8::internal::Object>)
+     37    0.3%     37    0.3%                                      v8::internal::BasicJsonStringifier::ApplyToJsonFunction(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+     26    0.2%     26    0.2%                                      v8::internal::DoubleToAscii(double, v8::internal::DtoaMode, int, v8::internal::Vector<char>, int*, int*, int*)
+     20    0.2%     20    0.2%                                      /lib/x86_64-linux-gnu/libc-2.23.so
+     15    0.1%     15    0.1%                                      v8::internal::JSArray::SetLength(v8::internal::Handle<v8::internal::JSArray>, unsigned int)
+     15    0.1%     15    0.1%                                      v8::internal::BasicJsonStringifier::SerializeString(v8::internal::Handle<v8::internal::String>)
+     14    0.1%     14    0.1%                                      v8::internal::LookupIterator::IsIntegerIndexedExotic(v8::internal::JSReceiver*)
+     14    0.1%     14    0.1%                                      v8::internal::BasicJsonStringifier::Result v8::internal::BasicJsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Object>, bool, v8::internal::Handle<v8::internal::Object>)
+     14    0.1%     14    0.1%                                      strlen
+     13    0.1%     13    0.1%                                      v8::internal::SimpleStringBuilder::AddSubstring(char const*, int)
+   1095    9.4%      0    0.0%                                  LazyCompile: ~parse native json.js:40:19
+   1095    9.4%      0    0.0%                                    v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+    129    1.1%    129    1.1%                                      v8::internal::JsonParser<true>::ParseJsonNumber()
+    129    1.1%    129    1.1%                                      double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+    111    0.9%    111    0.9%                                      v8::internal::Strtod(v8::internal::Vector<char const>, int)
+     70    0.6%     70    0.6%                                      v8::internal::JsonParser<true>::ParseJsonArray()
+     66    0.6%     66    0.6%                                      v8::internal::Heap::AllocateRaw(int, v8::internal::AllocationSpace, v8::internal::AllocationSpace, v8::internal::AllocationAlignment)
+     61    0.5%     61    0.5%                                      v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+     57    0.5%     57    0.5%                                      v8::internal::Heap::AllocateFixedArrayWithFiller(int, v8::internal::PretenureFlag, v8::internal::Object*)
+     43    0.4%     43    0.4%                                      v8::internal::JsonParser<true>::ParseJsonValue()
+     39    0.3%     39    0.3%                                      v8::internal::PagedSpace::AllocateRawUnaligned(int)
+     32    0.3%     32    0.3%                                      v8::internal::Heap::AllocateHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     23    0.2%     23    0.2%                                      v8::internal::Factory::NewNumber(double, v8::internal::PretenureFlag)
+     21    0.2%     21    0.2%                                      v8::internal::List<v8::internal::Handle<v8::internal::Object>, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::Handle<v8::internal::Object> const&, v8::internal::ZoneAllocationPolicy)
+     20    0.2%     20    0.2%                                      v8::internal::Factory::NewHeapNumber(double, v8::internal::MutableMode, v8::internal::PretenureFlag)
+     19    0.2%     19    0.2%                                      v8::internal::Isolate::get_initial_js_array_map(v8::internal::ElementsKind, v8::internal::Strength)
+     18    0.2%     18    0.2%                                      v8::internal::Heap::Allocate(v8::internal::Map*, v8::internal::AllocationSpace, v8::internal::AllocationSite*)
+     18    0.2%     18    0.2%                                      v8::internal::FixedArray::set(int, v8::internal::Object*)
+     15    0.1%     15    0.1%                                      v8::internal::Heap::AllocateJSObjectFromMap(v8::internal::Map*, v8::internal::PretenureFlag, bool, v8::internal::AllocationSite*)
+     15    0.1%     15    0.1%                                      v8::internal::Factory::NewJSObjectFromMap(v8::internal::Handle<v8::internal::Map>, v8::internal::PretenureFlag, bool, v8::internal::Handle<v8::internal::AllocationSite>)
+     15    0.1%      0    0.0%                                      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     15    0.1%     15    0.1%                                        v8::internal::Strtod(v8::internal::Vector<char const>, int)
+     14    0.1%     14    0.1%                                      v8::internal::JSMessageObject** v8::internal::HandleScope::CreateHandle<v8::internal::JSMessageObject>(v8::internal::Isolate*, v8::internal::JSMessageObject*)
+     14    0.1%     14    0.1%                                      /lib/x86_64-linux-gnu/libc-2.23.so
+     13    0.1%     13    0.1%                                      v8::internal::Factory::NewFixedArray(int, v8::internal::PretenureFlag)
+    407    3.5%      0    0.0%                                  LazyCompile: *module.exports.geojsonToGeobuf /home/phillipdaw/code/gpxAQI/server/lib/geobufFun.js:8:27
+    407    3.5%      1    0.0%                                    LazyCompile: ~encode /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:18:16
+    320    2.7%     18    0.2%                                      LazyCompile: *Pbf.writeMessage /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:323:27
+    302    2.6%     22    0.2%                                        LazyCompile: *writeFeatureCollection /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:91:32
+    279    2.4%     14    0.1%                                          LazyCompile: *writeFeature /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:98:22
+    187    1.6%      1    0.0%                                            LazyCompile: *writeGeometry /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:110:23
+    178    1.5%      2    0.0%                                              LazyCompile: *writeMultiLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:168:24
+     89    0.8%     17    0.1%                                                LazyCompile: *Pbf.writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:329:34
+     72    0.6%     70    0.6%                                                  LazyCompile: *writePackedSVarint /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:469:28
+     86    0.7%     66    0.6%                                                LazyCompile: *populateLine /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:201:22
+     13    0.1%     13    0.1%                                                  Stub: GrowArrayElementsStub
+     77    0.7%      7    0.1%                                            LazyCompile: *writeProps /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:128:20
+     55    0.5%      1    0.0%                                              LazyCompile: *writeValue /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:143:20
+     30    0.3%      8    0.1%                                                LazyCompile: *Pbf.writeString /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:269:26
+     19    0.2%     15    0.1%                                                  LazyCompile: *writeUtf8 /home/phillipdaw/code/gpxAQI/server/node_modules/pbf/index.js:567:19
+     18    0.2%      0    0.0%                                                LazyCompile: ~stringify native json.js:155:23
+     18    0.2%      0    0.0%                                                  v8::internal::Runtime_BasicJSONStringify(int, v8::internal::Object**, v8::internal::Isolate*)
+     81    0.7%      0    0.0%                                      LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     80    0.7%      3    0.0%                                        LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     73    0.6%     70    0.6%                                          LazyCompile: *analyze /home/phillipdaw/code/gpxAQI/server/node_modules/geobuf/encode.js:44:17
+     78    0.7%      1    0.0%                                  LazyCompile: ~send /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/response.js:107:25
+     44    0.4%      0    0.0%                                    LazyCompile: ~end /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:92:28
+     34    0.3%      2    0.0%                                      LazyCompile: ~OutgoingMessage.end _http_outgoing.js:514:41
+     28    0.2%      0    0.0%                                        LazyCompile: *Writable.uncork _stream_writable.js:219:37
+     28    0.2%      1    0.0%                                          LazyCompile: ~clearBuffer _stream_writable.js:362:21
+     26    0.2%      0    0.0%                                            LazyCompile: *doWrite _stream_writable.js:284:17
+     25    0.2%      1    0.0%                                              LazyCompile: ~Socket._writeGeneric net.js:622:42
+     19    0.2%      0    0.0%                                                /usr/bin/nodejs
+     19    0.2%     19    0.2%                                                  void node::StreamBase::JSMethod<node::StreamWrap, &node::StreamBase::Writev>(v8::FunctionCallbackInfo<v8::Value> const&)
+     28    0.2%      0    0.0%                                    LazyCompile: *generateETag /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/utils.js:275:32
+     28    0.2%     28    0.2%                                      /lib/x86_64-linux-gnu/libcrypto.so.1.0.0
+
+    515    4.4%      0    0.0%  Function: ~<anonymous> node.js:10:10
+    503    4.3%      0    0.0%    LazyCompile: ~startup node.js:13:19
+    466    4.0%      0    0.0%      LazyCompile: ~Module.runMain module.js:440:26
+    461    3.9%      0    0.0%        LazyCompile: Module._load module.js:272:24
+    458    3.9%      0    0.0%          LazyCompile: ~Module.load module.js:335:33
+    456    3.9%      0    0.0%            LazyCompile: ~Module._extensions..js module.js:415:37
+    454    3.9%      0    0.0%              LazyCompile: ~Module._compile module.js:367:37
+    452    3.9%      0    0.0%                Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:1:11
+    431    3.7%      0    0.0%                  LazyCompile: ~require internal/module.js:11:19
+    224    1.9%      0    0.0%                    LazyCompile: ~Module.require module.js:351:36
+    224    1.9%      0    0.0%                      LazyCompile: Module._load module.js:272:24
+    219    1.9%      0    0.0%                        LazyCompile: ~Module.load module.js:335:33
+    219    1.9%      0    0.0%                          LazyCompile: ~Module._extensions..js module.js:415:37
+    218    1.9%      0    0.0%                            LazyCompile: ~Module._compile module.js:367:37
+    218    1.9%      0    0.0%                              Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/index.js:1:11
+    218    1.9%      0    0.0%                                LazyCompile: ~require internal/module.js:11:19
+    218    1.9%      0    0.0%                                  LazyCompile: ~Module.require module.js:351:36
+    218    1.9%      0    0.0%                                    LazyCompile: Module._load module.js:272:24
+    217    1.9%      0    0.0%                                      LazyCompile: ~Module.load module.js:335:33
+    217    1.9%      0    0.0%                                        LazyCompile: ~Module._extensions..js module.js:415:37
+    216    1.8%      0    0.0%                                          LazyCompile: ~Module._compile module.js:367:37
+    216    1.8%      0    0.0%                                            Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/express.js:1:11
+    177    1.5%      0    0.0%                                              LazyCompile: ~require internal/module.js:11:19
+    177    1.5%      0    0.0%                                                LazyCompile: ~Module.require module.js:351:36
+    177    1.5%      0    0.0%                                                  LazyCompile: Module._load module.js:272:24
+    171    1.5%      0    0.0%                                                    LazyCompile: ~Module.load module.js:335:33
+    171    1.5%      0    0.0%                                                      LazyCompile: ~Module._extensions..js module.js:415:37
+    170    1.5%      0    0.0%                                                        LazyCompile: ~Module._compile module.js:367:37
+    134    1.1%      0    0.0%                                                          Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/application.js:1:11
+    133    1.1%      0    0.0%                                                            LazyCompile: ~require internal/module.js:11:19
+    133    1.1%      0    0.0%                                                              LazyCompile: ~Module.require module.js:351:36
+    133    1.1%      0    0.0%                                                                LazyCompile: Module._load module.js:272:24
+    131    1.1%      0    0.0%                                                                  LazyCompile: ~Module.load module.js:335:33
+    131    1.1%      0    0.0%                                                                    LazyCompile: ~Module._extensions..js module.js:415:37
+    126    1.1%      0    0.0%                                                                      LazyCompile: ~Module._compile module.js:367:37
+     58    0.5%      0    0.0%                                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/utils.js:1:11
+     57    0.5%      0    0.0%                                                                          LazyCompile: ~require internal/module.js:11:19
+     57    0.5%      0    0.0%                                                                            LazyCompile: ~Module.require module.js:351:36
+     57    0.5%      0    0.0%                                                                              LazyCompile: Module._load module.js:272:24
+     51    0.4%      0    0.0%                                                                                LazyCompile: ~Module.load module.js:335:33
+     51    0.4%      0    0.0%                                                                                  LazyCompile: ~Module._extensions..js module.js:415:37
+     49    0.4%      0    0.0%                                                                                    LazyCompile: ~Module._compile module.js:367:37
+     37    0.3%      0    0.0%                                                                                      Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/send/index.js:1:11
+     36    0.3%      0    0.0%                                                                                        LazyCompile: ~require internal/module.js:11:19
+     36    0.3%      0    0.0%                                                                                          LazyCompile: ~Module.require module.js:351:36
+     36    0.3%      0    0.0%                                                                                            LazyCompile: Module._load module.js:272:24
+     26    0.2%      0    0.0%                                                                                              LazyCompile: ~Module.load module.js:335:33
+     25    0.2%      0    0.0%                                                                                                LazyCompile: ~Module._extensions..js module.js:415:37
+     24    0.2%      0    0.0%                                                                                                  LazyCompile: ~Module._compile module.js:367:37
+     35    0.3%      0    0.0%                                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/finalhandler/index.js:1:11
+     35    0.3%      0    0.0%                                                                          LazyCompile: ~require internal/module.js:11:19
+     35    0.3%      0    0.0%                                                                            LazyCompile: ~Module.require module.js:351:36
+     35    0.3%      0    0.0%                                                                              LazyCompile: Module._load module.js:272:24
+     26    0.2%      0    0.0%                                                                                LazyCompile: ~Module.load module.js:335:33
+     26    0.2%      0    0.0%                                                                                  LazyCompile: ~Module._extensions..js module.js:415:37
+     23    0.2%      0    0.0%                                                                                    LazyCompile: ~Module._compile module.js:367:37
+     13    0.1%      0    0.0%                                                                                      Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/debug/src/index.js:1:11
+     13    0.1%      0    0.0%                                                                                        LazyCompile: ~require internal/module.js:11:19
+     13    0.1%      0    0.0%                                                                                          LazyCompile: ~Module.require module.js:351:36
+     13    0.1%      0    0.0%                                                                                            LazyCompile: Module._load module.js:272:24
+     13    0.1%      0    0.0%                                                                                              LazyCompile: ~Module.load module.js:335:33
+     13    0.1%      0    0.0%                                                                                                LazyCompile: ~Module._extensions..js module.js:415:37
+     13    0.1%      0    0.0%                                                                                                  LazyCompile: ~Module._compile module.js:367:37
+     12    0.1%      0    0.0%                                                                                                    Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/debug/src/node.js:1:11
+     24    0.2%      0    0.0%                                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:1:11
+     24    0.2%      0    0.0%                                                                          LazyCompile: ~require internal/module.js:11:19
+     24    0.2%      0    0.0%                                                                            LazyCompile: ~Module.require module.js:351:36
+     24    0.2%      0    0.0%                                                                              LazyCompile: Module._load module.js:272:24
+     21    0.2%      0    0.0%                                                                                LazyCompile: ~Module.load module.js:335:33
+     21    0.2%      0    0.0%                                                                                  LazyCompile: ~Module._extensions..js module.js:415:37
+     20    0.2%      0    0.0%                                                                                    LazyCompile: ~Module._compile module.js:367:37
+     17    0.1%      0    0.0%                                                                                      Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/route.js:1:11
+     17    0.1%      0    0.0%                                                                                        LazyCompile: ~require internal/module.js:11:19
+     17    0.1%      0    0.0%                                                                                          LazyCompile: ~Module.require module.js:351:36
+     17    0.1%      0    0.0%                                                                                            LazyCompile: Module._load module.js:272:24
+     14    0.1%      0    0.0%                                                                                              LazyCompile: ~Module.load module.js:335:33
+     13    0.1%      0    0.0%                                                                                                LazyCompile: ~Module._extensions..js module.js:415:37
+     12    0.1%      0    0.0%                                                                                                  LazyCompile: ~Module._compile module.js:367:37
+     25    0.2%      0    0.0%                                                          Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/request.js:1:11
+     24    0.2%      0    0.0%                                                            LazyCompile: ~require internal/module.js:11:19
+     24    0.2%      0    0.0%                                                              LazyCompile: ~Module.require module.js:351:36
+     24    0.2%      0    0.0%                                                                LazyCompile: Module._load module.js:272:24
+     21    0.2%      0    0.0%                                                                  LazyCompile: ~Module.load module.js:335:33
+     21    0.2%      0    0.0%                                                                    LazyCompile: ~Module._extensions..js module.js:415:37
+     18    0.2%      0    0.0%                                                                      LazyCompile: ~Module._compile module.js:367:37
+     15    0.1%      0    0.0%                                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/accepts/index.js:1:11
+     15    0.1%      0    0.0%                                                                          LazyCompile: ~require internal/module.js:11:19
+     15    0.1%      0    0.0%                                                                            LazyCompile: ~Module.require module.js:351:36
+     15    0.1%      0    0.0%                                                                              LazyCompile: Module._load module.js:272:24
+     27    0.2%      0    0.0%                                              LazyCompile: ~get /home/phillipdaw/code/gpxAQI/server/node_modules/body-parser/index.js:122:23
+     27    0.2%      0    0.0%                                                LazyCompile: ~loadParser /home/phillipdaw/code/gpxAQI/server/node_modules/body-parser/index.js:132:21
+     27    0.2%      0    0.0%                                                  LazyCompile: ~require internal/module.js:11:19
+     27    0.2%      0    0.0%                                                    LazyCompile: *Module.require module.js:351:36
+     27    0.2%      0    0.0%                                                      LazyCompile: Module._load module.js:272:24
+     26    0.2%      0    0.0%                                                        LazyCompile: ~Module.load module.js:335:33
+     26    0.2%      0    0.0%                                                          LazyCompile: ~Module._extensions..js module.js:415:37
+     24    0.2%      0    0.0%                                                            LazyCompile: ~Module._compile module.js:367:37
+     22    0.2%      1    0.0%                                                              Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/body-parser/lib/types/json.js:1:11
+     21    0.2%      0    0.0%                                                                LazyCompile: *require internal/module.js:11:19
+     21    0.2%      0    0.0%                                                                  LazyCompile: Module._load module.js:272:24
+     17    0.1%      0    0.0%                                                                    LazyCompile: ~Module.load module.js:335:33
+     16    0.1%      0    0.0%                                                                      LazyCompile: ~Module._extensions..js module.js:415:37
+     16    0.1%      0    0.0%                                                                        LazyCompile: ~Module._compile module.js:367:37
+     12    0.1%      0    0.0%                                              LazyCompile: *require internal/module.js:11:19
+    207    1.8%      0    0.0%                    LazyCompile: *Module.require module.js:351:36
+    207    1.8%      0    0.0%                      LazyCompile: Module._load module.js:272:24
+    195    1.7%      0    0.0%                        LazyCompile: ~Module.load module.js:335:33
+    176    1.5%      0    0.0%                          LazyCompile: ~Module._extensions..js module.js:415:37
+    172    1.5%      0    0.0%                            LazyCompile: ~Module._compile module.js:367:37
+    108    0.9%      0    0.0%                              Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/lib/polygonFun.js:1:11
+    108    0.9%      0    0.0%                                LazyCompile: *require internal/module.js:11:19
+    108    0.9%      0    0.0%                                  LazyCompile: Module._load module.js:272:24
+    104    0.9%      0    0.0%                                    LazyCompile: ~Module.load module.js:335:33
+    103    0.9%      0    0.0%                                      LazyCompile: ~Module._extensions..js module.js:415:37
+    102    0.9%      0    0.0%                                        LazyCompile: ~Module._compile module.js:367:37
+    102    0.9%      0    0.0%                                          Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/geojson-slicer/index.js:1:11
+    102    0.9%      0    0.0%                                            Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/geojson-slicer/index.js:1:72
+    102    0.9%      0    0.0%                                              LazyCompile: *require internal/module.js:11:19
+    102    0.9%      0    0.0%                                                LazyCompile: Module._load module.js:272:24
+     98    0.8%      0    0.0%                                                  LazyCompile: ~Module.load module.js:335:33
+     94    0.8%      0    0.0%                                                    LazyCompile: ~Module._extensions..js module.js:415:37
+     94    0.8%      0    0.0%                                                      LazyCompile: ~Module._compile module.js:367:37
+     93    0.8%      0    0.0%                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/npmlog/log.js:1:11
+     86    0.7%      0    0.0%                                                          LazyCompile: *require internal/module.js:11:19
+     86    0.7%      0    0.0%                                                            LazyCompile: Module._load module.js:272:24
+     83    0.7%      0    0.0%                                                              LazyCompile: ~Module.load module.js:335:33
+     82    0.7%      0    0.0%                                                                LazyCompile: ~Module._extensions..js module.js:415:37
+     81    0.7%      0    0.0%                                                                  LazyCompile: ~Module._compile module.js:367:37
+     40    0.3%      0    0.0%                                                                    Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/are-we-there-yet/index.js:1:11
+     40    0.3%      0    0.0%                                                                      LazyCompile: *require internal/module.js:11:19
+     40    0.3%      0    0.0%                                                                        LazyCompile: Module._load module.js:272:24
+     40    0.3%      0    0.0%                                                                          LazyCompile: ~Module.load module.js:335:33
+     40    0.3%      0    0.0%                                                                            LazyCompile: ~Module._extensions..js module.js:415:37
+     40    0.3%      0    0.0%                                                                              LazyCompile: ~Module._compile module.js:367:37
+     39    0.3%      0    0.0%                                                                                Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/are-we-there-yet/tracker-group.js:1:11
+     39    0.3%      0    0.0%                                                                                  LazyCompile: *require internal/module.js:11:19
+     39    0.3%      0    0.0%                                                                                    LazyCompile: Module._load module.js:272:24
+     38    0.3%      0    0.0%                                                                                      LazyCompile: ~Module.load module.js:335:33
+     38    0.3%      0    0.0%                                                                                        LazyCompile: ~Module._extensions..js module.js:415:37
+     37    0.3%      0    0.0%                                                                                          LazyCompile: ~Module._compile module.js:367:37
+     37    0.3%      0    0.0%                                                                                            Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/are-we-there-yet/tracker-stream.js:1:11
+     37    0.3%      0    0.0%                                                                                              LazyCompile: *require internal/module.js:11:19
+     37    0.3%      0    0.0%                                                                                                LazyCompile: Module._load module.js:272:24
+     34    0.3%      0    0.0%                                                                                                  LazyCompile: ~Module.load module.js:335:33
+     34    0.3%      0    0.0%                                                                                                    LazyCompile: ~Module._extensions..js module.js:415:37
+     33    0.3%      0    0.0%                                                                                                      LazyCompile: ~Module._compile module.js:367:37
+     33    0.3%      0    0.0%                                                                                                        Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/are-we-there-yet/node_modules/readable-stream/readable.js:1:11
+     33    0.3%      0    0.0%                                                                                                          LazyCompile: *require internal/module.js:11:19
+     33    0.3%      0    0.0%                                                                                                            LazyCompile: Module._load module.js:272:24
+     32    0.3%      0    0.0%                                                                                                              LazyCompile: ~Module.load module.js:335:33
+     30    0.3%      0    0.0%                                                                                                                LazyCompile: ~Module._extensions..js module.js:415:37
+     24    0.2%      0    0.0%                                                                                                                  LazyCompile: ~Module._compile module.js:367:37
+     16    0.1%      0    0.0%                                                                                                                    Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/are-we-there-yet/node_modules/readable-stream/lib/_stream_readable.js:1:11
+     16    0.1%      0    0.0%                                                                                                                      LazyCompile: *require internal/module.js:11:19
+     16    0.1%      0    0.0%                                                                                                                        LazyCompile: Module._load module.js:272:24
+     39    0.3%      0    0.0%                                                                    Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/gauge/index.js:1:11
+     39    0.3%      0    0.0%                                                                      LazyCompile: *require internal/module.js:11:19
+     39    0.3%      0    0.0%                                                                        LazyCompile: Module._load module.js:272:24
+     37    0.3%      0    0.0%                                                                          LazyCompile: ~Module.load module.js:335:33
+     21    0.2%      0    0.0%                                                                            LazyCompile: ~Module._extensions..js module.js:415:37
+     20    0.2%      0    0.0%                                                                              LazyCompile: ~Module._compile module.js:367:37
+     20    0.2%      0    0.0%                                                                                Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/gauge/plumbing.js:1:11
+     20    0.2%      0    0.0%                                                                                  LazyCompile: *require internal/module.js:11:19
+     20    0.2%      0    0.0%                                                                                    LazyCompile: Module._load module.js:272:24
+     18    0.2%      0    0.0%                                                                                      LazyCompile: ~Module.load module.js:335:33
+     18    0.2%      0    0.0%                                                                                        LazyCompile: ~Module._extensions..js module.js:415:37
+     18    0.2%      0    0.0%                                                                                          LazyCompile: ~Module._compile module.js:367:37
+     18    0.2%      0    0.0%                                                                                            Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/gauge/render-template.js:1:11
+     18    0.2%      0    0.0%                                                                                              LazyCompile: *require internal/module.js:11:19
+     18    0.2%      0    0.0%                                                                                                LazyCompile: Module._load module.js:272:24
+     15    0.1%      0    0.0%                                                                                                  LazyCompile: ~Module.load module.js:335:33
+     14    0.1%      0    0.0%                                                                            LazyCompile: *Module._extensions..js module.js:415:37
+     21    0.2%      0    0.0%                              Function: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/node-fetch/index.js:1:11
+     21    0.2%      0    0.0%                                LazyCompile: *require internal/module.js:11:19
+     21    0.2%      0    0.0%                                  LazyCompile: Module._load module.js:272:24
+     17    0.1%      0    0.0%                          LazyCompile: *Module._extensions..js module.js:415:37
+     16    0.1%      0    0.0%                            LazyCompile: ~Module._compile module.js:367:37
+     17    0.1%      0    0.0%      LazyCompile: ~NativeModule.require node.js:883:34
+     16    0.1%      0    0.0%        LazyCompile: ~NativeModule.compile node.js:949:44
+     12    0.1%      0    0.0%          Function: ~<anonymous> module.js:1:11
+     12    0.1%      0    0.0%            LazyCompile: ~NativeModule.require node.js:883:34
+
+    330    2.8%      0    0.0%  LazyCompile: ~readFileAfterClose fs.js:362:28
+    309    2.6%      0    0.0%    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/graceful-fs/graceful-fs.js:73:50
+    276    2.4%      0    0.0%      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:340:39
+    275    2.3%      0    0.0%        LazyCompile: ~parse native json.js:40:19
+    275    2.3%      0    0.0%          v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+     28    0.2%     28    0.2%            v8::internal::JsonParser<true>::ParseJsonNumber()
+     26    0.2%     26    0.2%            v8::internal::Strtod(v8::internal::Vector<char const>, int)
+     24    0.2%     24    0.2%            v8::internal::JsonParser<true>::ParseJsonArray()
+     23    0.2%     23    0.2%            double v8::internal::InternalStringToDouble<unsigned char const*, unsigned char const*>(v8::internal::UnicodeCache*, unsigned char const*, unsigned char const*, int, double)
+     22    0.2%     22    0.2%            v8::internal::Heap::AllocateFixedArrayWithFiller(int, v8::internal::PretenureFlag, v8::internal::Object*)
+     18    0.2%     18    0.2%            v8::internal::Heap::AllocateRaw(int, v8::internal::AllocationSpace, v8::internal::AllocationSpace, v8::internal::AllocationAlignment)
+     16    0.1%     16    0.1%            v8::internal::List<v8::internal::Handle<v8::internal::Object>, v8::internal::ZoneAllocationPolicy>::Add(v8::internal::Handle<v8::internal::Object> const&, v8::internal::ZoneAllocationPolicy)
+     16    0.1%     16    0.1%            v8::internal::Heap::InitializeJSObjectFromMap(v8::internal::JSObject*, v8::internal::FixedArray*, v8::internal::Map*)
+     13    0.1%      0    0.0%      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/fireAqiServer.js:263:34
+     12    0.1%      0    0.0%        LazyCompile: ~parse native json.js:40:19
+     12    0.1%      0    0.0%          v8::internal::Runtime_ParseJson(int, v8::internal::Object**, v8::internal::Isolate*)
+     21    0.2%      0    0.0%    LazyCompile: *Buffer.toString buffer.js:378:37
+     21    0.2%      0    0.0%      LazyCompile: ~slowToString buffer.js:333:22
+     21    0.2%      0    0.0%        /usr/bin/nodejs
+     21    0.2%     21    0.2%          node::Buffer::Utf8Slice(v8::FunctionCallbackInfo<v8::Value> const&)
+
+     84    0.7%      1    0.0%  LazyCompile: ~parserOnHeadersComplete _http_common.js:42:33
+     73    0.6%      0    0.0%    LazyCompile: ~parserOnIncoming _http_server.js:454:28
+     66    0.6%      0    0.0%      LazyCompile: ~emit events.js:117:44
+     66    0.6%      0    0.0%        LazyCompile: ~emitTwo events.js:85:17
+     47    0.4%      0    0.0%          LazyCompile: ~app /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/express.js:38:21
+     47    0.4%      0    0.0%            LazyCompile: ~handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/application.js:158:29
+     37    0.3%      0    0.0%              LazyCompile: ~handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:136:31
+     37    0.3%      0    0.0%                LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     24    0.2%      0    0.0%                  LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     24    0.2%      0    0.0%                    LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     24    0.2%      0    0.0%                      LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     24    0.2%      0    0.0%                        LazyCompile: ~query /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/middleware/query.js:39:24
+     22    0.2%      0    0.0%                          LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     22    0.2%      0    0.0%                            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     22    0.2%      0    0.0%                              LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     22    0.2%      0    0.0%                                LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     22    0.2%      0    0.0%                                  LazyCompile: ~expressInit /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/middleware/init.js:29:30
+     20    0.2%      0    0.0%                                    LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     20    0.2%      0    0.0%                                      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     20    0.2%      0    0.0%                                        LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     20    0.2%      0    0.0%                                          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     20    0.2%      0    0.0%                                            LazyCompile: ~corsMiddleware /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:203:35
+     20    0.2%      0    0.0%                                              LazyCompile: ~optionsCallback /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:198:34
+     20    0.2%      0    0.0%                                                LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:204:37
+     19    0.2%      0    0.0%                                                  LazyCompile: ~originCallback /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:213:39
+     19    0.2%      0    0.0%                                                    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:219:57
+     19    0.2%      0    0.0%                                                      LazyCompile: ~cors /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:159:16
+     18    0.2%      0    0.0%                                                        LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     18    0.2%      0    0.0%                                                          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     18    0.2%      0    0.0%                                                            LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     18    0.2%      0    0.0%                                                              LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     18    0.2%      1    0.0%                                                                LazyCompile: ~compression /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:59:31
+     17    0.1%      0    0.0%                                                                  LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     17    0.1%      0    0.0%                                                                    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     17    0.1%      0    0.0%                                                                      LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     17    0.1%      0    0.0%                                                                        LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     17    0.1%      0    0.0%                                                                          LazyCompile: ~serveStatic /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:72:31
+     18    0.2%      0    0.0%          LazyCompile: *app /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/express.js:38:21
+     18    0.2%      0    0.0%            LazyCompile: ~handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:136:31
+     17    0.1%      0    0.0%              LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     17    0.1%      0    0.0%                LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     17    0.1%      0    0.0%                  LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     17    0.1%      0    0.0%                    LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     16    0.1%      0    0.0%                      LazyCompile: *query /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/middleware/query.js:39:24
+     16    0.1%      0    0.0%                        LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     16    0.1%      0    0.0%                          LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     16    0.1%      0    0.0%                            LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     16    0.1%      0    0.0%                              LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     15    0.1%      0    0.0%                                LazyCompile: *expressInit /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/middleware/init.js:29:30
+     14    0.1%      0    0.0%                                  LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     14    0.1%      0    0.0%                                    LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     14    0.1%      0    0.0%                                      LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     14    0.1%      0    0.0%                                        LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     13    0.1%      0    0.0%                                          LazyCompile: *corsMiddleware /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:203:35
+     13    0.1%      0    0.0%                                            LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:204:37
+     13    0.1%      0    0.0%                                              LazyCompile: ~originCallback /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:213:39
+     13    0.1%      0    0.0%                                                LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:219:57
+     13    0.1%      0    0.0%                                                  LazyCompile: ~cors /home/phillipdaw/code/gpxAQI/server/node_modules/cors/lib/index.js:159:16
+     13    0.1%      0    0.0%                                                    LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     13    0.1%      0    0.0%                                                      LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     13    0.1%      0    0.0%                                                        LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     13    0.1%      0    0.0%                                                          LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     13    0.1%      0    0.0%                                                            LazyCompile: ~compression /home/phillipdaw/code/gpxAQI/server/node_modules/compression/index.js:59:31
+     13    0.1%      0    0.0%                                                              LazyCompile: ~next /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:176:16
+     13    0.1%      0    0.0%                                                                LazyCompile: ~<anonymous> /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:275:64
+     13    0.1%      0    0.0%                                                                  LazyCompile: ~trim_prefix /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/index.js:288:23
+     13    0.1%      0    0.0%                                                                    LazyCompile: handle /home/phillipdaw/code/gpxAQI/server/node_modules/express/lib/router/layer.js:86:49
+     13    0.1%      1    0.0%                                                                      LazyCompile: ~serveStatic /home/phillipdaw/code/gpxAQI/server/node_modules/serve-static/index.js:72:31
+
+     44    0.4%     44    0.4%  /lib/x86_64-linux-gnu/libc-2.23.so
+
+     27    0.2%      0    0.0%  LazyCompile: ~_tickCallback node.js:335:27
+
+     24    0.2%     24    0.2%  v8::internal::StoreBuffer::ProcessOldToNewSlot(unsigned char*, void (*)(v8::internal::HeapObject**, v8::internal::HeapObject*))
+
+     20    0.2%     20    0.2%  v8::internal::StoreBuffer::PrepareForIteration()
+
+     17    0.1%     17    0.1%  munmap
+
+     15    0.1%     15    0.1%  v8::internal::Heap::ScavengeObject(v8::internal::HeapObject**, v8::internal::HeapObject*)
+
+     12    0.1%     12    0.1%  void v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::EvacuateObject<(v8::internal::ScavengingVisitor<(v8::internal::MarksHandling)1, (v8::internal::LoggingAndProfiling)0>::ObjectContents)1, (v8::internal::AllocationAlignment)0>(v8::internal::Map*, v8::internal::HeapObject**, v8::internal::HeapObject*, int)
+

@@ -28,8 +28,9 @@ app.use(compression());
 app.use(express.static(__dirname));
 
 //--------------RIDE TRACKER---------------//
-var testRide = Array();
-
+//var testRide = Array();
+var testRide = {type: "FeatureCollection", features: []}
+this.routeToDisplay=null;
 //Used for caching XML stream. Should be upgraded to work with streams
 app.use(function(req, res, next) {
   //if (req.method !== "post") return next();
@@ -55,19 +56,26 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/track/:user', (req, res) => {
   var user;
   if (req.params.user !== undefined) user = req.params.user;
-  var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng']});
-  console.log("GPX sent");
-  var geobuf = geobufFun.geojsonToGeobuf(geojson);
+  console.log(testRide.features[0])
+
+  //var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng'], include: ['time']});
+  console.log(testRide)
+  var toReturn = polygonFun.makeLine(testRide);
+  console.log(util.inspect(toReturn, false, null))
+  var geobuf = geobufFun.geojsonToGeobuf(toReturn);//geojson);
   if (typeof res !== "undefined") {
     res.type('arraybuffer')
     res.send(new Buffer(geobuf));
   }
+  //console.log(util(inspect(
+  console.log("GPX sent");
+
 });
 
 app.delete('/track/:user', (req, res) => {
   var user;
   if (req.params.user !== undefined) user = req.params.user;
-  testRide.length = 0;
+  testRide.features.length = 0;
   console.log('track deleted for ' + user);
   res.send('ok');
 });
@@ -112,8 +120,10 @@ app.post('/track', (req, res) => {
   var loc = req.body.location;
   //var now = new Date();
   //loc.time = dateFormat();//now is default
-  testRide.push(loc);
-  console.log(loc);
+  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time']});
+  feature.properties.type="pos"
+  testRide.features.push(feature);
+  console.log(loc);//testRide.features);
   res.send('ok');
 });
 //Upload route to display with track
@@ -134,7 +144,9 @@ app.delete('/route/gpx', (req, res) => {
 });
 app.get('/route/gpx', (req, res) => {
   //console.log(this.routeToDisplay);
-  if (this.routeToDisplay !== null) {
+  if (this.routeToDisplay !== null) { 
+	  console.log('about to geobuf:')
+	  console.log(this.routeToDisplay)
 	  var geobuf = geobufFun.geojsonToGeobuf(this.routeToDisplay);
 	  res.send(new Buffer(geobuf));
   }

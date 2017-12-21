@@ -115,17 +115,36 @@ createIcon = function(geojson) {
   console.log(hackSvg)
   return hackSvg;
 }
-//Upload Location - ADD USER FIELD
+
+//Upload Location - TODO ADD USER FIELD
 app.post('/track', (req, res) => {
+  console.log('madeit')
   var loc = req.body.location;
-  //var now = new Date();
-  //loc.time = dateFormat();//now is default
-  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time']});
+  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc']});
   feature.properties.type="pos"
-  testRide.features.push(feature);
-  console.log(loc);//testRide.features);
+  var different;
+  //console.log(testRide.features)
+  if (testRide.features.length > 0) {
+    var prevFeature = testRide.features[testRide.features.length-1]
+    var different = polygonFun.checkIfPointsDiffer(feature, prevFeature);
+    if (different) { testRide.features.push(feature); }
+    else {
+     testRide.features[testRide.features.length-1].properties.time = feature.properties.time;
+    //console.log(loc + "\r\n Is Different? " + different);//testRide.features);
+    }
+  }
+  else {
+    testRide.features.push(feature); 
+    console.log(loc);
+    different = true;
+  }
+  if (different) { console.log(loc); }
+  else { console.log('Stationary, updated timestamp') }
+
   res.send('ok');
 });
+
+
 //Upload route to display with track
 app.post('/route/gpx', (req, res) => {
   console.log('Receiving GPX file for display on track')

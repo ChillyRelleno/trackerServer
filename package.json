@@ -26,6 +26,7 @@
     "geojson-slicer": "^0.1.0",
     "geojson-to-svg": "^1.0.3",
     "graceful-fs": "^4.1.11",
+    "haversine": "^1.1.0",
     "json-stringify": "^1.0.0",
     "node-fetch": "^1.7.3",
     "pbf": "^3.1.0",

@@ -35,19 +35,25 @@ this.routeToDisplay=null;
 app.use(function(req, res, next) {
   //if (req.method !== "post") return next();
   if (0 !== req.url.indexOf('/route/gpx')) return next();
-  //else {
+  //console.log('madeit')
+  else {
     var data = '';
     //var re = JSON.parse(JSON.stringify(req));
     req.setEncoding('utf8');
     req.on('data', function(chunk) {
         data += chunk;
+	console.log('chunk = ')
+	console.log(chunk);
     });
     req.on('end', function() {
+     if (data.length !==0) {
+	console.log(data)
         req.rawBody = data;
 //console.log(req.rawBody);
         next();
+     }
     });
-  //}
+  }
 });
 app.use(bodyParser.json() );
 app.use(bodyParser.urlencoded({extended:true}));
@@ -56,19 +62,20 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/track/:user', (req, res) => {
   var user;
   if (req.params.user !== undefined) user = req.params.user;
-  console.log(testRide.features[0])
+  //console.log(testRide.features[0])
 
   //var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng'], include: ['time']});
-  console.log(testRide)
+  //console.log(testRide)
+  if (testRide.features.length == 0) {res.sendStatus(204); return;}
   var toReturn = polygonFun.makeLine(testRide);
-  console.log(util.inspect(toReturn, false, null))
+  //console.log(util.inspect(toReturn, false, null))
   var geobuf = geobufFun.geojsonToGeobuf(toReturn);//geojson);
   if (typeof res !== "undefined") {
     res.type('arraybuffer')
     res.send(new Buffer(geobuf));
   }
   //console.log(util(inspect(
-  console.log("GPX sent");
+  //console.log("GPX sent");
 
 });
 
@@ -112,13 +119,12 @@ createIcon = function(geojson) {
     .render(simple)
 //    .extent(0, 0, 300, 300)
   var hackSvg = svg.replace(" viewBox=\"NaN NaN NaN NaN\"", " viewBox=\"0 0 300 300\"")
-  console.log(hackSvg)
+  console.log('modified svg ' + hackSvg)
   return hackSvg;
 }
 
 //Upload Location - TODO ADD USER FIELD
 app.post('/track', (req, res) => {
-  console.log('madeit')
   var loc = req.body.location;
   var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc']});
   feature.properties.type="pos"
@@ -135,10 +141,10 @@ app.post('/track', (req, res) => {
   }
   else {
     testRide.features.push(feature); 
-    console.log(loc);
+    console.log('recieved first loc ');
     different = true;
   }
-  if (different) { console.log(loc); }
+  if (different) { console.log('received loc ' + loc); }
   else { console.log('Stationary, updated timestamp') }
 
   res.send('ok');
@@ -147,9 +153,9 @@ app.post('/track', (req, res) => {
 
 //Upload route to display with track
 app.post('/route/gpx', (req, res) => {
-  console.log('Receiving GPX file for display on track')
+  console.log('Receiving GPX file for display on track');
+  console.log('rawBody = ' + req.rawBody);
   var xml = new xmldom().parseFromString(req.rawBody, "application/xml")
-  //console.log(xml);
   this.routeToDisplay = polygonFun.insertExtents(toGeoJSON.gpx(xml));
   var svg = createIcon(this.routeToDisplay);
   console.log('SVG is ' + svg.length + 'chars');
@@ -165,7 +171,7 @@ app.get('/route/gpx', (req, res) => {
   //console.log(this.routeToDisplay);
   if (this.routeToDisplay !== null) { 
 	  console.log('about to geobuf:')
-	  console.log(this.routeToDisplay)
+	  console.log('route = ' + this.routeToDisplay)
 	  var geobuf = geobufFun.geojsonToGeobuf(this.routeToDisplay);
 	  res.send(new Buffer(geobuf));
   }

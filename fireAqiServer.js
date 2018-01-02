@@ -82,11 +82,34 @@ var modifyFeatures = function(json, setStyleFunc) {
   for (i = 0, len = json.features.length; i < len; i++) {
     json.features[i] = setStyleFunc(json.features[i])  // setFireStyle(json.features[i])
     json.features[i] = polygonFun.calcBounds(json.features[i])
+    if (i % 2 == 1) sanitizeFireDescription(json.features[i-1], json.features[i]);
   }//for each feature
   console.log("Bounding boxes calculated and stored for " + i +
 	" " +json.features[0].properties.type + " perimeters")
    return json
 }//modifyFeatures()
+
+function sanitizeFireDescription(pointFeature, polyFeature) {
+	//Escape special characters FIRST
+        polyFeature.properties.description =
+                pointFeature.properties.description.replace(/\"/g, "");
+        polyFeature.properties.description =
+                polyFeature.properties.description.replace(
+                  "<a href='https://www.geomac.gov' target='_blank'><img src='https://wildfire.cr.usgs.gov/geomac/images/geomac_logo_redo.png' width='144' height='42' /></a>"
+                  , "");
+        //Dead Link
+        polyFeature.properties.description =
+                polyFeature.properties.description.replace(
+                  "<a href='https://www.nifc.gov/fireInfo/fireinfo_nfn.html' target='_blank'>National Fire News</a>"
+                  , "<a href='http://www.nifc.gov/fireInfo/nfn.htm' target='_blank'>National Fire News</a>");
+
+        //Useless Link, ignores bounding box params
+        polyFeature.properties.description =
+                polyFeature.properties.description.replace(
+                  "<a href='https://www.geomac.gov/' target='_blank'>Geomac Wildland Fire Support</a><br />"
+                  , "")
+
+}
 
 function sendResponse(matching, res) {//west, south, east, north, res) {
    //console.log(util.inspect(matching,false,null))

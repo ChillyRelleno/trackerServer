@@ -57,7 +57,7 @@ fireTimer.setInterval();
 
 //*****other stuff*********//
 getTestRoute = function(req, res)  {
-  fs.readFile('./testsimple.geojson', (err, data) => { //'./test.gpx', (err, data) => {
+  fs.readFile('./WestCoastTestSimple.json', (err, data) => { //'./test.gpx', (err, data) => {
      if (err) {throw err};
      var str = String(data);
      //var xml = new xmldom().parseFromString(str, "text/xml")

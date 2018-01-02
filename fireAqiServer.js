@@ -381,4 +381,4 @@ updateFireFromDisk();//fireCallback, fireTestCallback);
 app.listen(config.fireAqiServerPort, function () {
   console.log('CORS-enabled web server listening on port ' + config.fireAqiServerPort)
 })
-
+updateFireData();

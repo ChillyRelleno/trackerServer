@@ -5,7 +5,7 @@ var app = express()
 var fetch = require('node-fetch')
 var compression = require('compression')
 var fs = require('graceful-fs')
-
+require('log-timestamp')
 //This one uses
 var xmldom = require('xmldom').DOMParser;
 var toGeoJSON  = require('./lib/togeojson.js')

@@ -7,7 +7,7 @@ var compression = require('compression')
 var config = require('./config.js')
 var geobufFun = require('./lib/geobufFun.js')
 var toGeoJSON  = require('./lib/togeojson.js')
-
+require('log-timestamp')
 //This one needs
 var xmldom = require('xmldom').DOMParser;
 var GeoJSON = require('geojson')

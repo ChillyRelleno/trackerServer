@@ -15,6 +15,12 @@ var geojsonToSvg = require('geojson-to-svg')
 var SimplifyGeoJson = require('simplify-geojson')
 var polygonFun = require('./lib/polygonFun.js')
 var dateFormat = require('dateformat');
+//var server = require('http').Server(app);
+var server = app.listen(config.trackerServerPort, function() {
+	console.log('Tracker server listening on port ' + config.trackerServerPort)
+})
+
+var io = require('socket.io')(server);
 
 //Will need
 var fs = require('graceful-fs')
@@ -57,6 +63,23 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json() );
 app.use(bodyParser.urlencoded({extended:true}));
+
+//SOCKET EVENTS
+//allData is the initial upload, all data so far as {allData: ... }
+//updateData is a single loc, as {updateData: ... }
+//updateTime is {updateTime: ...}
+//may have to add ride ID later, some way to only send to select clients
+io.on('connection', (socket) => {
+  socket.on('room', (room) => { 
+    socket.join(room);
+    console.log('client joined ' + room);
+  });
+  //I think this will just emit to the one client? TODO
+  var toReturn = polygonFun.makeLine(testRide);
+  if (toReturn.features.length >1)
+  socket.emit('allData', { allData: toReturn });
+});//on connection
+
 
 //Send tracked positions for display
 app.get('/track/:user', (req, res) => {
@@ -125,11 +148,18 @@ createIcon = function(geojson) {
 
 //Upload Location - TODO ADD USER FIELD
 app.post('/track', (req, res) => {
-  var loc = req.body.location;
+  var user = 'tnr';
+  //TODO
+  //if (req.params.user !== undefined) user = req.params.user;
+
+  var loc;
+  if (req.body.location !== undefined) loc = req.body.location;
+//console.log(loc)
   var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc']});
   feature.properties.type="pos"
   var different;
   //console.log(testRide.features)
+    var length = testRide.features.length;
   if (testRide.features.length > 0) {
     var prevFeature = testRide.features[testRide.features.length-1]
     var different = polygonFun.checkIfPointsDiffer(feature, prevFeature);
@@ -137,14 +167,27 @@ app.post('/track', (req, res) => {
     else {
      testRide.features[testRide.features.length-1].properties.time = feature.properties.time;
     //console.log(loc + "\r\n Is Different? " + different);//testRide.features);
+     io.sockets.in(user).emit('updateTime', {updateTime: feature.properties.time});
     }
   }
   else {
-    testRide.features.push(feature); 
     console.log('recieved first loc ');
     different = true;
+    //var socket = io();
+    //console.log(feature);
   }
-  if (different) { console.log('received loc ' + loc); }
+  if (different) { 
+    console.log('received loc ' + loc);
+    testRide.features.push(feature); 
+
+    //io.sockets.in(user).emit('allData', {allData: testRide}); //testRide});//'updateData', { updateData: feature });
+    if (length == 0) { 
+	var toReturn = polygonFun.makeLine(testRide);
+	io.sockets.in(user).emit('allData', {allData: toReturn}); 
+    }
+    else { io.sockets.in(user).emit('updateData', { updateData: feature }); }
+
+  }
   else { console.log('Stationary, updated timestamp') }
 
   res.send('ok');
@@ -183,6 +226,3 @@ app.get('/test', (req, res) => {
   res.send(svg);
 })
 
-app.listen(config.trackerServerPort, function() {
-	console.log('Tracker server listening on port ' + config.trackerServerPort)
-})

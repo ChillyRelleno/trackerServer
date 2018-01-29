@@ -76,17 +76,46 @@ app.get('/getTestRoute', (req, res) => {getTestRoute(req, res);});
 
 //**************Functions shared between Fire / AQI*******************************//
 
+//Move to general functions
+var updateData = (url, callback, setStyleFunc, modifiedDest) => {
+  console.log("----"+url+"----")
+  return fetch(url)
+    .then(function(res) { return res.text() })
+    .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
+    .then(function(xml) { return toGeoJSON.kml(xml) })
+    .then(function(json) { callback( modifyFeatures(json, setStyleFunc)); return json })
+    //.then(function(json) { console.log(json);return json;})//"Length: "+ json.features.length);return json; })
+    .then(function(json) {
+        fs.writeFile(modifiedDest, JSON.stringify(json), function (err) {
+          if (err) return console.log(err);
+	  else return json;
+        }) })
+    .catch(function(err) { 
+	console.log('Error: ' + url);
+	console.log(err);
+	callback({type: "FeatureCollection", features: []});
+    });
+}
 
 var modifyFeatures = function(json, setStyleFunc) {
+ //console.log(json);
+ if (json.features.length > 0) {
   var i = 0;
   for (i = 0, len = json.features.length; i < len; i++) {
     json.features[i] = setStyleFunc(json.features[i])  // setFireStyle(json.features[i])
     json.features[i] = polygonFun.calcBounds(json.features[i])
-    if (i % 2 == 1) sanitizeFireDescription(json.features[i-1], json.features[i]);
+    if (setStyleFunc == setFireStyle) {
+      if (i % 2 == 1) sanitizeFireDescription(json.features[i-1], json.features[i]);
+    }
   }//for each feature
   console.log("Bounding boxes calculated and stored for " + i +
 	" " +json.features[0].properties.type + " perimeters")
+ }
+ else {
+   //console.log(json);
+ }
    return json
+
 }//modifyFeatures()
 
 function sanitizeFireDescription(pointFeature, polyFeature) {
@@ -195,22 +224,6 @@ app.get('/filter/fireSeason/aqi/:west/:south/:east/:north', (req, res) => {
                 checkLegend, aqiDataPrep);
   sendResponse(matching, res);
 })//filter aqi by bounds route
-//Move to general functions
-var updateData = (url, callback, setStyleFunc, modifiedDest) => {
-  console.log("----"+url+"----")
-  return fetch(url)
-    .then(function(res) { return res.text() })
-    .then(function(str) { return (new xmldom()).parseFromString(str, "text/xml") })
-    .then(function(xml) { return toGeoJSON.kml(xml) })
-    .then(function(json) { callback( modifyFeatures(json, setStyleFunc)); return json })
-    //.then(function(json) { console.log(json);return json;})//"Length: "+ json.features.length);return json; })
-    .then(function(json) {
-        fs.writeFile(modifiedDest, JSON.stringify(json), function (err) {
-          if (err) return console.log(err);
-	  else return json;
-        }) })
-    .catch(function(err) { console.log('Error: ${err}') });
-}
 
 //contentintal US 
 //"http://www.airnowapi.org/aq/kml/Combined/?DATE=2017-09-18T06
@@ -382,3 +395,4 @@ app.listen(config.fireAqiServerPort, function () {
   console.log('CORS-enabled web server listening on port ' + config.fireAqiServerPort)
 })
 updateFireData();
+updateAqiData();

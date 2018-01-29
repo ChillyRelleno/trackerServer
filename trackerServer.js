@@ -35,7 +35,7 @@ app.use(express.static(__dirname));
 
 //--------------RIDE TRACKER---------------//
 //var testRide = Array();
-var testRide = {type: "FeatureCollection", features: []}
+var testRide = [];// = {type: "FeatureCollection", features: []}
 this.routeToDisplay=null;
 //Used for caching XML stream. Should be upgraded to work with streams
 app.use(function(req, res, next) {
@@ -73,24 +73,37 @@ io.on('connection', (socket) => {
   socket.on('room', (room) => { 
     socket.join(room);
     console.log('client joined ' + room);
+
+    var split = room.split(".");
+    var user = split[0];
+    var ride = split[1];
+   // if (!testRide[user]) testRide[user] =[];// {type: "FeatureCollection", features: []};
+    //if (!testRide[user][ride]) testRide[user][ride] = {type: "FeatureCollection", features: []};
+    if (testRide[user] !== undefined)
+    if(testRide[user][ride] !== undefined) {
+      var toReturn = polygonFun.makeLine(testRide[user][ride]);
+      if (toReturn.features.length >1)
+      socket.emit('allData', { allData: toReturn });
+    }
+
   });
   //I think this will just emit to the one client? TODO
-  var toReturn = polygonFun.makeLine(testRide);
-  if (toReturn.features.length >1)
-  socket.emit('allData', { allData: toReturn });
+  //var toReturn = polygonFun.makeLine(testRide[user][ride]);
+  //if (toReturn.features.length >1)
+  //socket.emit('allData', { allData: toReturn });
 });//on connection
 
 
 //Send tracked positions for display
-app.get('/track/:user', (req, res) => {
-  var user;
+app.get('/track/:user/:ride', (req, res) => {
+  var user = 'tnr', ride = '';
   if (req.params.user !== undefined) user = req.params.user;
-  //console.log(testRide.features[0])
+  if (req.params.ride !== undefined) ride = req.params.ride;
 
   //var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng'], include: ['time']});
   //console.log(testRide)
-  if (testRide.features.length == 0) {res.sendStatus(204); return;}
-  var toReturn = polygonFun.makeLine(testRide);
+  if (testRide[user][ride].features.length == 0) {res.sendStatus(204); return;}
+  var toReturn = polygonFun.makeLine(testRide[users][ride]);
   //console.log(util.inspect(toReturn, false, null))
   var geobuf = geobufFun.geojsonToGeobuf(toReturn);//geojson);
   if (typeof res !== "undefined") {
@@ -102,12 +115,17 @@ app.get('/track/:user', (req, res) => {
 
 });
 
-app.delete('/track/:user', (req, res) => {
+app.delete('/track/:user/:ride', (req, res) => {
   var user;
   if (req.params.user !== undefined) user = req.params.user;
-  testRide.features.length = 0;
-  console.log('track deleted for ' + user);
-  res.send('ok');
+  if (req.params.ride !== undefined) ride = req.params.ride;
+   if (testRide[user] !== undefined)
+    if(testRide[user][ride] !== undefined) {
+      testRide[user][ride].features.length = 0;
+      console.log('track deleted for ' + user);
+      res.send('ok');
+    }
+
 });
 
 createIcon = function(geojson) {
@@ -147,27 +165,43 @@ createIcon = function(geojson) {
 }
 
 //Upload Location - TODO ADD USER FIELD
-app.post('/track', (req, res) => {
-  var user = 'tnr';
+app.post('/track/:user/:ride', (req, res) => {
+  var user = 'tnr';// = 'tnr';
+  var ride = '';
   //TODO
-  //if (req.params.user !== undefined) user = req.params.user;
+  if (req.params.user !== undefined) user = req.params.user;
+  if (req.params.ride !== undefined) ride = req.params.ride;
 
   var loc;
   if (req.body.location !== undefined) loc = req.body.location;
 //console.log(loc)
-  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc']});
+  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc', 'distance']});
   feature.properties.type="pos"
-  var different;
-  //console.log(testRide.features)
-    var length = testRide.features.length;
-  if (testRide.features.length > 0) {
-    var prevFeature = testRide.features[testRide.features.length-1]
-    var different = polygonFun.checkIfPointsDiffer(feature, prevFeature);
-    if (different) { testRide.features.push(feature); }
+  var different = false;
+  if (!testRide[user]) testRide[user] =[];// {type: "FeatureCollection", features: []};
+  if (!testRide[user][ride]) testRide[user][ride] = {type: "FeatureCollection", features: []};
+
+
+    var length = testRide[user][ride].features.length;
+  if (testRide[user][ride].features.length == 0) { 
+	feature.properties.distance = 0;
+	feature.properties.sumDistance = 0;
+  }
+  if (testRide[user][ride].features.length > 0) {
+    var prevFeature = testRide[user][ride].features[testRide[user][ride].features.length-1]
+    //returns distance in meters if different, 0 if rejected
+    var difference = polygonFun.checkIfPointsDiffer(feature, prevFeature);
+    if (difference !== 0) {
+	feature.properties.distance = difference;//{'magnitude': different, 'unit': 'm'};
+	different = true;
+	feature.properties.sumDistance = 
+	  testRide[user][ride].features[testRide[user][ride].features.length-1]
+		.properties.sumDistance + difference;
+    }
     else {
-     testRide.features[testRide.features.length-1].properties.time = feature.properties.time;
-    //console.log(loc + "\r\n Is Different? " + different);//testRide.features);
+     testRide[user][ride].features[testRide[user][ride].features.length-1].properties.time = feature.properties.time;
      io.sockets.in(user).emit('updateTime', {updateTime: feature.properties.time});
+     io.sockets.in(user+'.'+ride).emit('updateTime', {updateTime: feature.properties.time});
     }
   }
   else {
@@ -176,16 +210,20 @@ app.post('/track', (req, res) => {
     //var socket = io();
     //console.log(feature);
   }
-  if (different) { 
-    console.log('received loc ' + loc);
-    testRide.features.push(feature); 
+  if (different ) {
+    console.log('received loc ' + feature.geometry.coordinates);
+    testRide[user][ride].features.push(feature);
 
     //io.sockets.in(user).emit('allData', {allData: testRide}); //testRide});//'updateData', { updateData: feature });
-    if (length == 0) { 
-	var toReturn = polygonFun.makeLine(testRide);
-	io.sockets.in(user).emit('allData', {allData: toReturn}); 
+    if (length == 0) {
+	var toReturn = polygonFun.makeLine(testRide[user][ride]);
+	io.sockets.in(user).emit('allData', {allData: toReturn});
+	io.sockets.in(user+'.'+ride).emit('allData', {allData: toReturn});
     }
-    else { io.sockets.in(user).emit('updateData', { updateData: feature }); }
+    else {
+	io.sockets.in(user).emit('updateData', { updateData: feature });
+	io.sockets.in(user+'.'+ride).emit('updateData', {updateData: feature});
+    }
 
   }
   else { console.log('Stationary, updated timestamp') }
@@ -195,7 +233,12 @@ app.post('/track', (req, res) => {
 
 
 //Upload route to display with track
-app.post('/route/gpx', (req, res) => {
+app.post('/route/gpx/:user/:ride', (req, res) => {
+  var user = 'tnr';// = 'tnr';
+  var ride = '';
+  if (req.params.user !== undefined) user = req.params.user;
+  if (req.params.ride !== undefined) ride = req.params.ride;
+
   console.log('Receiving GPX file for display on track');
   console.log('rawBody = ' + req.rawBody);
   var xml = new xmldom().parseFromString(req.rawBody, "application/xml")
@@ -205,13 +248,22 @@ app.post('/route/gpx', (req, res) => {
   //console.log(util.inspect(json, false, null));
   res.send(svg);
 });
-app.delete('/route/gpx', (req, res) => {
+app.delete('/route/gpx/:user/:ride', (req, res) => {
+  var user = 'tnr';// = 'tnr';
+  var ride = '';
+  if (req.params.user !== undefined) user = req.params.user;
+  if (req.params.ride !== undefined) ride = req.params.ride;
+
   this.routeToDisplay = null;
   console.log('route deleted')
   res.send('ok');
 });
-app.get('/route/gpx', (req, res) => {
+app.get('/route/gpx/:user/:ride', (req, res) => {
   //console.log(this.routeToDisplay);
+  var user = 'tnr';// = 'tnr';
+  var ride = '';
+  if (req.params.user !== undefined) user = req.params.user;
+  if (req.params.ride !== undefined) ride = req.params.ride;
   if (this.routeToDisplay !== null) { 
 	  console.log('about to geobuf:')
 	  console.log('route = ' + this.routeToDisplay)

@@ -71,14 +71,16 @@ app.use(bodyParser.urlencoded({extended:true}));
 //may have to add ride ID later, some way to only send to select clients
 io.on('connection', (socket) => {
   socket.on('room', (room) => { 
-    socket.join(room);
-    console.log('client joined ' + room);
-
+    
     var split = room.split(".");
     var user = split[0];
     var ride = split[1];
-   // if (!testRide[user]) testRide[user] =[];// {type: "FeatureCollection", features: []};
-    //if (!testRide[user][ride]) testRide[user][ride] = {type: "FeatureCollection", features: []};
+    user = user.toLowerCase();
+    if (ride != 'defaultRide') ride = ride.toLowerCase();
+    roomMod = user + '.' + ride;
+    socket.join(roomMod);
+    console.log('client joined ' + roomMod);
+
     if (testRide[user] !== undefined)
     if(testRide[user][ride] !== undefined) {
       var toReturn = polygonFun.makeLine(testRide[user][ride]);
@@ -87,21 +89,16 @@ io.on('connection', (socket) => {
     }
 
   });
-  //I think this will just emit to the one client? TODO
-  //var toReturn = polygonFun.makeLine(testRide[user][ride]);
-  //if (toReturn.features.length >1)
-  //socket.emit('allData', { allData: toReturn });
 });//on connection
+
 
 
 //Send tracked positions for display
 app.get('/track/:user/:ride', (req, res) => {
-  var user = 'tnr', ride = '';
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
 
-  //var geojson = GeoJSON.parse(testRide, {Point: ['lat', 'lng'], include: ['time']});
-  //console.log(testRide)
   if (testRide[user][ride].features.length == 0) {res.sendStatus(204); return;}
   var toReturn = polygonFun.makeLine(testRide[users][ride]);
   //console.log(util.inspect(toReturn, false, null))
@@ -110,83 +107,60 @@ app.get('/track/:user/:ride', (req, res) => {
     res.type('arraybuffer')
     res.send(new Buffer(geobuf));
   }
-  //console.log(util(inspect(
-  //console.log("GPX sent");
-
 });
 
 app.delete('/track/:user/:ride', (req, res) => {
-  var user;
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
-   if (testRide[user] !== undefined)
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
+
+  if (testRide[user] !== undefined)
     if(testRide[user][ride] !== undefined) {
       testRide[user][ride].features.length = 0;
       console.log('track deleted for ' + user);
       res.send('ok');
-    }
-
+  }
 });
 
-createIcon = function(geojson) {
-  var extent = geojson.features[0].properties.extent
-  var width = Math.abs(extent[0] - extent[2])
-  var height = Math.abs(extent[1] - extent[3])
+conditionUserRideParams = (userParam, rideParam) => {
+  var user = 'tnr', ride = 'defaultRide';
+  if (userParam !== undefined) user = userParam;
+  if (rideParam !== undefined) ride = rideParam;
+  if (!ride) ride = 'defaultRide';
+  user = user.toLowerCase();
+  if (ride != 'defaultRide') ride = ride.toLowerCase();
 
-  var simplifyBase = 0.1
-  var simplifyDivisor = 3
-  var simplifyWeight = Math.max(width, height)/simplifyDivisor
-  simplifyWeight = simplifyWeight.toFixed(6)
-  console.log('simplifyWeight: ' + simplifyWeight)
-  var simple = SimplifyGeoJson(geojson, simplifyBase*simplifyWeight)
-  var svg = geojsonToSvg()
-    //.type('type')
-    //.styles({'GPX' : {stroke: 'red' } })
-    .styles(function(feature, canvasBBox, featureBBox) {
-		var extent = feature.properties.extent
-		var width = Math.abs(extent[0] - extent[2])
-		var height = Math.abs(extent[1] - extent[3])
-		var strokeWeight = (Math.max(width, height)/10)
-//		var newWeight = strokeWeight.toFixed(4)
-	  console.log('strokeWeight: ' + strokeWeight)
-
-//		return { stroke:"red", weight:1, opacity:.5};
-		return { stroke:"red", weight:strokeWeight, opacity:.5};
-	})
-    .projection(function(coord) {
-	return [coord[0], coord[1]*-1];
-    })
-    //.data({type: 'Feature', properties: {type: 'GPX'} })
-    .render(simple)
-//    .extent(0, 0, 300, 300)
-  var hackSvg = svg.replace(" viewBox=\"NaN NaN NaN NaN\"", " viewBox=\"0 0 300 300\"")
-  console.log('modified svg ' + hackSvg)
-  return hackSvg;
+  return { 'user': user, 'ride': ride }
 }
+
+createUserRideIfNew = (user, ride) => {
+  if (!testRide[user]) testRide[user] =[];
+  if (!testRide[user][ride]) {
+        testRide[user][ride] = {type: "FeatureCollection", features: []};
+	//testRide[user][ride].properties.distance = 0;
+        //testRide[user][ride].properties.sumDistance = 0;
+        //if it's a new ride but the user already has defaultRide data, clear it
+        if (testRide[user]['defaultRide']) { 
+		testRide[user]['defaultRide'] =  {type: "FeatureCollection", features: []};
+		//.features.length = 0;
+	}
+  }
+}
+
 
 //Upload Location - TODO ADD USER FIELD
 app.post('/track/:user/:ride', (req, res) => {
-  var user = 'tnr';// = 'tnr';
-  var ride = '';
-  //TODO
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
-
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
   var loc;
   if (req.body.location !== undefined) loc = req.body.location;
-//console.log(loc)
-  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc', 'distance']});
+  var feature =  GeoJSON.parse(loc, {Point: ['lat', 'lng'], include: ['time', 'acc', 'distance', 'sumDistance']});
   feature.properties.type="pos"
   var different = false;
-  if (!testRide[user]) testRide[user] =[];// {type: "FeatureCollection", features: []};
-  if (!testRide[user][ride]) testRide[user][ride] = {type: "FeatureCollection", features: []};
+  createUserRideIfNew(user, ride);
 
-
-    var length = testRide[user][ride].features.length;
-  if (testRide[user][ride].features.length == 0) { 
-	feature.properties.distance = 0;
-	feature.properties.sumDistance = 0;
-  }
+  var length = testRide[user][ride].features.length;
   if (testRide[user][ride].features.length > 0) {
     var prevFeature = testRide[user][ride].features[testRide[user][ride].features.length-1]
     //returns distance in meters if different, 0 if rejected
@@ -200,21 +174,21 @@ app.post('/track/:user/:ride', (req, res) => {
     }
     else {
      testRide[user][ride].features[testRide[user][ride].features.length-1].properties.time = feature.properties.time;
-     io.sockets.in(user).emit('updateTime', {updateTime: feature.properties.time});
+     //io.sockets.in(user).emit('updateTime', {updateTime: feature.properties.time});
      io.sockets.in(user+'.'+ride).emit('updateTime', {updateTime: feature.properties.time});
     }
   }
   else {
-    console.log('recieved first loc ');
+    feature.properties.distance = 0;
+    feature.properties.sumDistance = 0;
+
+    console.log('recieved first loc ' + user + '.' + ride);
     different = true;
-    //var socket = io();
-    //console.log(feature);
   }
   if (different ) {
-    console.log('received loc ' + feature.geometry.coordinates);
+    console.log(user + '.' + ride + ' received loc ' + feature.geometry.coordinates);
     testRide[user][ride].features.push(feature);
 
-    //io.sockets.in(user).emit('allData', {allData: testRide}); //testRide});//'updateData', { updateData: feature });
     if (length == 0) {
 	var toReturn = polygonFun.makeLine(testRide[user][ride]);
 	io.sockets.in(user).emit('allData', {allData: toReturn});
@@ -234,10 +208,9 @@ app.post('/track/:user/:ride', (req, res) => {
 
 //Upload route to display with track
 app.post('/route/gpx/:user/:ride', (req, res) => {
-  var user = 'tnr';// = 'tnr';
-  var ride = '';
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
 
   console.log('Receiving GPX file for display on track');
   console.log('rawBody = ' + req.rawBody);
@@ -245,25 +218,22 @@ app.post('/route/gpx/:user/:ride', (req, res) => {
   this.routeToDisplay = polygonFun.insertExtents(toGeoJSON.gpx(xml));
   var svg = createIcon(this.routeToDisplay);
   console.log('SVG is ' + svg.length + 'chars');
-  //console.log(util.inspect(json, false, null));
   res.send(svg);
 });
 app.delete('/route/gpx/:user/:ride', (req, res) => {
-  var user = 'tnr';// = 'tnr';
-  var ride = '';
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
 
   this.routeToDisplay = null;
   console.log('route deleted')
   res.send('ok');
 });
 app.get('/route/gpx/:user/:ride', (req, res) => {
-  //console.log(this.routeToDisplay);
-  var user = 'tnr';// = 'tnr';
-  var ride = '';
-  if (req.params.user !== undefined) user = req.params.user;
-  if (req.params.ride !== undefined) ride = req.params.ride;
+  var userRide = conditionUserRideParams(req.params.user, req.params.ride);
+  var user = userRide.user;
+  var ride = userRide.ride;
+
   if (this.routeToDisplay !== null) { 
 	  console.log('about to geobuf:')
 	  console.log('route = ' + this.routeToDisplay)
@@ -278,3 +248,34 @@ app.get('/test', (req, res) => {
   res.send(svg);
 })
 
+createIcon = function(geojson) {
+  var extent = geojson.features[0].properties.extent
+  var width = Math.abs(extent[0] - extent[2])
+  var height = Math.abs(extent[1] - extent[3])
+
+  var simplifyBase = 0.1
+  var simplifyDivisor = 3
+  var simplifyWeight = Math.max(width, height)/simplifyDivisor
+  simplifyWeight = simplifyWeight.toFixed(6)
+  console.log('simplifyWeight: ' + simplifyWeight)
+  var simple = SimplifyGeoJson(geojson, simplifyBase*simplifyWeight)
+  var svg = geojsonToSvg()
+    .styles(function(feature, canvasBBox, featureBBox) {
+		var extent = feature.properties.extent
+		var width = Math.abs(extent[0] - extent[2])
+		var height = Math.abs(extent[1] - extent[3])
+		var strokeWeight = (Math.max(width, height)/10)
+	        //console.log('strokeWeight: ' + strokeWeight)
+
+		return { stroke:"red", weight:strokeWeight, opacity:.5};
+	})
+    .projection(function(coord) {
+	return [coord[0], coord[1]*-1];
+    })
+    //.data({type: 'Feature', properties: {type: 'GPX'} })
+    .render(simple)
+//    .extent(0, 0, 300, 300)
+  var hackSvg = svg.replace(" viewBox=\"NaN NaN NaN NaN\"", " viewBox=\"0 0 300 300\"")
+  console.log('modified svg ' + hackSvg)
+  return hackSvg;
+}

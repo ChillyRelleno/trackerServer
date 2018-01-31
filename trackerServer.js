@@ -71,7 +71,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 //may have to add ride ID later, some way to only send to select clients
 io.on('connection', (socket) => {
   socket.on('room', (room) => { 
-    
     var split = room.split(".");
     var user = split[0];
     var ride = split[1];
@@ -87,8 +86,18 @@ io.on('connection', (socket) => {
       if (toReturn.features.length >1)
       socket.emit('allData', { allData: toReturn });
     }
-
   });
+
+  /*socket.on('reset', (room) => {
+    var split = room.split(".");
+    var userRide = conditionUserRideParams(split[0], split[1]);
+    var user = userRide.user;
+    var ride = userRide.ride;
+
+    createUserRideIfNew(user, ride);
+    testRide[user][ride].features.length = 0;
+    testRide[user]['defaultRide'].features.length = 0;
+  });*/
 });//on connection
 
 
@@ -113,11 +122,12 @@ app.delete('/track/:user/:ride', (req, res) => {
   var userRide = conditionUserRideParams(req.params.user, req.params.ride);
   var user = userRide.user;
   var ride = userRide.ride;
-
+  createUserRideIfNew(user, ride);
   if (testRide[user] !== undefined)
     if(testRide[user][ride] !== undefined) {
       testRide[user][ride].features.length = 0;
-      console.log('track deleted for ' + user);
+      testRide[user]['defaultRide'].features.length = 0;
+      console.log('track deleted for ' + user + "." + ride);
       res.send('ok');
   }
 });

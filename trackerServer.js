@@ -140,10 +140,10 @@ createUserRideIfNew = (user, ride) => {
 	//testRide[user][ride].properties.distance = 0;
         //testRide[user][ride].properties.sumDistance = 0;
         //if it's a new ride but the user already has defaultRide data, clear it
-        if (testRide[user]['defaultRide']) { 
-		testRide[user]['defaultRide'] =  {type: "FeatureCollection", features: []};
+        //if (testRide[user]['defaultRide'].features) { 
+	testRide[user]['defaultRide'] =  {type: "FeatureCollection", features: []};
 		//.features.length = 0;
-	}
+	//}
   }
 }
 
@@ -168,13 +168,15 @@ app.post('/track/:user/:ride', (req, res) => {
     if (difference !== 0) {
 	feature.properties.distance = difference;//{'magnitude': different, 'unit': 'm'};
 	different = true;
-	feature.properties.sumDistance = 
+	feature.properties.sumDistance =
 	  testRide[user][ride].features[testRide[user][ride].features.length-1]
 		.properties.sumDistance + difference;
     }
     else {
      testRide[user][ride].features[testRide[user][ride].features.length-1].properties.time = feature.properties.time;
-     //io.sockets.in(user).emit('updateTime', {updateTime: feature.properties.time});
+     testRide[user]['defaultRide'].features[testRide[user]['defaultRide'].features.length-1].properties.time = feature.properties.time;
+
+     io.sockets.in(user+'.defaultRide').emit('updateTime', {updateTime: feature.properties.time});
      io.sockets.in(user+'.'+ride).emit('updateTime', {updateTime: feature.properties.time});
     }
   }
@@ -188,14 +190,15 @@ app.post('/track/:user/:ride', (req, res) => {
   if (different ) {
     console.log(user + '.' + ride + ' received loc ' + feature.geometry.coordinates);
     testRide[user][ride].features.push(feature);
+    testRide[user]['defaultRide'].features.push(feature);
 
     if (length == 0) {
 	var toReturn = polygonFun.makeLine(testRide[user][ride]);
-	io.sockets.in(user).emit('allData', {allData: toReturn});
+	io.sockets.in(user+'.defaultRide').emit('allData', {allData: toReturn});
 	io.sockets.in(user+'.'+ride).emit('allData', {allData: toReturn});
     }
     else {
-	io.sockets.in(user).emit('updateData', { updateData: feature });
+	io.sockets.in(user+'.defaultRide').emit('updateData', { updateData: feature });
 	io.sockets.in(user+'.'+ride).emit('updateData', {updateData: feature});
     }
 

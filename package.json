@@ -29,7 +29,7 @@
     "haversine": "^1.1.0",
     "json-stringify": "^1.0.0",
     "log-timestamp": "^0.1.2",
-    "node-fetch": "^1.7.3",
+    "node-fetch": "^2.6.1",
     "pbf": "^3.1.0",
     "setinterval": "^0.1.0",
     "simplify-geojson": "^1.0.3",
